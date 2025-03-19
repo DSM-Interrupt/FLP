@@ -1,4 +1,4 @@
-25175898981012502
+25177641324877468
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -86351,6 +86351,13 @@ SOT-1334-1
 0
 14
 14
+Package_TO_SOT_SMD
+SOT95P280X145-5N
+
+
+0
+5
+5
 Package_TO_SOT_SMD
 SuperSOT-3
 3-pin SuperSOT package https://www.fairchildsemi.com/package-drawings/MA/MA03B.pdf
