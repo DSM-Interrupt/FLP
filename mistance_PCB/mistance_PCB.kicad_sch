@@ -13368,7 +13368,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SKRPABE010:SW_SKRPABE010"
+		(property "Footprint" "Diode_SMD:SW_SKRPABE010"
 			(at 49.53 40.64 0)
 			(effects
 				(font
