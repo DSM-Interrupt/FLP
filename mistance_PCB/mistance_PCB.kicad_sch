@@ -8282,6 +8282,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 25.4) (xy 182.88 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66c500a8-3fcf-4ca8-baaf-f4c81a2cb13d")
+	)
+	(wire
+		(pts
 			(xy 111.76 41.91) (xy 113.03 41.91)
 		)
 		(stroke
@@ -8399,16 +8409,6 @@
 			(type default)
 		)
 		(uuid "7707ddd7-3b4b-434f-992d-14bbcfcb0c37")
-	)
-	(wire
-		(pts
-			(xy 161.29 25.4) (xy 182.88 25.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7760e71f-a288-428b-a75c-9092d961fe5f")
 	)
 	(wire
 		(pts
@@ -17480,7 +17480,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RF_Module:ESP32-WROOM-32D"
+		(property "Footprint" "RF_Module:ESP32-WROOM-32E"
 			(at 69.85 146.05 0)
 			(effects
 				(font
