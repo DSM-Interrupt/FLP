@@ -1,4 +1,4 @@
-25188099021840453
+25189842078047276
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -93001,6 +93001,13 @@ SOT95P237X112-3N
 0
 3
 3
+SKRPABE010
+SW_SKRPABE010
+
+
+0
+4
+4
 SMA-J-P-X-ST-TH1
 SAMTEC_SMA-J-P-X-ST-TH1
 
