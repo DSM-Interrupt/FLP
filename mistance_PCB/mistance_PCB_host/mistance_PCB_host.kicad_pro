@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 1.2,
-          "height": 1.35,
-          "width": 1.7
+          "drill": 0.0,
+          "height": 1.55,
+          "width": 2.3
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -225,7 +225,16 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "power_pin_not_driven|1612900|1409700|3b8f6b5a-2288-4d9a-b243-2aacb91d152a|00000000-0000-0000-0000-000000000000|/1a661fa9-14f5-41a2-bff5-90163425b44c|/1a661fa9-14f5-41a2-bff5-90163425b44c|",
+        ""
+      ],
+      [
+        "power_pin_not_driven|1854200|520700|5703e8c0-3916-4d56-a67a-84af84c4050e|00000000-0000-0000-0000-000000000000|/1a661fa9-14f5-41a2-bff5-90163425b44c|/1a661fa9-14f5-41a2-bff5-90163425b44c|",
+        ""
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -449,7 +458,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "mistance_PCB.kicad_pro",
+    "filename": "mistance_PCB_host.kicad_pro",
     "version": 3
   },
   "net_settings": {
