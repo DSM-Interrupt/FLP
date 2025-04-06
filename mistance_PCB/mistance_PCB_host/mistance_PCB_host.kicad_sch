@@ -22175,7 +22175,7 @@
 				)
 			)
 		)
-		(property "Value" "22R"
+		(property "Value" "5.1K"
 			(at 200.914 128.524 90)
 			(effects
 				(font
