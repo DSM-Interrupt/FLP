@@ -12145,7 +12145,7 @@
 		)
 	)
 	(global_label "IO0"
-		(shape input)
+		(shape bidirectional)
 		(at 114.3 119.38 90)
 		(fields_autoplaced yes)
 		(effects
@@ -12156,7 +12156,7 @@
 		)
 		(uuid "2507d9f8-32ae-4d38-8feb-492bbbfe4aef")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 114.3 113.25 90)
+			(at 114.3 112.1387 90)
 			(effects
 				(font
 					(size 1.27 1.27)
