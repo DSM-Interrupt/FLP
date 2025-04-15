@@ -3184,6 +3184,392 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "L86-M33:L86-M33"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -12.7042 12.7042 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Value" "L86-M33"
+				(at -12.7212 -17.8097 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Footprint" "L86-M33:XCVR_L86-M33"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MF" "Quectel"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "DESCRIPTION" "L86 is an ultra-compact GNSS POT _Patch on Top_ module with an embedded 18.4mm × 18.4mm × 4.0mm patch antenna and utilizes the MediaTek new generation GNSS chipset MT3333 that achieves the perfect performance"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "PACKAGE" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "PRICE" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Package" "LCC-12 Quectel"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Check_prices" "https://www.snapeda.com/parts/L86-M33/Quectel/view-part/?ref=eda"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Price" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/L86-M33/Quectel/view-part/?ref=snap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MP" "L86-M33"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Availability" "In Stock"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "AVAILABILITY" "Unavailable"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Description_1" "L86 is an ultra-compact GNSS POT (Patch on Top) module with an embedded 18.4mm × 18.4mm × 4.0mm patch antenna and utilizes the MediaTek new generation GNSS chipset MT3333 that achieves the perfect performance"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(symbol "L86-M33_0_0"
+				(rectangle
+					(start -12.7 -15.24)
+					(end 12.7 12.7)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin input line
+					(at -17.78 2.54 0)
+					(length 5.08)
+					(name "~{RESET}"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -17.78 -2.54 0)
+					(length 5.08)
+					(name "EX_ANT"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -17.78 -7.62 0)
+					(length 5.08)
+					(name "FORCE_ON"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 17.78 10.16 180)
+					(length 5.08)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 17.78 7.62 180)
+					(length 5.08)
+					(name "V_BCKP"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 17.78 2.54 180)
+					(length 5.08)
+					(name "1PPS"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 17.78 0 180)
+					(length 5.08)
+					(name "AADET_N"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 17.78 -5.08 180)
+					(length 5.08)
+					(name "RXD1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 17.78 -7.62 180)
+					(length 5.08)
+					(name "TXD1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 17.78 -12.7 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 17.78 -12.7 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Power_Protection:USBLC6-2P6"
 			(pin_names
 				(hide yes)
@@ -6923,6 +7309,12 @@
 		(uuid "763ab3ad-cc2b-41b8-9af9-65b4f10eb183")
 	)
 	(junction
+		(at 102.87 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7696965f-039c-4124-9ee9-d63d4f871c51")
+	)
+	(junction
 		(at 95.25 49.53)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7005,6 +7397,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b54f32bb-15c6-421a-a6d4-d5448a169106")
+	)
+	(junction
+		(at 96.52 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bb43cdbc-9c4e-4790-b020-74e2bb271db0")
 	)
 	(junction
 		(at 196.85 120.65)
@@ -7262,6 +7660,16 @@
 	)
 	(wire
 		(pts
+			(xy 102.87 147.32) (xy 102.87 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a6acfd6-2abc-48e0-99bd-676c4d63c236")
+	)
+	(wire
+		(pts
 			(xy 167.64 64.77) (xy 167.64 68.58)
 		)
 		(stroke
@@ -7279,6 +7687,16 @@
 			(type default)
 		)
 		(uuid "0cd8567d-16d5-4f22-ae45-bec57042c2d2")
+	)
+	(wire
+		(pts
+			(xy 66.04 161.29) (xy 96.52 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0e185af3-211f-4d62-848c-9fb84da5eee7")
 	)
 	(wire
 		(pts
@@ -7442,6 +7860,16 @@
 	)
 	(wire
 		(pts
+			(xy 17.78 93.98) (xy 26.67 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f5f57b1-ccd8-46f8-b284-20b4cd89c3ba")
+	)
+	(wire
+		(pts
 			(xy 140.97 161.29) (xy 140.97 157.48)
 		)
 		(stroke
@@ -7492,6 +7920,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 161.29) (xy 102.87 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24caee6a-06bb-4bff-bde1-c7cc43b9613e")
+	)
+	(wire
+		(pts
 			(xy 143.51 63.5) (xy 143.51 66.04)
 		)
 		(stroke
@@ -7519,6 +7957,16 @@
 			(type default)
 		)
 		(uuid "2d581b7b-4ff1-484d-9e9e-4c188c6dcff6")
+	)
+	(wire
+		(pts
+			(xy 102.87 158.75) (xy 102.87 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f50f449-c71a-479b-a70c-939a641411f4")
 	)
 	(wire
 		(pts
@@ -7612,13 +8060,13 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 171.45) (xy 256.54 171.45)
+			(xy 102.87 161.29) (xy 109.22 161.29)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "404333a6-c157-46a6-8e92-84379843825b")
+		(uuid "3e38a912-2349-4304-8817-902835bb20dc")
 	)
 	(wire
 		(pts
@@ -7702,6 +8150,16 @@
 	)
 	(wire
 		(pts
+			(xy 17.78 96.52) (xy 26.67 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46b4123a-4777-4a4c-a41f-6990ee5cd2c1")
+	)
+	(wire
+		(pts
 			(xy 185.42 101.6) (xy 185.42 115.57)
 		)
 		(stroke
@@ -7709,6 +8167,16 @@
 			(type default)
 		)
 		(uuid "46c9c2ef-e74a-4edf-8a8b-b3fd0822d989")
+	)
+	(wire
+		(pts
+			(xy 76.2 179.07) (xy 78.74 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "479bbefc-0daa-4617-9304-99dec5d4028f")
 	)
 	(wire
 		(pts
@@ -7739,6 +8207,16 @@
 			(type default)
 		)
 		(uuid "4918e481-1a46-4eff-8d9a-c44362e9a438")
+	)
+	(wire
+		(pts
+			(xy 66.04 184.15) (xy 74.93 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49feba70-c03e-4960-8254-24e3af1bf696")
 	)
 	(wire
 		(pts
@@ -8302,6 +8780,16 @@
 	)
 	(wire
 		(pts
+			(xy 66.04 176.53) (xy 68.58 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "912555ef-1064-4f3e-81b2-47eaf44e043b")
+	)
+	(wire
+		(pts
 			(xy 228.6 19.05) (xy 231.14 19.05)
 		)
 		(stroke
@@ -8462,6 +8950,16 @@
 	)
 	(wire
 		(pts
+			(xy 17.78 114.3) (xy 26.67 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aabd6e1c-f993-4dc1-b499-226704beb819")
+	)
+	(wire
+		(pts
 			(xy 82.55 68.58) (xy 82.55 71.12)
 		)
 		(stroke
@@ -8482,6 +8980,16 @@
 	)
 	(wire
 		(pts
+			(xy 76.2 176.53) (xy 78.74 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aed09ce7-f8f9-4356-b988-d3efe5a9e949")
+	)
+	(wire
+		(pts
 			(xy 140.97 161.29) (xy 148.59 161.29)
 		)
 		(stroke
@@ -8489,6 +8997,16 @@
 			(type default)
 		)
 		(uuid "afbc3b47-d970-417e-80e7-6fde2e95f406")
+	)
+	(wire
+		(pts
+			(xy 96.52 158.75) (xy 96.52 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "afd32a27-c1fa-4c3a-a6c9-e1b7206d279e")
 	)
 	(wire
 		(pts
@@ -8542,6 +9060,16 @@
 	)
 	(wire
 		(pts
+			(xy 17.78 111.76) (xy 26.67 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b3731dba-4cab-4f04-97a3-20fe4e915c48")
+	)
+	(wire
+		(pts
 			(xy 135.89 20.32) (xy 157.48 20.32)
 		)
 		(stroke
@@ -8589,6 +9117,16 @@
 			(type default)
 		)
 		(uuid "b9e5aec1-3b3d-4147-ba20-52c9e9a4aa35")
+	)
+	(wire
+		(pts
+			(xy 96.52 147.32) (xy 96.52 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bad318a1-2262-426e-85c5-a2fac6a101bf")
 	)
 	(wire
 		(pts
@@ -8802,16 +9340,6 @@
 	)
 	(wire
 		(pts
-			(xy 243.84 146.05) (xy 245.11 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d9ab6978-3c3c-439b-96d5-cebaa7a8ebb6")
-	)
-	(wire
-		(pts
 			(xy 176.53 123.19) (xy 180.34 123.19)
 		)
 		(stroke
@@ -8992,6 +9520,16 @@
 	)
 	(wire
 		(pts
+			(xy 66.04 179.07) (xy 68.58 179.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa8cd58b-789f-40f1-9761-54b3a657a612")
+	)
+	(wire
+		(pts
 			(xy 196.85 125.73) (xy 198.12 125.73)
 		)
 		(stroke
@@ -9070,6 +9608,28 @@
 		)
 		(uuid "ffef6f0c-603c-4207-aaa4-c2e0ff6ba510")
 	)
+	(global_label "GPS_TX"
+		(shape input)
+		(at 78.74 179.07 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "05a8b28e-a7f0-46d7-9b27-e4a24851b36c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 88.6194 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "5v OUT"
 		(shape input)
 		(at 195.58 49.53 0)
@@ -9105,6 +9665,28 @@
 		(uuid "0ba6c79d-a446-4444-9c45-8787bc366795")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 228.2153 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPS_TX"
+		(shape output)
+		(at 17.78 96.52 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1ae15c21-7901-47f1-8b52-7048d9ff0ee7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 7.9006 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9180,9 +9762,9 @@
 			)
 		)
 	)
-	(global_label "TX"
-		(shape input)
-		(at 82.55 109.22 0)
+	(global_label "GPS_Rx"
+		(shape output)
+		(at 78.74 176.53 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -9190,9 +9772,53 @@
 			)
 			(justify left)
 		)
+		(uuid "4775af3c-df5d-40d1-b496-1db805732e03")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 88.7404 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "TX"
+		(shape output)
+		(at 17.78 114.3 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
 		(uuid "625c2294-3490-422e-a16c-445f9f32b4b6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 87.7123 109.22 0)
+			(at 12.6177 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V OUT"
+		(shape output)
+		(at 109.22 161.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7eadbf4c-bd2a-47bb-b228-0aef0a698ca6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 120.9138 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9226,22 +9852,22 @@
 	)
 	(global_label "RX"
 		(shape input)
-		(at 82.55 111.76 0)
+		(at 17.78 111.76 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "8aad17e8-476a-4d5f-a47e-727153289b43")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 88.0147 111.76 0)
+			(at 12.3153 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -9369,6 +9995,28 @@
 		(uuid "d46b1cb1-0a45-4500-adb1-08cb68a91228")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 124.0753 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPS_Rx"
+		(shape input)
+		(at 17.78 93.98 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d6f65e32-6a91-488d-80ce-84292cf1da42")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 7.7796 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10363,6 +11011,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 102.87 147.32 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2919fe9f-6603-467f-9355-c30ba006836b")
+		(property "Reference" "#PWR032"
+			(at 102.87 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 102.87 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 102.87 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 102.87 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 102.87 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "59c866fa-90c4-4eda-ac05-4f5c4813a712")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 82.55 57.15 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11280,6 +11994,74 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 72.39 176.53 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4e78f63b-8cd1-4339-8cae-d7ad9d55be51")
+		(property "Reference" "R12"
+			(at 72.39 176.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22R"
+			(at 72.644 174.244 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 72.39 178.308 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 72.39 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 72.39 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8f8db607-b090-4a95-b5ca-4d61f005fede")
+		)
+		(pin "1"
+			(uuid "e2454dbd-2bec-4510-848c-1fd8e6ce6a69")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "R12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:Polyfuse")
 		(at 163.83 161.29 90)
 		(unit 1)
@@ -12147,6 +12929,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 96.52 154.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "630d6220-98f8-4720-ac7e-30457d73e446")
+		(property "Reference" "C23"
+			(at 100.33 153.6699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 100.33 156.2099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 97.4852 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 96.52 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 96.52 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d8a6378f-4f96-46ef-a6b9-94826e0c225b")
+		)
+		(pin "2"
+			(uuid "3ec8c002-225a-479f-ad87-c566f8df32ae")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "C23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Interface_USB:CP2104")
 		(at 152.4 115.57 180)
 		(unit 1)
@@ -12970,6 +13822,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 96.52 147.32 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7de7e97c-361b-49ad-8216-cb5a321946c2")
+		(property "Reference" "#PWR031"
+			(at 96.52 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 96.52 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 96.52 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 96.52 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78bb7be5-1674-4a7a-9fbb-520a584b55ed")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "#PWR031")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 179.07 95.25 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13712,6 +14630,222 @@
 		)
 	)
 	(symbol
+		(lib_id "L86-M33:L86-M33")
+		(at 48.26 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a79d3b71-f3aa-44cd-b827-1ff995f4a596")
+		(property "Reference" "U8"
+			(at 48.26 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "L86-M33"
+			(at 48.26 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "L86-M33:XCVR_L86-M33"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Quectel"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "DESCRIPTION" "L86 is an ultra-compact GNSS POT _Patch on Top_ module with an embedded 18.4mm × 18.4mm × 4.0mm patch antenna and utilizes the MediaTek new generation GNSS chipset MT3333 that achieves the perfect performance"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PACKAGE" "None"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PRICE" "None"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "LCC-12 Quectel"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/L86-M33/Quectel/view-part/?ref=eda"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/L86-M33/Quectel/view-part/?ref=snap"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "L86-M33"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "In Stock"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "AVAILABILITY" "Unavailable"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "L86 is an ultra-compact GNSS POT (Patch on Top) module with an embedded 18.4mm × 18.4mm × 4.0mm patch antenna and utilizes the MediaTek new generation GNSS chipset MT3333 that achieves the perfect performance"
+			(at 48.26 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "10"
+			(uuid "9c996d87-12ca-4645-953e-86dbe3e2f515")
+		)
+		(pin "7"
+			(uuid "77932909-d169-4c95-a129-b9bd44d147b8")
+		)
+		(pin "1"
+			(uuid "63a5ad2f-ae80-450e-a3b1-6e076d5c8952")
+		)
+		(pin "8"
+			(uuid "3fa2de13-fdde-4170-8779-ec832c417a79")
+		)
+		(pin "11"
+			(uuid "248b7ab3-bf89-4a68-8386-310de08bd365")
+		)
+		(pin "5"
+			(uuid "6fec3eca-9634-4d45-a22f-3493c87431bd")
+		)
+		(pin "12"
+			(uuid "0c59b6c1-e32f-4b9f-bb57-59a1fad9c859")
+		)
+		(pin "3"
+			(uuid "9ab79e04-ce08-461d-9f10-8814f01ed637")
+		)
+		(pin "6"
+			(uuid "0e104c49-9151-4148-a287-8696e63e90f6")
+		)
+		(pin "4"
+			(uuid "85406def-e383-44de-a019-69da03209d12")
+		)
+		(pin "2"
+			(uuid "c9bcdd51-4f38-44c7-ae0d-841ffa32e6aa")
+		)
+		(instances
+			(project ""
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "U8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 224.79 73.66 90)
 		(unit 1)
@@ -13841,6 +14975,73 @@
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
 					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 74.93 184.15 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b67ded27-c9e7-48a9-9435-87ca3c6f006a")
+		(property "Reference" "#PWR030"
+			(at 81.28 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 78.74 184.1499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 74.93 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.93 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 74.93 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bc76cae2-99d2-445b-b343-e50ac0d256b7")
+		)
+		(instances
+			(project ""
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -14329,6 +15530,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 102.87 154.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c089bcbb-3fa0-4929-a70d-8940ebb0f7f5")
+		(property "Reference" "C24"
+			(at 106.68 153.6699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 106.68 156.2099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 103.8352 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 102.87 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 102.87 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f580d9f0-09aa-439e-a526-d5651e0256a8")
+		)
+		(pin "2"
+			(uuid "b187e43e-4f0e-469a-8ebc-3e878578c20f")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "C24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 218.44 81.28 270)
 		(unit 1)
@@ -14736,6 +16007,74 @@
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
 					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 72.39 179.07 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d042c18d-d084-424f-8d13-cfd124ba1de7")
+		(property "Reference" "R13"
+			(at 72.39 179.07 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22R"
+			(at 72.644 176.784 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 72.39 180.848 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 72.39 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 72.39 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "dc8f3f81-a7cf-42c4-8afe-73e2df24c704")
+		)
+		(pin "1"
+			(uuid "b62fd09f-9600-4c9b-aabf-6c1255217707")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "R13")
 					(unit 1)
 				)
 			)
