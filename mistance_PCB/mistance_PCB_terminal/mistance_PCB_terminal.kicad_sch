@@ -3228,16 +3228,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "MF" "Quectel"
+			(property "Description" "L86 is an ultra-compact GNSS POT _Patch on Top_ module with an embedded 18.4mm × 18.4mm × 4.0mm patch antenna and utilizes the MediaTek new generation GNSS chipset MT3333 that achieves the perfect performance"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3247,7 +3238,7 @@
 					(hide yes)
 				)
 			)
-			(property "DESCRIPTION" "L86 is an ultra-compact GNSS POT _Patch on Top_ module with an embedded 18.4mm × 18.4mm × 4.0mm patch antenna and utilizes the MediaTek new generation GNSS chipset MT3333 that achieves the perfect performance"
+			(property "MF" "Quectel"
 				(at 0 0 0)
 				(effects
 					(font
@@ -7471,6 +7462,12 @@
 		(uuid "f4a292f0-b43d-441c-b3d0-ef4e91956fa3")
 	)
 	(junction
+		(at 68.58 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f5d4489b-c1c0-40f9-8e54-f09e156b9d35")
+	)
+	(junction
 		(at 29.21 21.59)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7535,6 +7532,10 @@
 		(uuid "7d508eda-7fb6-4485-9aff-6307e7bca857")
 	)
 	(no_connect
+		(at 66.04 168.91)
+		(uuid "7eccc354-e4a8-4527-900e-9aa720489d00")
+	)
+	(no_connect
 		(at 274.32 111.76)
 		(uuid "82ea7859-bf8c-4d3b-a019-9161949338ea")
 	)
@@ -7559,6 +7560,10 @@
 		(uuid "d8241e7a-2e6f-46c0-937f-cfd9ca8373d8")
 	)
 	(no_connect
+		(at 66.04 171.45)
+		(uuid "d90b296a-673b-4d44-9a38-3bf203c45295")
+	)
+	(no_connect
 		(at 274.32 96.52)
 		(uuid "de9fedb7-be38-4c36-9cfe-87a5fbce5a93")
 	)
@@ -7571,8 +7576,16 @@
 		(uuid "e2217923-0954-45d4-b047-303ccaffc521")
 	)
 	(no_connect
+		(at 30.48 173.99)
+		(uuid "ead0bb69-2748-4d05-8e45-36fb5fefe5ca")
+	)
+	(no_connect
 		(at 139.7 123.19)
 		(uuid "ece7b40f-9cbf-4d3c-a364-f00ec3ee7d12")
+	)
+	(no_connect
+		(at 30.48 179.07)
+		(uuid "f6b2e943-f04f-4439-9fcc-349b7a5438f2")
 	)
 	(no_connect
 		(at 243.84 93.98)
@@ -7690,7 +7703,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 161.29) (xy 96.52 161.29)
+			(xy 66.04 161.29) (xy 68.58 161.29)
 		)
 		(stroke
 			(width 0)
@@ -8510,6 +8523,16 @@
 	)
 	(wire
 		(pts
+			(xy 68.58 161.29) (xy 96.52 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "68f82217-dd8c-4fa4-a1e4-9a8d20d80dfe")
+	)
+	(wire
+		(pts
 			(xy 152.4 80.01) (xy 152.4 87.63)
 		)
 		(stroke
@@ -8577,6 +8600,16 @@
 			(type default)
 		)
 		(uuid "759aa13f-22b3-47cf-939d-0e25ff4bb84f")
+	)
+	(wire
+		(pts
+			(xy 68.58 161.29) (xy 66.04 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75bf8d16-3adb-4f9c-a1db-9881dfa8b211")
 	)
 	(wire
 		(pts
@@ -8847,6 +8880,16 @@
 			(type default)
 		)
 		(uuid "9ba6324d-e8cf-4649-835e-a4faa29452aa")
+	)
+	(wire
+		(pts
+			(xy 25.4 168.91) (xy 30.48 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ccaaebe-1d84-4770-8866-5513d11565a7")
 	)
 	(wire
 		(pts
@@ -9340,6 +9383,16 @@
 	)
 	(wire
 		(pts
+			(xy 17.78 91.44) (xy 26.67 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbf149f9-ec57-4b83-8a5f-22e0dbc69692")
+	)
+	(wire
+		(pts
 			(xy 176.53 123.19) (xy 180.34 123.19)
 		)
 		(stroke
@@ -9785,7 +9838,7 @@
 		)
 	)
 	(global_label "TX"
-		(shape output)
+		(shape input)
 		(at 17.78 114.3 180)
 		(fields_autoplaced yes)
 		(effects
@@ -9851,7 +9904,7 @@
 		)
 	)
 	(global_label "RX"
-		(shape input)
+		(shape output)
 		(at 17.78 111.76 180)
 		(fields_autoplaced yes)
 		(effects
@@ -9863,6 +9916,28 @@
 		(uuid "8aad17e8-476a-4d5f-a47e-727153289b43")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 12.3153 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPS_Reset"
+		(shape input)
+		(at 17.78 91.44 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a66f15a1-cb7f-4f84-b352-75b13816e9ae")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 4.8767 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9907,6 +9982,28 @@
 		(uuid "af91691f-8e59-433f-a448-4f9b580422b8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 116.8559 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GPS_Reset"
+		(shape output)
+		(at 25.4 168.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b0ba5b1e-4f64-47b9-b46e-8136f44698e9")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 12.4967 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9983,7 +10080,7 @@
 		)
 	)
 	(global_label "RX"
-		(shape output)
+		(shape input)
 		(at 129.54 138.43 180)
 		(fields_autoplaced yes)
 		(effects
