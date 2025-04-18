@@ -1,4 +1,4 @@
-25193329503953180
+25196818765561380
 12402012E212A
 AMPHENOL_12402012E212A
 
@@ -64679,6 +64679,13 @@ solder jumper open
 0
 3
 3
+L86-M33
+XCVR_L86-M33
+
+
+0
+12
+12
 LED_SMD
 LED-APA102-2020
 http://www.led-color.com/upload/201604/APA102-2020%20SMD%20LED.pdf
@@ -93029,6 +93036,13 @@ SAMTEC_SMA-J-P-X-ST-TH1
 0
 5
 5
+STM32F103C8T6
+QFP50P900X900X160-48N
+
+
+0
+48
+48
 Sensor
 ASAIR_AM2302_P2.54mm_Lead2.75mm_TabDown
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/AM2302.pdf
