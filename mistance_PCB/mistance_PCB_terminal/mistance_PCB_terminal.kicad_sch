@@ -5,6 +5,362 @@
 	(uuid "d49575c6-b8d6-4973-90d8-97f30253e1a9")
 	(paper "A4")
 	(lib_symbols
+		(symbol "ABM3B-8.000MHZ-B2-T:ABM3B-8.000MHZ-B2-T"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Y"
+				(at -5.0878 6.3559 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Value" "ABM3B-8.000MHZ-B2-T"
+				(at -5.0944 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Footprint" "ABM3B-8.000MHZ-B2-T:XTAL_ABM3B-8.000MHZ-B2-T"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MF" "Abracon"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MAXIMUM_PACKAGE_HEIGHT" "1.1 mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Package" "SMD-4 Abracon LLC"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Price" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Check_prices" "https://www.snapeda.com/parts/ABM3B-8.000MHZ-B2-T/Abracon/view-part/?ref=eda"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "STANDARD" "Manufacturer Recommendations"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "PARTREV" "08.25.15"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/ABM3B-8.000MHZ-B2-T/Abracon/view-part/?ref=snap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MP" "ABM3B-8.000MHZ-B2-T"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Description_1" "8 MHz ±20ppm Crystal 18pF 200 Ohms 4-SMD, No Lead"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Availability" "In Stock"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MANUFACTURER" "Abracon"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(symbol "ABM3B-8.000MHZ-B2-T_0_0"
+				(polyline
+					(pts
+						(xy -5.08 0) (xy -2.54 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -5.08 -7.62)
+					(end 5.08 5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.3368 2.54) (xy -2.3368 -2.54)
+					)
+					(stroke
+						(width 0.4064)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.397 2.54) (xy -1.397 -2.54)
+					)
+					(stroke
+						(width 0.4064)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.397 2.54) (xy 1.397 2.54)
+					)
+					(stroke
+						(width 0.4064)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.397 2.54) (xy 1.397 -2.54)
+					)
+					(stroke
+						(width 0.4064)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.397 -2.54) (xy -1.397 -2.54)
+					)
+					(stroke
+						(width 0.4064)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.3368 2.54) (xy 2.3368 -2.54)
+					)
+					(stroke
+						(width 0.4064)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 0) (xy 5.08 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 7.62 -5.08 180)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 7.62 -5.08 180)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "BLM21PG221SN1D:BLM21PG221SN1D"
 			(pin_names
 				(offset 1.016)
@@ -7941,6 +8297,12 @@
 		(uuid "00ed1f6a-ca95-49f0-8048-147c71a28454")
 	)
 	(junction
+		(at 125.73 193.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "014587c4-1a7b-4223-922b-65366b930050")
+	)
+	(junction
 		(at 80.01 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8011,6 +8373,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3089bbc4-a243-4182-8a5a-8b9e45e8f48e")
+	)
+	(junction
+		(at 144.78 189.23)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3869eb7b-b364-424b-bd80-108f6722f730")
 	)
 	(junction
 		(at 29.21 168.91)
@@ -8103,6 +8471,12 @@
 		(uuid "941d2c5f-b7d1-458c-acd9-928735ec6d34")
 	)
 	(junction
+		(at 144.78 181.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "984e8134-51bc-42b4-bc63-383c5727af48")
+	)
+	(junction
 		(at 157.48 161.29)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8179,6 +8553,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bc9dc03a-73a5-44b7-ad7f-b7a7ab92deff")
+	)
+	(junction
+		(at 125.73 177.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c4ed4d5f-2859-4b84-b074-4c47337e4a88")
 	)
 	(junction
 		(at 143.51 36.83)
@@ -8522,6 +8902,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 176.53) (xy 144.78 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ed3f47e-2068-429b-b5a3-0371b98de906")
+	)
+	(wire
+		(pts
 			(xy 140.97 36.83) (xy 143.51 36.83)
 		)
 		(stroke
@@ -8812,6 +9202,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 193.04) (xy 105.41 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28903116-e7bf-4b25-8458-fe0bcb64034a")
+	)
+	(wire
+		(pts
 			(xy 143.51 63.5) (xy 143.51 66.04)
 		)
 		(stroke
@@ -8839,6 +9239,16 @@
 			(type default)
 		)
 		(uuid "2a0fe77b-4c67-4bd9-8e5e-7556de889730")
+	)
+	(wire
+		(pts
+			(xy 19.05 134.62) (xy 26.67 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a7bd9a3-b993-4b17-8281-885c212ac420")
 	)
 	(wire
 		(pts
@@ -8989,6 +9399,36 @@
 			(type default)
 		)
 		(uuid "381af52c-b07a-48ed-8cc5-0c07b40d7761")
+	)
+	(wire
+		(pts
+			(xy 125.73 193.04) (xy 142.24 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b54076d-2919-4083-a973-453c9301eb72")
+	)
+	(wire
+		(pts
+			(xy 77.47 132.08) (xy 82.55 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b8c8ef9-a2bd-45f0-b1c0-66dfe6f1f3fc")
+	)
+	(wire
+		(pts
+			(xy 137.16 177.8) (xy 139.7 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3bd8e7f3-34a3-4f7a-ba54-0608e4cf3120")
 	)
 	(wire
 		(pts
@@ -9262,6 +9702,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 180.34) (xy 107.95 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d5eaf97-aad3-4c03-9b32-31c77aa59d5b")
+	)
+	(wire
+		(pts
 			(xy 195.58 130.81) (xy 198.12 130.81)
 		)
 		(stroke
@@ -9269,6 +9719,16 @@
 			(type default)
 		)
 		(uuid "502ec4b4-b105-495f-9a7d-64cb95074dcc")
+	)
+	(wire
+		(pts
+			(xy 127 176.53) (xy 125.73 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51818823-06b3-4f34-aa82-3a850ab6c06d")
 	)
 	(wire
 		(pts
@@ -9299,6 +9759,16 @@
 			(type default)
 		)
 		(uuid "53457348-25e8-468f-8815-2461d9498e6d")
+	)
+	(wire
+		(pts
+			(xy 147.32 177.8) (xy 144.78 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "553aab4d-6148-4a4d-aaf9-419b2725387c")
 	)
 	(wire
 		(pts
@@ -9582,6 +10052,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 180.34) (xy 105.41 190.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "708ecb8b-4095-44ab-bced-14cadf575ebd")
+	)
+	(wire
+		(pts
 			(xy 29.21 166.37) (xy 29.21 168.91)
 		)
 		(stroke
@@ -9659,6 +10139,16 @@
 			(type default)
 		)
 		(uuid "78722cd7-fdfb-43c0-b5da-1e40543a711d")
+	)
+	(wire
+		(pts
+			(xy 77.47 134.62) (xy 82.55 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78891e10-2cd2-41a7-9281-508d8b1b5441")
 	)
 	(wire
 		(pts
@@ -9892,6 +10382,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 193.04) (xy 144.78 189.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8cd7ce45-ed4d-4788-a642-fba970022c99")
+	)
+	(wire
+		(pts
 			(xy 121.92 46.99) (xy 121.92 49.53)
 		)
 		(stroke
@@ -9939,6 +10439,16 @@
 			(type default)
 		)
 		(uuid "931cf1e8-3ce8-42ad-85c4-c141b40d50c5")
+	)
+	(wire
+		(pts
+			(xy 19.05 137.16) (xy 26.67 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9361bf03-eaef-4d2e-b1bc-5d7b98fe133c")
 	)
 	(wire
 		(pts
@@ -9999,6 +10509,16 @@
 			(type default)
 		)
 		(uuid "9ccc793c-c7a3-41ea-88cb-a4b4cb4272b4")
+	)
+	(wire
+		(pts
+			(xy 115.57 177.8) (xy 125.73 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1437e15-0fbf-4c94-8962-2d3b9576a808")
 	)
 	(wire
 		(pts
@@ -10259,6 +10779,26 @@
 			(type default)
 		)
 		(uuid "b3731dba-4cab-4f04-97a3-20fe4e915c48")
+	)
+	(wire
+		(pts
+			(xy 147.32 193.04) (xy 144.78 189.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b628bb47-72d8-4fad-84b5-170985bc1128")
+	)
+	(wire
+		(pts
+			(xy 127 176.53) (xy 142.24 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6d94f72-1a89-459a-bfd0-aab46f166a63")
 	)
 	(wire
 		(pts
@@ -10572,6 +11112,16 @@
 	)
 	(wire
 		(pts
+			(xy 115.57 193.04) (xy 125.73 193.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7362fbd-4d11-4708-8ce1-1f10070e2c4b")
+	)
+	(wire
+		(pts
 			(xy 226.06 95.25) (xy 220.98 95.25)
 		)
 		(stroke
@@ -10649,6 +11199,16 @@
 			(type default)
 		)
 		(uuid "e2cbb97c-fcfa-4820-a40d-59b0da5d5a01")
+	)
+	(wire
+		(pts
+			(xy 130.81 177.8) (xy 137.16 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4d0b192-b141-40cf-948b-80cd55c0b361")
 	)
 	(wire
 		(pts
@@ -10950,6 +11510,28 @@
 		)
 		(uuid "ffef6f0c-603c-4207-aaa4-c2e0ff6ba510")
 	)
+	(global_label "OSC32_IN"
+		(shape bidirectional)
+		(at 19.05 134.62 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "03b05b30-c248-4828-a2a1-6c68c1982366")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 5.8216 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "GPS_TX"
 		(shape input)
 		(at 78.74 179.07 0)
@@ -11192,6 +11774,28 @@
 			)
 		)
 	)
+	(global_label "OSC_IN"
+		(shape bidirectional)
+		(at 82.55 132.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5125a68e-8357-40cc-9343-3630e00ef31f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 93.3594 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TX"
 		(shape input)
 		(at 20.32 114.3 180)
@@ -11302,6 +11906,28 @@
 			)
 		)
 	)
+	(global_label "OSC_IN"
+		(shape bidirectional)
+		(at 147.32 177.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8673bb85-cf50-4947-a87f-22525323088f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 158.1294 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "RX"
 		(shape output)
 		(at 20.32 111.76 180)
@@ -11337,6 +11963,28 @@
 		(uuid "8f64831a-dac6-4107-b0bc-ba652f744f79")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 129.9852 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "OSC_OUT"
+		(shape bidirectional)
+		(at 82.55 134.62 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8fa43603-f702-4ec7-b478-481ba6d1f0b5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 95.0527 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11474,6 +12122,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "OSC_OUT"
+		(shape bidirectional)
+		(at 147.32 193.04 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b2e7383d-164a-4083-a731-7d0d436f5fe0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 159.8227 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -11645,6 +12315,28 @@
 		(uuid "eb986f49-2756-4589-adc8-0f2b819e277e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 12.7386 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "OSC32_OUT"
+		(shape bidirectional)
+		(at 19.05 137.16 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "eeaca6f9-88c2-416b-b539-630739435bf7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 4.1283 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13010,6 +13702,72 @@
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
 					(reference "U8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 139.7 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "38c6e3cc-752a-4435-96c4-3644070dfb57")
+		(property "Reference" "#PWR036"
+			(at 139.7 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 139.7 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 139.7 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 139.7 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "43bfebcf-0ee6-48d6-b87e-e34e624280e1")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -17875,6 +18633,76 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 144.78 185.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c819dcf5-e865-4491-b0e7-29b02e90bdf2")
+		(property "Reference" "R15"
+			(at 147.32 184.1499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1M"
+			(at 147.32 186.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 143.002 185.42 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 144.78 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 144.78 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cfb2ed3d-4c99-4e4c-9adc-b32638303169")
+		)
+		(pin "2"
+			(uuid "6872e04d-1c91-4113-9eee-6a9a7efb16f8")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 194.31 133.35 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -18773,6 +19601,271 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 111.76 193.04 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e5a11734-c046-4c79-abef-82271a587bde")
+		(property "Reference" "C25"
+			(at 110.4899 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "20pF"
+			(at 113.0299 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 115.57 192.0748 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 111.76 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b7fd0145-6eac-484e-962f-6ae9a1d5b2da")
+		)
+		(pin "2"
+			(uuid "f2ae5c4c-7249-4b4c-988d-fb8f1ccb4602")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "C25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "ABM3B-8.000MHZ-B2-T:ABM3B-8.000MHZ-B2-T")
+		(at 125.73 185.42 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e724bb67-67da-44d1-b2e3-11886cf431d9")
+		(property "Reference" "Y2"
+			(at 134.62 184.1499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ABM3B-8.000MHZ-B2-T"
+			(at 120.904 195.326 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "ABM3B-8.000MHZ-B2-T:XTAL_ABM3B-8.000MHZ-B2-T"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Abracon"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "1.1 mm"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "SMD-4 Abracon LLC"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/ABM3B-8.000MHZ-B2-T/Abracon/view-part/?ref=eda"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" "08.25.15"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/ABM3B-8.000MHZ-B2-T/Abracon/view-part/?ref=snap"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "ABM3B-8.000MHZ-B2-T"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "8 MHz ±20ppm Crystal 18pF 200 Ohms 4-SMD, No Lead"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "In Stock"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Abracon"
+			(at 125.73 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6daa9360-f39b-4b88-949a-fc5ec84b3465")
+		)
+		(pin "4"
+			(uuid "62da2aad-3f2b-4c8e-aabf-eca1470e3a48")
+		)
+		(pin "3"
+			(uuid "caf2ec41-9230-4e7b-875f-7a9691708d0f")
+		)
+		(pin "2"
+			(uuid "b06d4204-73d1-493d-acf5-25d903778c2d")
+		)
+		(instances
+			(project ""
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "Y2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Transistor_BJT:UMH3N")
 		(at 113.03 115.57 0)
 		(unit 1)
@@ -18828,27 +19921,96 @@
 			)
 		)
 		(pin "4"
-			(uuid "63b828ca-04f4-4d2c-b3a6-6788d7736a68")
+			(uuid "63b828ca-04f4-4d2c-b3a6-6788d7736a69")
 		)
 		(pin "5"
-			(uuid "8e5ec548-d0bb-4aa6-9754-3f5f6a57b4bb")
+			(uuid "8e5ec548-d0bb-4aa6-9754-3f5f6a57b4bc")
 		)
 		(pin "3"
-			(uuid "21f59076-aacb-4db6-8c0a-7e6ee65a7d1c")
+			(uuid "21f59076-aacb-4db6-8c0a-7e6ee65a7d1d")
 		)
 		(pin "2"
-			(uuid "dd33be03-2991-4a8e-a5a1-6574a37b6679")
+			(uuid "dd33be03-2991-4a8e-a5a1-6574a37b667a")
 		)
 		(pin "6"
-			(uuid "67dd5d2d-5f6f-4bd4-8d0c-9dbd4c5c710d")
+			(uuid "67dd5d2d-5f6f-4bd4-8d0c-9dbd4c5c710e")
 		)
 		(pin "1"
-			(uuid "63290e62-31ae-4392-bfc5-229bcacd3c3f")
+			(uuid "63290e62-31ae-4392-bfc5-229bcacd3c40")
 		)
 		(instances
 			(project ""
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
 					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 111.76 177.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ebf94580-8931-4f3c-b3e8-bfe2decca41a")
+		(property "Reference" "C23"
+			(at 110.4899 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "20pF"
+			(at 113.0299 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 115.57 176.8348 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 111.76 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1a182a97-009e-4379-8cdd-997d8e802327")
+		)
+		(pin "2"
+			(uuid "7dfcf79d-a176-4510-80bf-7b199f1d22f5")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "C23")
 					(unit 1)
 				)
 			)
