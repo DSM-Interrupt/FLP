@@ -8620,10 +8620,6 @@
 		(uuid "1627f356-28f5-4d68-86c5-54c9db89d925")
 	)
 	(no_connect
-		(at 29.21 109.22)
-		(uuid "19250421-0822-44f2-834d-90ab30c41973")
-	)
-	(no_connect
 		(at 280.67 86.36)
 		(uuid "30effa06-d18a-42f7-b01d-ce02f3a646ff")
 	)
@@ -14436,6 +14432,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 254 137.16 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1e874a5d-4f1d-40bd-bd5e-7f3325ea9fd4")
+		(property "Reference" "R17"
+			(at 256.54 135.8899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10K"
+			(at 256.54 138.4299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 255.778 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 254 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 254 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f2cb986a-722d-4380-a99b-b83e342ef847")
+		)
+		(pin "1"
+			(uuid "b74e9b59-09d9-465b-b4bb-4a8c3858d05b")
+		)
+		(instances
+			(project "mistance_PCB_host"
+				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
+					(reference "R17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 194.31 133.35 0)
 		(unit 1)
@@ -14844,76 +14910,6 @@
 			(project "mistance_PCB"
 				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
 					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 256.54 137.16 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2f0dfa84-3f49-4c29-9ea4-f2bdd6086ddb")
-		(property "Reference" "R18"
-			(at 259.08 135.8899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "100K"
-			(at 259.08 138.4299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 258.318 137.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 256.54 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 256.54 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "c0a8f8fb-80ed-440c-bef1-148f28ae2251")
-		)
-		(pin "1"
-			(uuid "a9655ac8-6b8f-4191-80a5-570d26a4cd98")
-		)
-		(instances
-			(project "mistance_PCB_host"
-				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
-					(reference "R18")
 					(unit 1)
 				)
 			)
@@ -16047,76 +16043,6 @@
 			(project ""
 				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
 					(reference "C8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 261.62 137.16 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "54709c59-ffad-4e17-ac6a-79dd07bfc7e7")
-		(property "Reference" "R20"
-			(at 264.16 135.8899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "100K"
-			(at 264.16 138.4299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 263.398 137.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 261.62 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 261.62 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "3d26adbc-e810-4dd2-9aad-578d5b78b44a")
-		)
-		(pin "1"
-			(uuid "57f662ad-d542-44c6-aec8-6ed5b9c2e202")
-		)
-		(instances
-			(project "mistance_PCB_host"
-				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
-					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -18893,6 +18819,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 259.08 137.16 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "89664371-2696-4148-b235-aa344e58e27a")
+		(property "Reference" "R19"
+			(at 261.62 135.8899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10K"
+			(at 261.62 138.4299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 260.858 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 259.08 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 259.08 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "6e089ddf-42c9-4132-8f65-7c442baa9d28")
+		)
+		(pin "1"
+			(uuid "f163fb36-a0f8-4987-af7e-c60afca91b6e")
+		)
+		(instances
+			(project "mistance_PCB_host"
+				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
+					(reference "R19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 133.35 55.88 0)
 		(unit 1)
@@ -19138,76 +19134,6 @@
 			(project "mistance_PCB_host"
 				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
 					(reference "Enter&space1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 259.08 137.16 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8d6bcab7-4bd8-4416-8dc9-331710c700bd")
-		(property "Reference" "R19"
-			(at 261.62 135.8899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "100K"
-			(at 261.62 138.4299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 260.858 137.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 259.08 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 259.08 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "56965387-4ee3-49b1-9382-1671eff4948c")
-		)
-		(pin "1"
-			(uuid "70084224-33d3-457a-a353-cf7936987657")
-		)
-		(instances
-			(project "mistance_PCB_host"
-				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
-					(reference "R19")
 					(unit 1)
 				)
 			)
@@ -20863,76 +20789,6 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 254 137.16 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a71347c5-394c-4b17-9039-17aa244065da")
-		(property "Reference" "R17"
-			(at 256.54 135.8899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "100K"
-			(at 256.54 138.4299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 255.778 137.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 254 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 254 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "0c86ad2e-fa28-446a-81c8-3a90612d412e")
-		)
-		(pin "1"
-			(uuid "4b02cb08-fca6-4172-b54b-bc75c3dd7da3")
-		)
-		(instances
-			(project "mistance_PCB_host"
-				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
-					(reference "R17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
 		(at 44.45 63.5 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -21205,6 +21061,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 256.54 137.16 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ba0ceddc-8eec-4c70-8bbc-63a29c973a95")
+		(property "Reference" "R18"
+			(at 259.08 135.8899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10K"
+			(at 259.08 138.4299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 258.318 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 256.54 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 256.54 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1975abc0-2b74-418c-aadb-222c2d3a23de")
+		)
+		(pin "1"
+			(uuid "8225d9f8-2d91-4d58-9505-a2e7d4201026")
+		)
+		(instances
+			(project "mistance_PCB_host"
+				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
+					(reference "R18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 46.99 26.67 0)
 		(unit 1)
@@ -21265,6 +21191,76 @@
 			(project "mistance_PCB_host"
 				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
 					(reference "#PWR043")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 261.62 137.16 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bae90ff2-34f4-48dd-9e75-13e39de40f0f")
+		(property "Reference" "R20"
+			(at 264.16 135.8899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10K"
+			(at 264.16 138.4299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 263.398 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 261.62 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 261.62 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "4a7bb5e5-250f-4b71-8fca-19bd0ef6f896")
+		)
+		(pin "1"
+			(uuid "db616ff6-e257-488c-8bc7-4de159b696db")
+		)
+		(instances
+			(project "mistance_PCB_host"
+				(path "/1a661fa9-14f5-41a2-bff5-90163425b44c"
+					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -23396,7 +23392,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "100K"
+		(property "Value" "10K"
 			(at 254 138.4299 0)
 			(effects
 				(font
