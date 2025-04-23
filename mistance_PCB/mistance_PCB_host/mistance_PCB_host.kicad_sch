@@ -11954,7 +11954,7 @@
 		)
 	)
 	(global_label "MISO"
-		(shape output)
+		(shape input)
 		(at 241.3 109.22 180)
 		(fields_autoplaced yes)
 		(effects
@@ -12218,7 +12218,7 @@
 		)
 	)
 	(global_label "MISO"
-		(shape input)
+		(shape output)
 		(at 72.39 107.95 0)
 		(fields_autoplaced yes)
 		(effects
