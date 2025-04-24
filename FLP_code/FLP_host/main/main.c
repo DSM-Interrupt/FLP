@@ -35,27 +35,13 @@ static const char *TAG = "wifi";
 
 spi_device_handle_t spi;
 
-void lora_write_byte(uint8_t addr, uint8_t data) {
-    uint8_t tx_data[2] = { addr | 0x80, data };
-    spi_transaction_t t = {
-        .length = 8 * 2,
-        .tx_buffer = tx_data,
-        .rx_buffer = NULL
-    };
-    spi_device_transmit(spi, &t);
-}
+typedef struct terminaldevice{
+	int code;
+	double latit;
+	double longit;
+} TerminalDevice;
 
-uint8_t lora_read_byte(uint8_t addr) {
-    uint8_t tx_data[2] = { addr & 0x7F, 0x00 };
-    uint8_t rx_data[2];
-    spi_transaction_t t = {
-        .length = 8 * 2,
-        .tx_buffer = tx_data,
-        .rx_buffer = rx_data
-    };
-    spi_device_transmit(spi, &t);
-    return rx_data[1];
-}
+
 
 static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data) {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
@@ -150,7 +136,7 @@ void tcp_client_task(void *pvParameters) {
             ESP_LOGE("TCP", "recv failed: errno %d", errno);
             break;
         } else {
-            rx_buffer[len] = 0; // null-terminate
+            rx_buffer[len] = 0;
             ESP_LOGI("TCP", "Received: %s", rx_buffer);
         }
         
