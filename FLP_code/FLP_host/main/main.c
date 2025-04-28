@@ -1,11 +1,18 @@
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/_intsup.h>
+#include <sys/_types.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <sys/unistd.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
+#include "hal/gpio_types.h"
 #include "soc/gpio_num.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
@@ -20,29 +27,52 @@
 
 #define WIFI_SSID "Your_SSID"
 #define WIFI_PASS "Your_PASSWORD"
-
 #define WIFI_CONNECTED_BIT BIT0
+
 #define PIN_NUM_MISO GPIO_NUM_19
 #define PIN_NUM_MOSI GPIO_NUM_23
-#define PIN_NUM_CLK  GPIO_NUM_18
-#define PIN_NUM_CS   GPIO_NUM_5
-#define PIN_NUM_RST  GPIO_NUM_27
+#define PIN_NUM_CLK  GPIO_NUM_5
+#define PIN_NUM_CS   GPIO_NUM_18
+#define PIN_NUM_RST  GPIO_NUM_16
 #define PIN_NUM_IRQ  GPIO_NUM_26
+
+#define CTRL GPIO_NUM_17
+#define FIND_HOST GPIO_NUM_25
+#define Enter_AND_SPACE GPIO_NUM_27
+#define UP GPIO_NUM_34
+#define DOWN GPIO_NUM_35
 
 #define LORA_SPI_HOST HSPI_HOST
 #define LORA_FREQUENCY 433000000
+#define LORA_MAX_PACKET_SIZE 256
+#define MAX_DEVICE_CNT 50
 
-static const char *LR_TAG = "LoRa";
+#define MY_ID 3582194827
+
 static EventGroupHandle_t wifi_event_group;
 static const char *TAG = "wifi";
+static const char *LR_TAG = "LoRa";
 
 spi_device_handle_t lora_spi;
 
 typedef struct terminaldevice{
-	int code;
+	unsigned int code;
 	double latit;
 	double longit;
 } TerminalDevice;
+
+TerminalDevice * device_list[MAX_DEVICE_CNT];
+int8_t device_cnt = -1;
+
+bool device_add(unsigned int device_id){
+	device_cnt += 1;
+	if(device_cnt >50){
+		return false;
+	}
+	TerminalDevice * new_device = (TerminalDevice*)malloc(sizeof(TerminalDevice));
+	
+	device_list[device_cnt] = new_device;
+}
 
 void lora_write_register(uint8_t reg, uint8_t val) {
     spi_transaction_t t = {
@@ -66,7 +96,7 @@ uint8_t lora_read_register(uint8_t reg) {
     return out;
 }
 
-// 초기화
+
 void lora_init() {
     gpio_set_direction(PIN_NUM_RST, GPIO_MODE_OUTPUT);
     gpio_set_level(PIN_NUM_RST, 0);
@@ -74,55 +104,79 @@ void lora_init() {
     gpio_set_level(PIN_NUM_RST, 1);
     vTaskDelay(pdMS_TO_TICKS(10));
 
-    // LoRa 모드로 설정
-    lora_write_register(0x01, 0x80); // RegOpMode = LoRa + sleep
-    lora_write_register(0x01, 0x81); // standby
 
-    // 주파수 설정 (433MHz = 0x6C + 0x80 + 0x00)
+    lora_write_register(0x01, 0x80); 
+    lora_write_register(0x01, 0x81); 
+
+
     uint64_t frf = ((uint64_t)LORA_FREQUENCY << 19) / 32000000;
     lora_write_register(0x06, (frf >> 16) & 0xFF);
     lora_write_register(0x07, (frf >> 8) & 0xFF);
     lora_write_register(0x08, (frf >> 0) & 0xFF);
 
-    // BW = 125kHz, CR = 4/5, Explicit Header
-    lora_write_register(0x1D, 0x72); // RegModemConfig1
-    lora_write_register(0x1E, 0xA4); // RegModemConfig2 (SF10)
 
-    // preamble length
+    lora_write_register(0x1D, 0x72);
+    lora_write_register(0x1E, 0xA4); 
+
+
     lora_write_register(0x20, 0x00);
     lora_write_register(0x21, 0x08);
 
-    // payload CRC
-    lora_write_register(0x1F, 0x00); // disable CRC
+
+    lora_write_register(0x1F, 0x00); 
 }
 
-// 패킷 송신
+
 void lora_send_packet(const char* data) {
     size_t len = strlen(data);
 
-    // standby 모드
     lora_write_register(0x01, 0x81);
 
-    // FIFO 포인터 초기화
-    lora_write_register(0x0E, 0x00); // FIFO TX base
-    lora_write_register(0x0D, 0x00); // FIFO addr ptr
+
+    lora_write_register(0x0E, 0x00);
+    lora_write_register(0x0D, 0x00);
 
     for (int i = 0; i < len; i++) {
         lora_write_register(0x00, data[i]);
     }
 
-    lora_write_register(0x22, len); // payload length
-    lora_write_register(0x01, 0x83); // TX mode
+    lora_write_register(0x22, len);
+    lora_write_register(0x01, 0x83);
 
-    // 전송 완료 대기
+
     while ((lora_read_register(0x12) & 0x08) == 0) {
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 
-    // IRQ 플래그 클리어
     lora_write_register(0x12, 0xFF);
 }
-/**/
+
+int lora_receive_packet(char *buf) {
+    int len = 0;
+    
+    uint8_t irq_flags = lora_read_register(0x12);
+
+    if (irq_flags & 0x40) {
+        len = lora_read_register(0x13);
+
+        if (len > LORA_MAX_PACKET_SIZE) {
+            len = LORA_MAX_PACKET_SIZE;
+        }
+
+        uint8_t fifo_addr = lora_read_register(0x10);
+        lora_write_register(0x0D, fifo_addr);
+
+        for (int i = 0; i < len; i++) {
+            buf[i] = lora_read_register(0x00);
+        }
+
+        lora_write_register(0x12, 0xFF);
+    }
+
+    return len;
+}
+
+
 static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data) {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
         esp_wifi_connect();
@@ -205,7 +259,6 @@ void tcp_client_task(void *pvParameters) {
     }
 
     while (1) {
-		
         
     }
 
@@ -213,7 +266,15 @@ void tcp_client_task(void *pvParameters) {
     vTaskDelete(NULL);
 }
 
-
+void lora_host_task(void *pvParameters){
+	
+	
+	while(1){
+		
+	}
+	
+	vTaskDelete(NULL);
+}
 
 void app_main(void) {
 	spi_bus_config_t buscfg = {
@@ -229,18 +290,42 @@ void app_main(void) {
         .spics_io_num = PIN_NUM_CS,
         .queue_size = 7
     };
+
+    ESP_ERROR_CHECK(spi_bus_initialize(LORA_SPI_HOST, &buscfg, SPI_DMA_CH_AUTO));
+    ESP_ERROR_CHECK(spi_bus_add_device(LORA_SPI_HOST, &devcfg, &lora_spi));
 	
-	
-	gpio_num_t pins[] = {GPIO_NUM_17, GPIO_NUM_25, GPIO_NUM_26, GPIO_NUM_27};
+	gpio_num_t pins[] = {CTRL, FIND_HOST, Enter_AND_SPACE, UP,DOWN};
 	for (int i = 0; i < sizeof(pins)/sizeof(pins[0]); i++) {
 	    gpio_set_direction(pins[i], GPIO_MODE_INPUT);
 	    gpio_set_pull_mode(pins[i], GPIO_FLOATING);
 	}
 	
 	wifi_init_sta();
+	lora_init();
 	
 	xTaskCreate(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL);
+	xTaskCreate(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL);
     while (1) {
-        
+		if(gpio_get_level(CTRL) == 1 && gpio_get_level(FIND_HOST) == 1){
+			char buf[LORA_MAX_PACKET_SIZE];
+			int packet_len;
+			while(1){
+				memset(buf, 0, sizeof(buf));
+				packet_len = lora_receive_packet(buf);
+				
+				if(packet_len > 0){
+					if (strstr(buf, "FINDHOST") != NULL){
+						char temp[10];
+						for(int i = 0 ;i < 10;i++){
+							temp[i] = buf[i];
+						}
+		                device_add(atoi(temp));
+		            }
+				}
+				if(gpio_get_level(CTRL) == 1 && gpio_get_level(DOWN) == 1){
+					break;
+				}
+			}
+		}
     }
 }
