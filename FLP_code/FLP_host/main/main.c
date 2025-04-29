@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sys/unistd.h>
+#include "esp_err.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
@@ -16,6 +17,7 @@
 #include "soc/gpio_num.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
+#include "nvs.h"
 #include "nvs_flash.h"
 #include "esp_log.h"
 #include "freertos/event_groups.h"
@@ -45,13 +47,15 @@
 #define LORA_SPI_HOST HSPI_HOST
 #define LORA_FREQUENCY 433000000
 #define LORA_MAX_PACKET_SIZE 256
+
 #define MAX_DEVICE_CNT 50
+#define FLASH_STORAGE "storage"
 
 #define MY_ID 3582194827
+#define TAG_NVS "nvs_init"
 
 static EventGroupHandle_t wifi_event_group;
 static const char *TAG = "wifi";
-static const char *LR_TAG = "LoRa";
 
 spi_device_handle_t lora_spi;
 
@@ -61,18 +65,73 @@ typedef struct terminaldevice{
 	double longit;
 } TerminalDevice;
 
-TerminalDevice * device_list[MAX_DEVICE_CNT];
-int8_t device_cnt = -1;
+unsigned int device_list[MAX_DEVICE_CNT];
+TerminalDevice* device_info[MAX_DEVICE_CNT];
+size_t device_count = 0;
 
-bool device_add(unsigned int device_id){
-	device_cnt += 1;
-	if(device_cnt >50){
-		return false;
-	}
-	TerminalDevice * new_device = (TerminalDevice*)malloc(sizeof(TerminalDevice));
-	
-	device_list[device_cnt] = new_device;
+void load_array(unsigned int* array, size_t max_size) {
+    nvs_handle_t handle;
+    esp_err_t err = nvs_open(FLASH_STORAGE, NVS_READONLY, &handle);
+    if (err != ESP_OK) {
+        ESP_LOGW("device", "NVS open failed or not initialized. Starting fresh.");
+        device_count = 0;
+        return;
+    }
+
+    size_t required_size = max_size * sizeof(unsigned int);
+    err = nvs_get_blob(handle, "device_struct", array, &required_size);
+    if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGI("device", "No existing device list found.");
+        device_count = 0;
+    } else if (err == ESP_OK) {
+        device_count = required_size / sizeof(unsigned int);
+        ESP_LOGI("device", "Loaded %d devices from NVS.", device_count);
+    } else {
+        ESP_LOGE("device", "Error reading NVS: %s", esp_err_to_name(err));
+        device_count = 0;
+    }
+
+    nvs_close(handle);
 }
+
+void save_array(const unsigned int* array, size_t count) {
+    nvs_handle_t handle;
+    esp_err_t err = nvs_open(FLASH_STORAGE, NVS_READWRITE, &handle);
+    if (err != ESP_OK) {
+        ESP_LOGE("device", "Failed to open NVS for writing: %s", esp_err_to_name(err));
+        return;
+    }
+
+    err = nvs_set_blob(handle, "device_struct", array, sizeof(unsigned int) * count);
+    if (err != ESP_OK) {
+        ESP_LOGE("device", "Failed to write device list: %s", esp_err_to_name(err));
+    } else {
+        nvs_commit(handle);
+        ESP_LOGI("device", "Saved %d devices to NVS.", count);
+    }
+
+    nvs_close(handle);
+}
+
+bool device_add(unsigned int device_id) {
+    for (size_t i = 0; i < device_count; i++) {
+        if (device_list[i] == device_id) {
+            ESP_LOGW("device", "Device ID %u already exists. Skipping.", device_id);
+            return false;
+        }
+    }
+
+    if (device_count >= MAX_DEVICE_CNT) {
+        ESP_LOGE("device", "Device list full. Cannot add ID %u.", device_id);
+        return false;
+    }
+
+    device_list[device_count++] = device_id;
+    save_array(device_list, device_count);
+    ESP_LOGI("device", "Device ID %u added.", device_id);
+    return true;
+}
+
 
 void lora_write_register(uint8_t reg, uint8_t val) {
     spi_transaction_t t = {
@@ -176,6 +235,22 @@ int lora_receive_packet(char *buf) {
     return len;
 }
 
+esp_err_t init_nvs_with_handling(void) {
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_LOGW(TAG_NVS, "NVS 문제가 발생했습니다. 플래시를 지우고 다시 초기화합니다.");
+        ESP_ERROR_CHECK(nvs_flash_erase()); // NVS 영역 초기화 (format)
+        ret = nvs_flash_init(); // 다시 초기화
+    }
+
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG_NVS, "NVS 초기화 실패: %s", esp_err_to_name(ret));
+    } else {
+        ESP_LOGI(TAG_NVS, "NVS 초기화 성공");
+    }
+
+    return ret;
+}
 
 static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data) {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
@@ -267,12 +342,16 @@ void tcp_client_task(void *pvParameters) {
 }
 
 void lora_host_task(void *pvParameters){
-	
+	for(int i = 0 ;i <device_count;i++){
+		TerminalDevice* new_device = (TerminalDevice*)malloc(sizeof(TerminalDevice));
+		
+		new_device->code = device_list[i];
+		device_info[i] = new_device;
+	}
 	
 	while(1){
 		
 	}
-	
 	vTaskDelete(NULL);
 }
 
@@ -293,6 +372,16 @@ void app_main(void) {
 
     ESP_ERROR_CHECK(spi_bus_initialize(LORA_SPI_HOST, &buscfg, SPI_DMA_CH_AUTO));
     ESP_ERROR_CHECK(spi_bus_add_device(LORA_SPI_HOST, &devcfg, &lora_spi));
+	ESP_ERROR_CHECK(init_nvs_with_handling());
+	
+	esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+
+    load_array(device_list, MAX_DEVICE_CNT);
 	
 	gpio_num_t pins[] = {CTRL, FIND_HOST, Enter_AND_SPACE, UP,DOWN};
 	for (int i = 0; i < sizeof(pins)/sizeof(pins[0]); i++) {
