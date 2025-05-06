@@ -76,13 +76,13 @@ TerminalDevice* device_info[MAX_DEVICE_CNT];
 size_t device_count = 0;
 
 unsigned int atou(const char* str) {
-    int result = 0;
+    unsigned int result = 0;
 
-    while (isspace(*str)) {
+    while (isspace((unsigned char)*str)) {
         str++;
     }
 
-    while (isdigit(*str)) {
+    while (isdigit((unsigned char)*str)) {
         result = result * 10 + (*str - '0');
         str++;
     }
@@ -424,6 +424,8 @@ void tcp_client_task(void *pvParameters) {
         int r = recv(sock, rx_buffer, sizeof(rx_buffer)-1, MSG_DONTWAIT);
         if (r > 0) {
             rx_buffer[r] = '\0';
+            
+            
             ESP_LOGI("TCP", "Received: %s", rx_buffer);
             
         }
