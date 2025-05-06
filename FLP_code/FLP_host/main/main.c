@@ -14,6 +14,7 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "hal/gpio_types.h"
+#include "lwip/sockets.h"
 #include "soc/gpio_num.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
@@ -37,6 +38,8 @@
 #define PIN_NUM_CS   GPIO_NUM_18
 #define PIN_NUM_RST  GPIO_NUM_16
 #define PIN_NUM_IRQ  GPIO_NUM_26
+#define GPS_RX GPIO_NUM_33
+#define GPS_TX GPIO_NUM_32
 
 #define CTRL GPIO_NUM_17
 #define FIND_HOST GPIO_NUM_25
@@ -51,11 +54,14 @@
 #define MAX_DEVICE_CNT 50
 #define FLASH_STORAGE "storage"
 
-#define MY_ID 3582194827
 #define TAG_NVS "nvs_init"
 
 static EventGroupHandle_t wifi_event_group;
 static const char *TAG = "wifi";
+const unsigned int MY_ID_INT = 3582194827;
+const char* MY_ID_CHAR = "3582194827";
+
+bool gps_data_all_receive = false;
 
 spi_device_handle_t lora_spi;
 
@@ -68,6 +74,70 @@ typedef struct terminaldevice{
 unsigned int device_list[MAX_DEVICE_CNT];
 TerminalDevice* device_info[MAX_DEVICE_CNT];
 size_t device_count = 0;
+
+unsigned int atou(const char* str) {
+    int result = 0;
+
+    while (isspace(*str)) {
+        str++;
+    }
+
+    while (isdigit(*str)) {
+        result = result * 10 + (*str - '0');
+        str++;
+    }
+
+    return result;
+}
+
+char* make_json_payload(void) {
+    char* json = malloc(4096);
+    if (!json) return NULL;
+    sprintf(json, "{\n\"hostId\": \"%s\",\n\"members\": [\n", MY_ID_CHAR);
+    char entry[256];
+    int first = 1;
+    for (int i = 0; i < MAX_DEVICE_CNT; i++) {
+        if (!device_info[i]) continue;
+        if (!first) {
+            strcat(json, ",\n");
+        }
+        first = 0;
+        snprintf(entry, sizeof(entry),
+            "{\n\"memberId\": \"%u\",\n\"lat\": %.6f,\n\"lon\": %.6f\n}",
+            device_info[i]->code,
+            device_info[i]->latit,
+            device_info[i]->longit
+        );
+        strcat(json, entry);
+    }
+    strcat(json, "\n]\n}");
+    return json;
+}
+
+bool split(char * input, TerminalDevice* info) {
+    char* token;
+    token = strtok(input, ",");
+    if (token != NULL) {
+        if (info->code != atou(token)) {
+            return false;
+        }
+    }
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+		info->latit = atof(token);
+    }
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+		info->longit = atof(token);
+    }
+    token = strtok(NULL, ",");
+    if (token != NULL) {
+        if (MY_ID_INT != atou(token)) {
+            return false;
+        }
+    }
+    return true;
+}
 
 void load_array(unsigned int* array, size_t max_size) {
     nvs_handle_t handle;
@@ -239,8 +309,8 @@ esp_err_t init_nvs_with_handling(void) {
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_LOGW(TAG_NVS, "NVS 문제가 발생했습니다. 플래시를 지우고 다시 초기화합니다.");
-        ESP_ERROR_CHECK(nvs_flash_erase()); // NVS 영역 초기화 (format)
-        ret = nvs_flash_init(); // 다시 초기화
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
     }
 
     if (ret != ESP_OK) {
@@ -334,12 +404,37 @@ void tcp_client_task(void *pvParameters) {
     }
 
     while (1) {
-        
+        if (gps_data_all_receive) {
+            char* server_send_string_JSON = make_json_payload();
+            if (server_send_string_JSON != NULL) {
+                size_t len = strlen(server_send_string_JSON);
+                int sent = send(sock, server_send_string_JSON, len, 0);
+                if (sent < 0) {
+                    ESP_LOGE("TCP", "Error occurred during sending: errno %d", errno);
+                } else {
+                    ESP_LOGI("TCP", "Sent %d bytes", sent);
+                }
+                free(server_send_string_JSON);
+            } else {
+                ESP_LOGE("TCP", "Failed to allocate JSON payload");
+            }
+            gps_data_all_receive = false;
+        }
+
+        int r = recv(sock, rx_buffer, sizeof(rx_buffer)-1, MSG_DONTWAIT);
+        if (r > 0) {
+            rx_buffer[r] = '\0';
+            ESP_LOGI("TCP", "Received: %s", rx_buffer);
+            
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
     close(sock);
     vTaskDelete(NULL);
 }
+
 
 void lora_host_task(void *pvParameters){
 	for(int i = 0 ;i <device_count;i++){
@@ -350,7 +445,27 @@ void lora_host_task(void *pvParameters){
 	}
 	
 	while(1){
-		
+		for(int i = 0; i < device_count;i++){
+			char gps_get_messege[17];
+			sprintf(gps_get_messege,"%u", device_info[i]->code);
+			strcat(gps_get_messege, "getgps");
+			lora_send_packet(gps_get_messege);
+			
+			char buf[LORA_MAX_PACKET_SIZE];
+			int packet_len;
+			while(1){
+				packet_len = lora_receive_packet(buf);
+				if(packet_len < 0){
+					if(strstr(buf, MY_ID_CHAR)){
+						split(buf, device_info[i]);
+						break;
+					}
+				}
+			}
+			
+			
+		}
+		gps_data_all_receive = true;
 	}
 	vTaskDelete(NULL);
 }
@@ -409,6 +524,7 @@ void app_main(void) {
 							temp[i] = buf[i];
 						}
 		                device_add(atoi(temp));
+		                break;
 		            }
 				}
 				if(gpio_get_level(CTRL) == 1 && gpio_get_level(DOWN) == 1){
