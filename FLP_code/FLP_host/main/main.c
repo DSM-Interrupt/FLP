@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sys/unistd.h>
+#include "driver/uart.h"
 #include "esp_err.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -24,6 +25,7 @@
 #include "freertos/event_groups.h"
 #include "esp_netif_ip_addr.h"
 #include "driver/spi_master.h"
+#include "cJSON.h"
 
 #define HOST_IP_ADDR "192.168.0.100"
 #define PORT 3333
@@ -55,12 +57,22 @@
 #define FLASH_STORAGE "storage"
 
 #define TAG_NVS "nvs_init"
+#define UART_GPS UART_NUM_1
+#define BUF_SIZE 1024
+
+#define TXD_PIN GPIO_NUM_33  // GPS RX
+#define RXD_PIN GPIO_NUM_32  // GPS TX
+
+static const char *G_TAG = "GPS";
+double latitude = 0.0;
+double longitude = 0.0;
 
 static EventGroupHandle_t wifi_event_group;
-static const char *TAG = "wifi";
+static const char *W_TAG = "wifi";
 const unsigned int MY_ID_INT = 3582194827;
 const char* MY_ID_CHAR = "3582194827";
-
+int rx_id = 0;
+int rx_danger = 0;
 bool gps_data_all_receive = false;
 
 spi_device_handle_t lora_spi;
@@ -91,27 +103,51 @@ unsigned int atou(const char* str) {
 }
 
 char* make_json_payload(void) {
-    char* json = malloc(4096);
-    if (!json) return NULL;
-    sprintf(json, "{\n\"hostId\": \"%s\",\n\"members\": [\n", MY_ID_CHAR);
-    char entry[256];
-    int first = 1;
+    cJSON *root = cJSON_CreateObject();
+    cJSON_AddStringToObject(root, "hostId", MY_ID_CHAR);
+
+    cJSON *members_array = cJSON_CreateArray();
+
     for (int i = 0; i < MAX_DEVICE_CNT; i++) {
         if (!device_info[i]) continue;
-        if (!first) {
-            strcat(json, ",\n");
-        }
-        first = 0;
-        snprintf(entry, sizeof(entry),
-            "{\n\"memberId\": \"%u\",\n\"lat\": %.6f,\n\"lon\": %.6f\n}",
-            device_info[i]->code,
-            device_info[i]->latit,
-            device_info[i]->longit
-        );
-        strcat(json, entry);
+
+        cJSON *member = cJSON_CreateObject();
+
+        cJSON_AddNumberToObject(member, "memberId", device_info[i]->code);
+        cJSON_AddNumberToObject(member, "lat", device_info[i]->latit);
+        cJSON_AddNumberToObject(member, "lon", device_info[i]->longit);
+
+        cJSON_AddItemToArray(members_array, member);
     }
-    strcat(json, "\n]\n}");
-    return json;
+
+    cJSON_AddItemToObject(root, "members", members_array);
+
+    char *json_str = cJSON_PrintUnformatted(root);
+
+    cJSON_Delete(root);
+    return json_str;
+}
+
+void parse_rx_buffer(const char *rx_buffer) {
+    cJSON *root = cJSON_Parse(rx_buffer);
+    if (root == NULL) {
+        ESP_LOGE("JSON", "Failed to parse rx_buffer");
+        return;
+    }
+
+    cJSON *id_item = cJSON_GetObjectItem(root, "id");
+    cJSON *distance_item = cJSON_GetObjectItem(root, "distance");
+
+    if (cJSON_IsNumber(id_item) && cJSON_IsNumber(distance_item)) {
+        rx_id = id_item->valueint;
+        rx_danger = distance_item->valueint;
+
+        ESP_LOGI("JSON", "Parsed id: %d, distance: %d", rx_id, rx_danger);
+    } else {
+        ESP_LOGE("JSON", "Invalid JSON format");
+    }
+
+    cJSON_Delete(root);
 }
 
 bool split(char * input, TerminalDevice* info) {
@@ -202,6 +238,80 @@ bool device_add(unsigned int device_id) {
     return true;
 }
 
+
+// NMEA에서 DMM(Degree Decimal Minutes)을 DD(Decimal Degrees)로 변환
+double convert_to_decimal_degrees(const char* nmea_coord, char direction) {
+    double raw = atof(nmea_coord);
+    int degrees = (int)(raw / 100);
+    double minutes = raw - (degrees * 100);
+    double decimal_degrees = degrees + (minutes / 60.0);
+
+    if (direction == 'S' || direction == 'W') {
+        decimal_degrees *= -1.0;
+    }
+
+    return decimal_degrees;
+}
+
+void parse_nmea_sentence(char* sentence) {
+    if (strstr(sentence, "$GPGGA") || strstr(sentence, "$GPRMC")) {
+        char *token;
+        int field_index = 0;
+        char lat[16] = {0}, lon[16] = {0};
+        char lat_dir = 0, lon_dir = 0;
+
+        token = strtok(sentence, ",");
+
+        while (token != NULL) {
+            field_index++;
+
+            if (field_index == 3) strncpy(lat, token, sizeof(lat));
+            if (field_index == 4) lat_dir = token[0];
+            if (field_index == 5) strncpy(lon, token, sizeof(lon));
+            if (field_index == 6) lon_dir = token[0];
+
+            token = strtok(NULL, ",");
+        }
+
+        if (strlen(lat) > 0 && strlen(lon) > 0) {
+            latitude = convert_to_decimal_degrees(lat, lat_dir);
+            longitude = convert_to_decimal_degrees(lon, lon_dir);
+            ESP_LOGI(G_TAG, "위도: %lf, 경도: %lf", latitude, longitude);
+        }
+    }
+}
+
+void gps_uart_init() {
+    uart_config_t uart_config = {
+        .baud_rate = 9600,
+        .data_bits = UART_DATA_8_BITS,
+        .parity    = UART_PARITY_DISABLE,
+        .stop_bits = UART_STOP_BITS_1,
+        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
+    };
+    uart_driver_install(UART_GPS, BUF_SIZE * 2, 0, 0, NULL, 0);
+    uart_param_config(UART_GPS, &uart_config);
+    uart_set_pin(UART_GPS, TXD_PIN, RXD_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
+}
+
+void gps_task(void *arg) {
+    gps_uart_init();
+
+    uint8_t* data = (uint8_t*) malloc(BUF_SIZE);
+    while (1) {
+        int len = uart_read_bytes(UART_GPS, data, BUF_SIZE - 1, pdMS_TO_TICKS(1000));
+        if (len > 0) {
+            data[len] = '\0';  // 문자열 끝 처리
+            char* line = strtok((char*)data, "\r\n");
+            while (line != NULL) {
+                parse_nmea_sentence(line);
+                line = strtok(NULL, "\r\n");
+            }
+        }
+        vTaskDelay(pdMS_TO_TICKS(1000));  // 1초마다 체크
+    }
+    free(data);
+}
 
 void lora_write_register(uint8_t reg, uint8_t val) {
     spi_transaction_t t = {
@@ -331,7 +441,7 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t e
     	ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
     	char ip_str[INET_ADDRSTRLEN];
     	esp_ip4addr_ntoa(&event->ip_info.ip, ip_str, INET_ADDRSTRLEN);
-    	ESP_LOGI(TAG, "Got IP: %s", ip_str);
+    	ESP_LOGI(W_TAG, "Got IP: %s", ip_str);
     	xEventGroupSetBits(wifi_event_group, WIFI_CONNECTED_BIT);
 	}
 }
@@ -371,14 +481,14 @@ void wifi_init_sta(void) {
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_start());
 
-    ESP_LOGI(TAG, "wifi_init_sta finished.");
+    ESP_LOGI(W_TAG, "wifi_init_sta finished.");
 
     xEventGroupWaitBits(wifi_event_group, WIFI_CONNECTED_BIT,
                         false, true, portMAX_DELAY);
 }
 
 void tcp_client_task(void *pvParameters) {
-    char rx_buffer[128];
+    char rx_buffer[1024];
     char host_ip[] = HOST_IP_ADDR;
     int addr_family = AF_INET;
     int ip_protocol = IPPROTO_IP;
@@ -424,6 +534,38 @@ void tcp_client_task(void *pvParameters) {
         int r = recv(sock, rx_buffer, sizeof(rx_buffer)-1, MSG_DONTWAIT);
         if (r > 0) {
             rx_buffer[r] = '\0';
+           	unsigned int receive_id[MAX_DEVICE_CNT];
+           	uint8_t receive_danger[MAX_DEVICE_CNT];
+           	cJSON *root = cJSON_Parse(rx_buffer);
+		    if (root == NULL) {
+		        printf("JSON 파싱 실패\n");
+		        return;
+		    }
+		
+		    cJSON *danger_array = cJSON_GetObjectItem(root, "danger");
+		    if (!cJSON_IsArray(danger_array)) {
+		        printf("danger 항목이 배열이 아님\n");
+		        cJSON_Delete(root);
+		        return;
+		    }
+		
+		    int count = cJSON_GetArraySize(danger_array);
+		    if (count > MAX_DEVICE_CNT) count = MAX_DEVICE_CNT;
+		
+		    for (int i = 0; i < count; i++) {
+		        cJSON *item = cJSON_GetArrayItem(danger_array, i);
+		        cJSON *id = cJSON_GetObjectItem(item, "id");
+		        cJSON *distance = cJSON_GetObjectItem(item, "distance");
+		
+		        if (cJSON_IsNumber(id) && cJSON_IsNumber(distance)) {
+		            receive_id[i] = id->valueint;
+		            receive_danger[i] = distance->valueint;
+		        }
+		    }
+		
+		    cJSON_Delete(root);
+            parse_rx_buffer(rx_buffer);
+            
             
             
             ESP_LOGI("TCP", "Received: %s", rx_buffer);
@@ -511,6 +653,7 @@ void app_main(void) {
 	
 	xTaskCreate(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL);
 	xTaskCreate(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL);
+    xTaskCreate(gps_task, "gps_task", 4096, NULL, 10, NULL);
     while (1) {
 		if(gpio_get_level(CTRL) == 1 && gpio_get_level(FIND_HOST) == 1){
 			char buf[LORA_MAX_PACKET_SIZE];
