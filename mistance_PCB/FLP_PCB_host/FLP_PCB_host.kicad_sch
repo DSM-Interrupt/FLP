@@ -14563,7 +14563,7 @@
 				)
 			)
 		)
-		(property "Value" "Ctrl"
+		(property "Value" "SKRPABE010"
 			(at 242.57 161.29 0)
 			(effects
 				(font
@@ -14887,7 +14887,7 @@
 				)
 			)
 		)
-		(property "Value" "WE-TPC_2811"
+		(property "Value" "744028000056"
 			(at 259.08 8.89 0)
 			(effects
 				(font
@@ -18642,7 +18642,7 @@
 				)
 			)
 		)
-		(property "Value" "Down"
+		(property "Value" "SKRPABE010"
 			(at 242.57 154.94 0)
 			(effects
 				(font
@@ -19334,7 +19334,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "USB_C_Receptacle_USB2.0_16P"
+		(property "Value" "12402012E212A"
 			(at 231.14 121.9199 0)
 			(effects
 				(font
@@ -20323,7 +20323,7 @@
 				)
 			)
 		)
-		(property "Value" "Enter&space"
+		(property "Value" "SKRPABE010"
 			(at 242.57 142.24 0)
 			(effects
 				(font
@@ -21839,7 +21839,7 @@
 				)
 			)
 		)
-		(property "Value" "Up"
+		(property "Value" "SKRPABE010"
 			(at 242.57 147.32 0)
 			(effects
 				(font
@@ -23251,7 +23251,7 @@
 				)
 			)
 		)
-		(property "Value" "Charger"
+		(property "Value" "10103594-0001LF"
 			(at 104.14 31.75 0)
 			(effects
 				(font
@@ -24476,7 +24476,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "Crystal"
+		(property "Value" "32MHz"
 			(at 241.3 76.1999 90)
 			(effects
 				(font
@@ -24611,7 +24611,7 @@
 				)
 			)
 		)
-		(property "Value" "Find_Host"
+		(property "Value" "SKRPABE010"
 			(at 242.57 135.89 0)
 			(effects
 				(font
@@ -24786,7 +24786,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "e7426759-2cbc-461f-b061-9fe0ec6bfaf2")
 		(property "Reference" "C15"
 			(at 59.69 179.0699 90)
@@ -24798,7 +24797,7 @@
 			)
 		)
 		(property "Value" "PESD0402-140"
-			(at 59.69 181.6099 90)
+			(at 60.198 172.466 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25221,7 +25220,7 @@
 				)
 			)
 		)
-		(property "Value" "D_Schottky"
+		(property "Value" "MBRA160T3G"
 			(at 187.0075 21.59 0)
 			(effects
 				(font
