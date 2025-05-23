@@ -677,5 +677,8 @@ void app_main(void) {
 				}
 			}
 		}
+		if(gpio_get_level(CTRL) == 1 && gpio_get_level(UP) == 1){
+			
+		}
     }
 }
