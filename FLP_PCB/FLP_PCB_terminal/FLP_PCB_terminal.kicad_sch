@@ -8499,12 +8499,6 @@
 		(uuid "1278aae5-3ca9-4fa0-a662-e37ddfd6d87d")
 	)
 	(junction
-		(at 92.71 72.39)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "14569a0a-e747-41f3-9854-30f130a823f8")
-	)
-	(junction
 		(at 217.17 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8515,12 +8509,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1b350a28-a2cc-46f5-aa75-b8e6e1a43464")
-	)
-	(junction
-		(at 116.84 81.28)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1d3de51c-92cb-4b95-b6ab-1ec65859a9a4")
 	)
 	(junction
 		(at 185.42 49.53)
@@ -8535,16 +8523,34 @@
 		(uuid "20ea089c-ccfc-49f0-add4-cec16fe50b30")
 	)
 	(junction
+		(at 34.29 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2284f818-ded8-45f0-a536-a089aebf45a9")
+	)
+	(junction
 		(at 186.69 62.23)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "27e3d06f-5f02-4f0d-ba44-7ad743ef109f")
 	)
 	(junction
+		(at 92.71 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "287968a6-31f3-4e4f-b9ff-f82877fb6b13")
+	)
+	(junction
 		(at 146.05 151.13)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3089bbc4-a243-4182-8a5a-8b9e45e8f48e")
+	)
+	(junction
+		(at 125.73 78.74)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "378fa51d-bea8-4f41-893b-d75e4edf1f56")
 	)
 	(junction
 		(at 144.78 189.23)
@@ -8613,6 +8619,12 @@
 		(uuid "7421291a-df2a-42ed-b8af-37019d9b54a5")
 	)
 	(junction
+		(at 198.12 154.94)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7510458e-af32-41cc-82e3-2e1931173396")
+	)
+	(junction
 		(at 78.74 46.99)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8649,6 +8661,12 @@
 		(uuid "8ad7c492-9baf-425e-aaf6-c2c2f8d52de5")
 	)
 	(junction
+		(at 95.25 68.58)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8c2934f7-3a70-42ba-82cf-164608388494")
+	)
+	(junction
 		(at 147.32 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8677,6 +8695,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "984e8134-51bc-42b4-bc63-383c5727af48")
+	)
+	(junction
+		(at 57.15 66.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "98e97fce-a1e2-4a74-95e0-713a67d4ea29")
 	)
 	(junction
 		(at 34.29 95.25)
@@ -8805,6 +8829,12 @@
 		(uuid "cdabf6a0-84e9-4b93-88aa-3afbc5a3b546")
 	)
 	(junction
+		(at 83.82 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d2dcba2b-9a4c-4368-9557-3705874c49bf")
+	)
+	(junction
 		(at 252.73 133.35)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8882,13 +8912,15 @@
 		(color 0 0 0 0)
 		(uuid "fc919b0e-4604-4963-ac0b-d02150b0cbd4")
 	)
+	(junction
+		(at 95.25 60.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ff0d0e80-283b-4fec-a06c-d17e3385f662")
+	)
 	(no_connect
 		(at 87.63 138.43)
 		(uuid "01c4e01e-de88-4c6d-999f-5cdfc43b9e46")
-	)
-	(no_connect
-		(at 36.83 151.13)
-		(uuid "08c47cc9-ecee-471d-ba5d-2829b52cc80b")
 	)
 	(no_connect
 		(at 87.63 140.97)
@@ -8971,6 +9003,14 @@
 		(uuid "6631b06f-d471-4f25-84d0-be0b8ed835ea")
 	)
 	(no_connect
+		(at 36.83 92.71)
+		(uuid "6b5f8e3d-ba2b-4491-8c51-d2df6f6d800c")
+	)
+	(no_connect
+		(at 87.63 102.87)
+		(uuid "6d9a0e79-6434-44d3-8124-6312a5ced972")
+	)
+	(no_connect
 		(at 198.12 110.49)
 		(uuid "6f162052-ca74-4330-a309-ea4b02ff0c94")
 	)
@@ -9021,10 +9061,6 @@
 	(no_connect
 		(at 243.84 96.52)
 		(uuid "c3c6b4b1-4b5e-4967-a520-8a3b5a0c61ab")
-	)
-	(no_connect
-		(at 36.83 148.59)
-		(uuid "c4813f42-9ce8-495e-82c2-621df0179335")
 	)
 	(no_connect
 		(at 87.63 130.81)
@@ -9192,6 +9228,16 @@
 	)
 	(wire
 		(pts
+			(xy 92.71 72.39) (xy 92.71 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08c84f37-f146-47f4-af3d-c5d0e39507c1")
+	)
+	(wire
+		(pts
 			(xy 228.6 153.67) (xy 233.68 153.67)
 		)
 		(stroke
@@ -9229,16 +9275,6 @@
 			(type default)
 		)
 		(uuid "0a6acfd6-2abc-48e0-99bd-676c4d63c236")
-	)
-	(wire
-		(pts
-			(xy 113.03 81.28) (xy 116.84 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ab7d991-770a-4968-9a50-f36814e5abb6")
 	)
 	(wire
 		(pts
@@ -9329,6 +9365,26 @@
 			(type default)
 		)
 		(uuid "0ef098df-cfc6-47ab-b805-46fa84a7c869")
+	)
+	(wire
+		(pts
+			(xy 95.25 60.96) (xy 96.52 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f2a2d41-cf9e-47c4-af52-eef861383253")
+	)
+	(wire
+		(pts
+			(xy 34.29 66.04) (xy 41.91 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f4418cf-684f-470a-a539-278ced86000b")
 	)
 	(wire
 		(pts
@@ -9482,6 +9538,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 72.39) (xy 86.36 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b24a53e-4af2-413a-82b0-96d0221a3ea3")
+	)
+	(wire
+		(pts
 			(xy 120.65 29.21) (xy 120.65 27.94)
 		)
 		(stroke
@@ -9599,6 +9665,16 @@
 			(type default)
 		)
 		(uuid "22cefd5c-1908-46eb-b49b-9ca00114bced")
+	)
+	(wire
+		(pts
+			(xy 198.12 154.94) (xy 198.12 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23b3f488-eecb-40b3-98e1-3d86244dfc84")
 	)
 	(wire
 		(pts
@@ -9902,6 +9978,16 @@
 	)
 	(wire
 		(pts
+			(xy 93.98 59.69) (xy 95.25 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38d5ae26-7f43-452e-90c7-a64d66917ffc")
+	)
+	(wire
+		(pts
 			(xy 125.73 193.04) (xy 142.24 193.04)
 		)
 		(stroke
@@ -9962,6 +10048,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 72.39) (xy 99.06 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3dfefc82-00ab-4e40-bf13-c2f36c74f258")
+	)
+	(wire
+		(pts
 			(xy 120.65 163.83) (xy 127 163.83)
 		)
 		(stroke
@@ -10002,7 +10098,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 81.28) (xy 120.65 81.28)
+			(xy 125.73 78.74) (xy 129.54 78.74)
 		)
 		(stroke
 			(width 0)
@@ -10142,7 +10238,7 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 74.93) (xy 95.25 74.93)
+			(xy 99.06 72.39) (xy 92.71 72.39)
 		)
 		(stroke
 			(width 0)
@@ -10229,6 +10325,16 @@
 			(type default)
 		)
 		(uuid "4c376ca8-229e-41f9-b10d-d0e4fbe3c05a")
+	)
+	(wire
+		(pts
+			(xy 83.82 72.39) (xy 83.82 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c7ac269-9ea8-4736-97e2-b63bbd646f94")
 	)
 	(wire
 		(pts
@@ -10412,13 +10518,13 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 74.93) (xy 92.71 72.39)
+			(xy 93.98 69.85) (xy 95.25 68.58)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5ad0c967-9747-4fef-b0cf-ee5d467b5d56")
+		(uuid "5a7b8f9d-52f1-40fd-aed6-6e5d26430158")
 	)
 	(wire
 		(pts
@@ -10492,7 +10598,7 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 138.43) (xy 198.12 161.29)
+			(xy 198.12 138.43) (xy 198.12 154.94)
 		)
 		(stroke
 			(width 0)
@@ -10562,6 +10668,16 @@
 	)
 	(wire
 		(pts
+			(xy 49.53 66.04) (xy 57.15 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66f7d051-8d02-4792-806b-4555e0d2ed71")
+	)
+	(wire
+		(pts
 			(xy 252.73 133.35) (xy 252.73 135.89)
 		)
 		(stroke
@@ -10612,6 +10728,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 69.85) (xy 111.76 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6dcc9967-c140-4055-801a-4c4c57221d88")
+	)
+	(wire
+		(pts
 			(xy 154.94 49.53) (xy 154.94 52.07)
 		)
 		(stroke
@@ -10622,7 +10748,7 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 62.23) (xy 57.15 68.58)
+			(xy 57.15 62.23) (xy 57.15 66.04)
 		)
 		(stroke
 			(width 0)
@@ -10739,6 +10865,16 @@
 			(type default)
 		)
 		(uuid "75bf8d16-3adb-4f9c-a1db-9881dfa8b211")
+	)
+	(wire
+		(pts
+			(xy 198.12 154.94) (xy 201.93 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75ea027b-842c-4b74-a443-01a8a2c4ce51")
 	)
 	(wire
 		(pts
@@ -10929,6 +11065,16 @@
 			(type default)
 		)
 		(uuid "8840f7a3-ed6c-4d5b-b819-02794145fc68")
+	)
+	(wire
+		(pts
+			(xy 125.73 78.74) (xy 121.92 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88d8fb60-f9d3-4d9d-942f-27099cebefa5")
 	)
 	(wire
 		(pts
@@ -11162,6 +11308,16 @@
 	)
 	(wire
 		(pts
+			(xy 57.15 66.04) (xy 57.15 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e30e970-62c8-4870-9ec2-5c4661c073b3")
+	)
+	(wire
+		(pts
 			(xy 212.09 78.74) (xy 212.09 64.77)
 		)
 		(stroke
@@ -11302,23 +11458,13 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 76.2) (xy 132.08 76.2)
+			(xy 121.92 73.66) (xy 140.97 73.66)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "a9cb4940-796b-4c5e-906e-48098ffd927b")
-	)
-	(wire
-		(pts
-			(xy 30.48 128.27) (xy 36.83 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aabd6e1c-f993-4dc1-b499-226704beb819")
 	)
 	(wire
 		(pts
@@ -11349,6 +11495,16 @@
 			(type default)
 		)
 		(uuid "ac6d93f8-ddf7-48a4-b4da-b4db17b8634e")
+	)
+	(wire
+		(pts
+			(xy 30.48 125.73) (xy 36.83 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac6ec68b-9e6a-4911-99df-8f14f5cd3ad7")
 	)
 	(wire
 		(pts
@@ -11422,7 +11578,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 91.44) (xy 116.84 95.25)
+			(xy 125.73 88.9) (xy 125.73 92.71)
 		)
 		(stroke
 			(width 0)
@@ -11469,16 +11625,6 @@
 			(type default)
 		)
 		(uuid "b330e5a1-ce5e-4511-9d5e-8c8e0f56ac9e")
-	)
-	(wire
-		(pts
-			(xy 30.48 125.73) (xy 36.83 125.73)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3731dba-4cab-4f04-97a3-20fe4e915c48")
 	)
 	(wire
 		(pts
@@ -11572,7 +11718,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 76.2) (xy 133.35 77.47)
+			(xy 140.97 73.66) (xy 142.24 74.93)
 		)
 		(stroke
 			(width 0)
@@ -11682,16 +11828,6 @@
 	)
 	(wire
 		(pts
-			(xy 36.83 86.36) (xy 25.4 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c24f695a-04fc-458a-8830-7f1d35275ec1")
-	)
-	(wire
-		(pts
 			(xy 241.3 78.74) (xy 243.84 81.28)
 		)
 		(stroke
@@ -11712,13 +11848,13 @@
 	)
 	(wire
 		(pts
-			(xy 36.83 92.71) (xy 36.83 86.36)
+			(xy 96.52 59.69) (xy 111.76 59.69)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c42d321d-93fc-4ccb-9c8e-cde9096e3011")
+		(uuid "c4764ebd-38b3-4a17-91f8-094aa8be44ff")
 	)
 	(wire
 		(pts
@@ -11782,6 +11918,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 148.59) (xy 36.83 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc1faef0-01e5-4ced-8836-5ff08b3d7850")
+	)
+	(wire
+		(pts
 			(xy 128.27 151.13) (xy 128.27 147.32)
 		)
 		(stroke
@@ -11789,6 +11935,16 @@
 			(type default)
 		)
 		(uuid "cd5d0498-34a3-4d91-bd0d-3e87bba9b8e6")
+	)
+	(wire
+		(pts
+			(xy 83.82 62.23) (xy 86.36 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cee39810-af46-48f9-bc56-095f92644fe0")
 	)
 	(wire
 		(pts
@@ -11992,7 +12148,17 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 83.82) (xy 116.84 81.28)
+			(xy 83.82 73.66) (xy 83.82 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1b6f409-7637-49bf-a039-2759f4fea7b5")
+	)
+	(wire
+		(pts
+			(xy 125.73 81.28) (xy 125.73 78.74)
 		)
 		(stroke
 			(width 0)
@@ -12102,6 +12268,16 @@
 	)
 	(wire
 		(pts
+			(xy 95.25 68.58) (xy 96.52 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e763af46-408a-4d81-8881-fbf86b92b908")
+	)
+	(wire
+		(pts
 			(xy 140.97 157.48) (xy 154.94 143.51)
 		)
 		(stroke
@@ -12192,16 +12368,6 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 102.87) (xy 92.71 102.87)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "efdada95-970b-486a-be35-b6b104c8741d")
-	)
-	(wire
-		(pts
 			(xy 38.1 76.2) (xy 36.83 76.2)
 		)
 		(stroke
@@ -12222,16 +12388,6 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 72.39) (xy 92.71 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f1518c62-7b45-46a3-bab6-39d38cb8df9c")
-	)
-	(wire
-		(pts
 			(xy 138.43 135.89) (xy 139.7 135.89)
 		)
 		(stroke
@@ -12249,6 +12405,16 @@
 			(type default)
 		)
 		(uuid "f4eb90b4-c74a-4fcd-ad98-69045199aa07")
+	)
+	(wire
+		(pts
+			(xy 29.21 151.13) (xy 36.83 151.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9dbfb26-7961-48b6-be9b-57a4a0f75d59")
 	)
 	(wire
 		(pts
@@ -12349,6 +12515,16 @@
 			(type default)
 		)
 		(uuid "fdaa91d0-9c19-4c18-b1b6-0daaf7237ec2")
+	)
+	(wire
+		(pts
+			(xy 30.48 128.27) (xy 36.83 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fdb2a9f7-eb6d-4a36-8b03-479c642070d6")
 	)
 	(wire
 		(pts
@@ -12666,6 +12842,28 @@
 			)
 		)
 	)
+	(global_label "PC_OSC_OUT"
+		(shape bidirectional)
+		(at 111.76 59.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "494c923e-4297-41f9-8896-54ca4ac27b9b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 127.7703 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "3.3V OUT"
 		(shape input)
 		(at 25.4 71.12 90)
@@ -12754,6 +12952,28 @@
 			)
 		)
 	)
+	(global_label "PC_OSC_IN"
+		(shape bidirectional)
+		(at 111.76 69.85 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5e3bc728-c0c6-441c-a5fd-2df9550b9f74")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 126.077 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "3.3V OUT"
 		(shape output)
 		(at 228.6 153.67 180)
@@ -12778,7 +12998,7 @@
 	)
 	(global_label "TX"
 		(shape input)
-		(at 30.48 128.27 180)
+		(at 30.48 125.73 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12788,7 +13008,7 @@
 		)
 		(uuid "625c2294-3490-422e-a16c-445f9f32b4b6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 25.3177 128.27 0)
+			(at 25.3177 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12816,28 +13036,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "PB0"
-		(shape bidirectional)
-		(at 92.71 102.87 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "7082dc63-30c5-44b3-8d19-d06807663c23")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 100.556 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -12930,6 +13128,28 @@
 			)
 		)
 	)
+	(global_label "5v OUT"
+		(shape input)
+		(at 201.93 154.94 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8367bfd1-5f80-4448-9d1e-5a49453db966")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 211.6885 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "OSC_IN"
 		(shape bidirectional)
 		(at 147.32 177.8 0)
@@ -12954,7 +13174,7 @@
 	)
 	(global_label "RX"
 		(shape output)
-		(at 30.48 125.73 180)
+		(at 30.48 128.27 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12964,7 +13184,7 @@
 		)
 		(uuid "8aad17e8-476a-4d5f-a47e-727153289b43")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 25.0153 125.73 0)
+			(at 25.0153 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12976,7 +13196,7 @@
 	)
 	(global_label "Buzzer"
 		(shape output)
-		(at 120.65 81.28 0)
+		(at 129.54 78.74 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -12986,7 +13206,7 @@
 		)
 		(uuid "8f64831a-dac6-4107-b0bc-ba652f744f79")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 129.9852 81.28 0)
+			(at 138.8752 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13075,6 +13295,28 @@
 		(uuid "997ae96c-9cf8-4a41-b711-fb37e625ad5c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 172.3353 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "PC_OSC_OUT"
+		(shape bidirectional)
+		(at 29.21 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9dda0bff-8caa-4542-a95a-8fd423caa1bf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 13.1997 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13480,6 +13722,28 @@
 			)
 		)
 	)
+	(global_label "PC_OSC_IN"
+		(shape bidirectional)
+		(at 29.21 148.59 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "facc0c44-8efd-4f2d-9e20-7e85d52eb02b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 14.893 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "3.3V OUT"
 		(shape output)
 		(at 105.41 85.09 0)
@@ -13580,7 +13844,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "033f257c-6d24-4110-a051-e27e47352f3a")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR023"
 			(at 151.13 175.26 0)
 			(effects
 				(font
@@ -13630,7 +13894,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR022")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -13703,6 +13967,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 90.17 59.69 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "06fc7d0d-f507-45d6-b4ca-7101c66a274f")
+		(property "Reference" "C30"
+			(at 96.266 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 83.82 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 86.36 60.6552 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 90.17 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 90.17 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9dfbf08b-42bc-42b5-b52f-10ab318b933d")
+		)
+		(pin "2"
+			(uuid "414f0534-21e1-4332-9ab8-430e1aa3e57a")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "C30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 191.77 130.81 90)
 		(unit 1)
@@ -13711,7 +14044,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "088d5d08-0aec-49af-a026-87e341319d61")
-		(property "Reference" "R15"
+		(property "Reference" "R16"
 			(at 191.77 130.81 90)
 			(effects
 				(font
@@ -13764,7 +14097,74 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R15")
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 83.82 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0b178420-b443-47e3-9328-c4a72a81508e")
+		(property "Reference" "#PWR041"
+			(at 83.82 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 86.36 74.9299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.82 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 83.82 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "45231abe-f66c-4183-85be-10d8cafb9cb4")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "#PWR041")
 					(unit 1)
 				)
 			)
@@ -13780,7 +14180,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0d8039f7-ec03-4663-9e26-4f8289c78f44")
-		(property "Reference" "Find_Host"
+		(property "Reference" "Find_Host1"
 			(at 241.3 143.51 0)
 			(effects
 				(font
@@ -13949,7 +14349,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "Find_Host")
+					(reference "Find_Host1")
 					(unit 1)
 				)
 			)
@@ -14174,7 +14574,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "17ed4d93-4fc9-4d14-979d-828083383d49")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR021"
 			(at 143.51 90.17 0)
 			(effects
 				(font
@@ -14225,7 +14625,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR020")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -14233,7 +14633,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 133.35 77.47 0)
+		(at 142.24 74.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14241,8 +14641,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "194c1a44-4a8c-4242-8c80-80e0481ab312")
-		(property "Reference" "#PWR017"
-			(at 133.35 83.82 0)
+		(property "Reference" "#PWR018"
+			(at 142.24 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14251,7 +14651,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 133.35 82.55 0)
+			(at 142.24 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14259,7 +14659,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 133.35 77.47 0)
+			(at 142.24 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14268,7 +14668,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 133.35 77.47 0)
+			(at 142.24 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14277,7 +14677,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 133.35 77.47 0)
+			(at 142.24 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14291,7 +14691,7 @@
 		(instances
 			(project ""
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR017")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -14377,7 +14777,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1f0b5a92-229e-402e-8bae-1bdd39019ca5")
-		(property "Reference" "#PWR028"
+		(property "Reference" "#PWR029"
 			(at 187.96 142.24 0)
 			(effects
 				(font
@@ -14427,7 +14827,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR028")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -14443,7 +14843,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "20d15aa4-efa2-4548-b2ce-ae1a105bcd88")
-		(property "Reference" "R21"
+		(property "Reference" "R5"
 			(at 91.44 101.5999 0)
 			(effects
 				(font
@@ -14497,7 +14897,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R21")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -14653,6 +15053,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 45.72 66.04 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "26c4796d-2557-4382-8e49-db83b8d08035")
+		(property "Reference" "C32"
+			(at 51.816 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 39.37 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 41.91 67.0052 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 45.72 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 45.72 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c9783dfe-f776-4685-a6a5-0014f73c93b1")
+		)
+		(pin "2"
+			(uuid "da6b5877-b2ab-464b-887b-fefe37f8e32e")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "C32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 87.63 73.66 0)
 		(unit 1)
@@ -14799,7 +15268,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "335289ba-eaf8-4fc6-a073-3d5afa64b884")
-		(property "Reference" "C26"
+		(property "Reference" "C23"
 			(at 212.09 43.18 90)
 			(effects
 				(font
@@ -14851,7 +15320,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C26")
+					(reference "C23")
 					(unit 1)
 				)
 			)
@@ -15018,7 +15487,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "38c6e3cc-752a-4435-96c4-3644070dfb57")
-		(property "Reference" "#PWR018"
+		(property "Reference" "#PWR019"
 			(at 139.7 186.69 0)
 			(effects
 				(font
@@ -15068,7 +15537,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR018")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -15224,7 +15693,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3beb00a9-55ff-4506-a4b8-3c26bc3cc62a")
-		(property "Reference" "C22"
+		(property "Reference" "C26"
 			(at 223.5199 77.47 0)
 			(effects
 				(font
@@ -15278,7 +15747,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C22")
+					(reference "C26")
 					(unit 1)
 				)
 			)
@@ -15294,7 +15763,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3d808879-5b74-4b5b-8d1e-47b526757eff")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR016"
 			(at 120.65 35.56 0)
 			(effects
 				(font
@@ -15344,7 +15813,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR015")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -15486,7 +15955,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 116.84 87.63 0)
+		(at 125.73 85.09 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15495,7 +15964,7 @@
 		(fields_autoplaced yes)
 		(uuid "4409cf07-34ca-461a-9a0c-63d402788d36")
 		(property "Reference" "C9"
-			(at 120.65 86.3599 0)
+			(at 129.54 83.8199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15504,7 +15973,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 120.65 88.8999 0)
+			(at 129.54 86.3599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15513,7 +15982,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 117.8052 91.44 0)
+			(at 126.6952 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15522,7 +15991,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 116.84 87.63 0)
+			(at 125.73 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15531,7 +16000,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 116.84 87.63 0)
+			(at 125.73 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15719,7 +16188,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "47548f3a-1608-4ec1-8363-c9caccc99718")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR020"
 			(at 140.97 175.26 0)
 			(effects
 				(font
@@ -15769,7 +16238,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR019")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -15784,7 +16253,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4acdb2b4-6fe0-4b54-8eea-ffe493559b2e")
-		(property "Reference" "#PWR040"
+		(property "Reference" "#PWR09"
 			(at 88.9 88.9 0)
 			(effects
 				(font
@@ -15834,7 +16303,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR040")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -15850,7 +16319,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4e1d4764-577d-4668-b3a8-08722ca79923")
-		(property "Reference" "R6"
+		(property "Reference" "R7"
 			(at 123.19 22.8599 0)
 			(effects
 				(font
@@ -15904,7 +16373,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R6")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -15989,7 +16458,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "52a8220d-089d-4d35-8773-a65e1b3499ad")
-		(property "Reference" "R7"
+		(property "Reference" "R10"
 			(at 138.43 22.8599 0)
 			(effects
 				(font
@@ -16043,7 +16512,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R7")
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -16199,7 +16668,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "570e809a-91ed-4b11-b6b4-6fa5f5d849a7")
-		(property "Reference" "J4"
+		(property "Reference" "J2"
 			(at 242.57 62.2299 0)
 			(effects
 				(font
@@ -16370,7 +16839,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "J4")
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -16386,7 +16855,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "581c24a0-5fec-4719-8896-a6bdbcd3a8b0")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR024"
 			(at 157.48 175.26 0)
 			(effects
 				(font
@@ -16436,7 +16905,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR023")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -16520,7 +16989,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5a99aed9-7049-4d00-9ff8-342db6aa245a")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR017"
 			(at 128.27 157.48 0)
 			(effects
 				(font
@@ -16571,7 +17040,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR016")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -16649,15 +17118,15 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 116.84 95.25 0)
+		(at 125.73 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "5d927ce7-0cf2-4a02-95b1-f0863e3641c4")
-		(property "Reference" "#PWR014"
-			(at 116.84 101.6 0)
+		(property "Reference" "#PWR015"
+			(at 125.73 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16666,7 +17135,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 122.174 97.536 0)
+			(at 131.064 94.996 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16674,7 +17143,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 116.84 95.25 0)
+			(at 125.73 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16683,7 +17152,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 116.84 95.25 0)
+			(at 125.73 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16692,7 +17161,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 116.84 95.25 0)
+			(at 125.73 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16706,7 +17175,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR014")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -17224,7 +17693,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6183de7f-252e-4d69-b15c-f786feae226a")
-		(property "Reference" "R20"
+		(property "Reference" "R18"
 			(at 201.93 71.1199 0)
 			(effects
 				(font
@@ -17278,7 +17747,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R20")
+					(reference "R18")
 					(unit 1)
 				)
 			)
@@ -17644,7 +18113,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "69cb157d-ca4b-4da8-b8ad-6c9472ed8ee3")
-		(property "Reference" "R18"
+		(property "Reference" "R20"
 			(at 259.08 148.5899 0)
 			(effects
 				(font
@@ -17698,7 +18167,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R18")
+					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -17714,7 +18183,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6bcee14d-c36a-465e-9e9a-ecb56171de6b")
-		(property "Reference" "#PWR033"
+		(property "Reference" "#PWR037"
 			(at 232.41 27.94 0)
 			(effects
 				(font
@@ -17765,7 +18234,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR033")
+					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -18061,7 +18530,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "723fecd1-17d8-4e9e-948f-93c3ded6e91f")
-		(property "Reference" "ID"
+		(property "Reference" "ID1"
 			(at 241.3 133.35 0)
 			(effects
 				(font
@@ -18230,7 +18699,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "ID")
+					(reference "ID1")
 					(unit 1)
 				)
 			)
@@ -18246,7 +18715,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "73b8e98a-a2e1-47f0-9945-1bac921f1b32")
-		(property "Reference" "R17"
+		(property "Reference" "R19"
 			(at 255.27 138.4299 0)
 			(effects
 				(font
@@ -18300,7 +18769,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R17")
+					(reference "R19")
 					(unit 1)
 				)
 			)
@@ -18316,7 +18785,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "78dc84da-7fbb-4929-b584-1701efa266fc")
-		(property "Reference" "#PWR035"
+		(property "Reference" "#PWR040"
 			(at 259.08 134.62 0)
 			(effects
 				(font
@@ -18366,7 +18835,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR035")
+					(reference "#PWR040")
 					(unit 1)
 				)
 			)
@@ -18381,7 +18850,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7b775ad5-caff-43d5-9f6c-ac168cc03cdb")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR012"
 			(at 95.25 57.15 0)
 			(effects
 				(font
@@ -18431,7 +18900,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR011")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -18702,7 +19171,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7de7e97c-361b-49ad-8216-cb5a321946c2")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR014"
 			(at 109.22 157.48 0)
 			(effects
 				(font
@@ -18753,7 +19222,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR013")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -18769,7 +19238,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "80e38e0d-b8d0-4515-8e80-ead11f3406d6")
-		(property "Reference" "#PWR025"
+		(property "Reference" "#PWR026"
 			(at 177.8 104.14 0)
 			(effects
 				(font
@@ -18820,7 +19289,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR025")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -18836,7 +19305,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "81d3b208-be99-4837-af11-c259c32192d3")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR028"
 			(at 186.69 69.85 0)
 			(effects
 				(font
@@ -18886,7 +19355,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR027")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -18902,7 +19371,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "855929c1-3d40-44a1-a398-73493b78e71e")
-		(property "Reference" "#PWR034"
+		(property "Reference" "#PWR038"
 			(at 243.84 60.96 0)
 			(effects
 				(font
@@ -18953,7 +19422,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR034")
+					(reference "#PWR038")
 					(unit 1)
 				)
 			)
@@ -19039,7 +19508,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "87db70f8-375c-4ede-ad36-4a8a5882a3f1")
-		(property "Reference" "R19"
+		(property "Reference" "R15"
 			(at 194.31 71.1199 0)
 			(effects
 				(font
@@ -19094,7 +19563,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R19")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -19109,7 +19578,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8aedfa20-56d8-456f-a7c4-f311f928a541")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR013"
 			(at 107.95 57.15 0)
 			(effects
 				(font
@@ -19159,7 +19628,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR012")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -19175,7 +19644,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8ebefd86-84ed-4b64-960c-5f76936699c7")
-		(property "Reference" "#PWR026"
+		(property "Reference" "#PWR027"
 			(at 181.61 113.03 0)
 			(effects
 				(font
@@ -19226,7 +19695,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR026")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -19242,7 +19711,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "95f0602e-0d4f-4e9c-8a81-f822a88475b1")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR025"
 			(at 170.18 74.93 0)
 			(effects
 				(font
@@ -19292,7 +19761,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR024")
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -19308,7 +19777,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "967f7a02-a5bc-4850-b8c9-cfc6ab11d05c")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR022"
 			(at 147.32 74.93 0)
 			(effects
 				(font
@@ -19358,7 +19827,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR021")
+					(reference "#PWR022")
 					(unit 1)
 				)
 			)
@@ -19577,7 +20046,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9f7ad0ad-209b-49e4-84e0-62aec6915dff")
-		(property "Reference" "C25"
+		(property "Reference" "C29"
 			(at 262.89 53.3399 0)
 			(effects
 				(font
@@ -19631,7 +20100,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C25")
+					(reference "C29")
 					(unit 1)
 				)
 			)
@@ -19647,7 +20116,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a3757571-a359-47d4-8f3c-1eee66b7f31c")
-		(property "Reference" "#PWR037"
+		(property "Reference" "#PWR035"
 			(at 217.17 38.1 0)
 			(effects
 				(font
@@ -19697,7 +20166,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR037")
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -19929,7 +20398,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "abb60f23-147d-43ac-b15b-d790ab555a93")
-		(property "Reference" "#PWR039"
+		(property "Reference" "#PWR032"
 			(at 199.39 99.06 0)
 			(effects
 				(font
@@ -19979,7 +20448,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR039")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -19994,7 +20463,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b5fd9469-dc96-490a-ae00-fe22ba207263")
-		(property "Reference" "C21"
+		(property "Reference" "C25"
 			(at 223.5199 69.85 0)
 			(effects
 				(font
@@ -20048,7 +20517,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C21")
+					(reference "C25")
 					(unit 1)
 				)
 			)
@@ -20064,7 +20533,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b61d8d7f-f1c1-4d02-8370-968fc2cf51d2")
-		(property "Reference" "#PWR032"
+		(property "Reference" "#PWR036"
 			(at 226.06 104.14 0)
 			(effects
 				(font
@@ -20115,7 +20584,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR032")
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -20131,7 +20600,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b67ded27-c9e7-48a9-9435-87ca3c6f006a")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR010"
 			(at 88.9 199.39 0)
 			(effects
 				(font
@@ -20182,7 +20651,7 @@
 		(instances
 			(project ""
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR09")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -20323,6 +20792,145 @@
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Crystal")
+		(at 95.25 64.77 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b8022bb7-9bb1-458e-a00f-07df366abe49")
+		(property "Reference" "Y3"
+			(at 99.06 63.4999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "32.768kHz"
+			(at 99.06 66.0399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm"
+			(at 95.25 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 95.25 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Two pin crystal"
+			(at 95.25 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a3eb6c1e-b515-4fde-873a-22ca19067ed2")
+		)
+		(pin "2"
+			(uuid "ccdf5992-5bab-44ff-bd9e-e4e101953daa")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "Y3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 90.17 69.85 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b8aafe20-b7f5-4f1c-a5cf-75e6f305e4a1")
+		(property "Reference" "C31"
+			(at 96.266 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 83.82 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 86.36 70.8152 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 90.17 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 90.17 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "611377e4-435a-44e7-bf8d-e4567dadacbd")
+		)
+		(pin "2"
+			(uuid "000df153-5384-434c-96b6-2be8e8edce77")
+		)
+		(instances
+			(project "mistance_PCB_terminal"
+				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
+					(reference "C31")
 					(unit 1)
 				)
 			)
@@ -20471,7 +21079,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bc81ff19-e958-4a01-a09b-072a8d1d8832")
-		(property "Reference" "#PWR038"
+		(property "Reference" "#PWR031"
 			(at 191.77 99.06 0)
 			(effects
 				(font
@@ -20521,7 +21129,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR038")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -20537,7 +21145,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bd7a720e-d86e-4d10-9462-9dfdee64b615")
-		(property "Reference" "C23"
+		(property "Reference" "C27"
 			(at 237.49 8.89 90)
 			(effects
 				(font
@@ -20589,7 +21197,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C23")
+					(reference "C27")
 					(unit 1)
 				)
 			)
@@ -20605,7 +21213,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "be18942e-0028-4afe-84cd-4e9185a0ac9c")
-		(property "Reference" "R5"
+		(property "Reference" "R6"
 			(at 97.79 44.4499 0)
 			(effects
 				(font
@@ -20659,7 +21267,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R5")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -20674,7 +21282,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bf20bec0-044b-4633-bb46-d0048acd7432")
-		(property "Reference" "R9"
+		(property "Reference" "R8"
 			(at 134.62 135.89 90)
 			(effects
 				(font
@@ -20727,7 +21335,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R9")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -20883,7 +21491,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c0e2bd1f-ed16-4c0b-bd41-139b37836093")
-		(property "Reference" "#PWR031"
+		(property "Reference" "#PWR034"
 			(at 215.9 90.17 0)
 			(effects
 				(font
@@ -20934,7 +21542,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR031")
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -21096,7 +21704,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c80080fc-93ab-4317-a529-546a102844ce")
-		(property "Reference" "C27"
+		(property "Reference" "C24"
 			(at 205.994 58.42 0)
 			(effects
 				(font
@@ -21150,7 +21758,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C27")
+					(reference "C24")
 					(unit 1)
 				)
 			)
@@ -21235,7 +21843,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ce83df5d-f774-4325-aca3-1fdf793cf31d")
-		(property "Reference" "R16"
+		(property "Reference" "R17"
 			(at 194.31 133.35 90)
 			(effects
 				(font
@@ -21288,7 +21896,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R16")
+					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -21494,7 +22102,7 @@
 	)
 	(symbol
 		(lib_id "Device:Buzzer")
-		(at 110.49 78.74 180)
+		(at 119.38 76.2 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21502,7 +22110,7 @@
 		(dnp no)
 		(uuid "d9e53ef6-36e2-4996-8d4f-167431a173ef")
 		(property "Reference" "BZ1"
-			(at 102.616 75.946 0)
+			(at 111.506 73.406 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21510,7 +22118,7 @@
 			)
 		)
 		(property "Value" "Buzzer"
-			(at 102.616 78.486 0)
+			(at 111.506 75.946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21518,7 +22126,7 @@
 			)
 		)
 		(property "Footprint" "Buzzer_Beeper:Buzzer_15x7.5RM7.6"
-			(at 111.125 81.28 90)
+			(at 120.015 78.74 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21527,7 +22135,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 111.125 81.28 90)
+			(at 120.015 78.74 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21536,7 +22144,7 @@
 			)
 		)
 		(property "Description" "Buzzer, polarized"
-			(at 110.49 78.74 0)
+			(at 119.38 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21857,7 +22465,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dfbd0f66-564a-4ab9-8c62-80239adde670")
-		(property "Reference" "#PWR030"
+		(property "Reference" "#PWR033"
 			(at 215.9 82.55 0)
 			(effects
 				(font
@@ -21908,7 +22516,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR030")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -21924,7 +22532,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e21aa6e6-9d0e-4e69-958d-d2c0d09224b9")
-		(property "Reference" "Q2"
+		(property "Reference" "Q1"
 			(at 135.89 40.64 90)
 			(effects
 				(font
@@ -21979,7 +22587,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "Q2")
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -22004,7 +22612,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "Crystal"
+		(property "Value" "32MHz"
 			(at 234.95 78.7399 90)
 			(effects
 				(font
@@ -22065,7 +22673,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e53e2c16-3489-4600-80c9-45ab224f5cc9")
-		(property "Reference" "C24"
+		(property "Reference" "C28"
 			(at 255.27 53.3399 0)
 			(effects
 				(font
@@ -22119,7 +22727,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C24")
+					(reference "C28")
 					(unit 1)
 				)
 			)
@@ -22203,7 +22811,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e6fe0b9b-3f83-4825-856f-4178221d521d")
-		(property "Reference" "C28"
+		(property "Reference" "C21"
 			(at 191.77 87.6299 90)
 			(effects
 				(font
@@ -22338,7 +22946,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C28")
+					(reference "C21")
 					(unit 1)
 				)
 			)
@@ -22619,7 +23227,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eeccb30e-b0bd-44a1-9a66-366769b26074")
-		(property "Reference" "C29"
+		(property "Reference" "C22"
 			(at 203.2 87.6299 90)
 			(effects
 				(font
@@ -22754,7 +23362,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "C29")
+					(reference "C22")
 					(unit 1)
 				)
 			)
@@ -22769,7 +23377,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "eee55a84-4a5a-42c1-a99a-64454e324a9c")
-		(property "Reference" "R10"
+		(property "Reference" "R9"
 			(at 134.62 138.43 90)
 			(effects
 				(font
@@ -22822,7 +23430,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "R10")
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -22838,7 +23446,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f0b28ebe-8c8b-466e-b487-d90d4cb93489")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR011"
 			(at 91.44 170.18 0)
 			(effects
 				(font
@@ -22889,7 +23497,7 @@
 		(instances
 			(project ""
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR010")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -22973,7 +23581,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f649fa0e-515a-4579-9772-ff44d3188015")
-		(property "Reference" "#PWR029"
+		(property "Reference" "#PWR030"
 			(at 190.5 142.24 0)
 			(effects
 				(font
@@ -23023,7 +23631,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR029")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -23039,7 +23647,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f8bbfa56-a3de-4580-8ebc-2ed9dc501348")
-		(property "Reference" "#PWR036"
+		(property "Reference" "#PWR039"
 			(at 252.73 125.73 0)
 			(effects
 				(font
@@ -23089,7 +23697,7 @@
 		(instances
 			(project "mistance_PCB_terminal"
 				(path "/d49575c6-b8d6-4973-90d8-97f30253e1a9"
-					(reference "#PWR036")
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)

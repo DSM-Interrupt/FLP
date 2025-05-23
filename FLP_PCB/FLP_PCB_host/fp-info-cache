@@ -1,4 +1,4 @@
-25196818765561380
+25198563764386397
 12402012E212A
 AMPHENOL_12402012E212A
 
@@ -6,6 +6,13 @@ AMPHENOL_12402012E212A
 0
 16
 16
+ABM3B-8.000MHZ-B2-T
+XTAL_ABM3B-8.000MHZ-B2-T
+
+
+0
+4
+4
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
