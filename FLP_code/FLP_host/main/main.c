@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sys/unistd.h>
+#include "arch/sys_arch.h"
 #include "driver/uart.h"
 #include "esp_err.h"
 #include "freertos/FreeRTOS.h"
@@ -74,6 +75,8 @@ const char* MY_ID_CHAR = "3582194827";
 int rx_id = 0;
 int rx_danger = 0;
 bool gps_data_all_receive = false;
+char SSID[33];
+char Password[64];
 
 spi_device_handle_t lora_spi;
 
@@ -678,7 +681,15 @@ void app_main(void) {
 			}
 		}
 		if(gpio_get_level(CTRL) == 1 && gpio_get_level(UP) == 1){
+			bool flag = true;
+			char adding_alpha = 'a';
 			
+			sys_delay_ms(500);
+			while(flag){
+				if(gpio_get_level(UP)){
+					(adding_alpha<='Z') ? : ;
+				}
+			}
 		}
     }
 }
