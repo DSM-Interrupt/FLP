@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.27,
-          "width": 2.54
+          "drill": 0.0,
+          "height": 1.55,
+          "width": 2.3
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -449,7 +449,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "mistance_PCB_terminal.kicad_pro",
+    "filename": "FLP_PCB_terminal.kicad_pro",
     "version": 3
   },
   "net_settings": {
