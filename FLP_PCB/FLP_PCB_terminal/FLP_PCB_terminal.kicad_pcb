@@ -136,7 +136,7 @@
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
-			(drillshape 1)
+			(drillshape 0)
 			(scaleselection 1)
 			(outputdirectory "")
 		)
@@ -15999,14 +15999,14 @@
 			)
 		)
 	)
-	(footprint "Buzzer_Beeper:Buzzer_15x7.5RM7.6"
+	(footprint "Buzzer_Beeper:Buzzer_12x9.5RM7.6"
 		(layer "F.Cu")
 		(uuid "ab992541-88ea-4595-b3c5-ec146e601385")
 		(at 71.28 118.25)
-		(descr "Generic Buzzer, D15mm height 7.5mm with RM7.6mm")
+		(descr "Generic Buzzer, D12mm height 9.5mm with RM7.6mm")
 		(tags "buzzer")
 		(property "Reference" "BZ1"
-			(at 13.13 0.24 0)
+			(at 3.8 -7.2 0)
 			(layer "F.SilkS")
 			(uuid "001f966a-6c19-4381-84a9-c196318b6dfe")
 			(effects
@@ -16017,7 +16017,7 @@
 			)
 		)
 		(property "Value" "Buzzer"
-			(at 3.81 8.89 0)
+			(at 3.8 7.4 0)
 			(layer "F.Fab")
 			(uuid "f9057280-8da6-41e7-83a0-f70bacf4984c")
 			(effects
@@ -16040,7 +16040,7 @@
 				)
 			)
 		)
-		(property "Description" "Buzzer, polarized"
+		(property "Description" ""
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16060,25 +16060,25 @@
 		(attr through_hole)
 		(fp_circle
 			(center 3.8 0)
-			(end 11.4 0)
+			(end 9.9 0)
 			(stroke
 				(width 0.12)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "fc388fec-e81a-4fb5-894f-e495325d93f5")
+			(uuid "19beac24-5d35-4859-8d79-1fd217e08c08")
 		)
 		(fp_circle
 			(center 3.8 0)
-			(end 11.55 0)
+			(end 10.05 0)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "c35996d9-2891-4dd9-a17b-68a0c9856e76")
+			(uuid "426b6818-0a91-47f8-9e73-b6c804b348b3")
 		)
 		(fp_circle
 			(center 3.8 0)
@@ -16089,18 +16089,18 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "e986fe87-973a-424e-a140-27594e3cd185")
+			(uuid "02aa331e-34bb-436c-9718-bfd745ed5e29")
 		)
 		(fp_circle
 			(center 3.8 0)
-			(end 11.3 0)
+			(end 9.8 0)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "d662fcf6-ac5a-4306-8d8b-e537728381dd")
+			(uuid "14bafe06-a9ee-494e-b7cb-581c3c4daf59")
 		)
 		(fp_text user "+"
 			(at -0.01 -2.54 0)
@@ -16158,7 +16158,7 @@
 			(uuid "bfa64997-23a5-47d9-89b2-931eae7a4209")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Buzzer_Beeper.3dshapes/Buzzer_15x7.5RM7.6.wrl"
+		(model "${KICAD9_3DMODEL_DIR}/Buzzer_Beeper.3dshapes/Buzzer_12x9.5RM7.6.wrl"
 			(offset
 				(xyz 0 0 0)
 			)

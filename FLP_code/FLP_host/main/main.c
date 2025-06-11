@@ -13,6 +13,7 @@
 #include "driver/uart.h"
 #include "esp_err.h"
 #include "freertos/FreeRTOS.h"
+#include "freertos/idf_additions.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "hal/gpio_types.h"
@@ -27,6 +28,8 @@
 #include "esp_netif_ip_addr.h"
 #include "driver/spi_master.h"
 #include "cJSON.h"
+#include "esp_http_server.h"
+#include "esp_netif.h"
 
 #define HOST_IP_ADDR "192.168.0.100"
 #define PORT 3333
@@ -65,13 +68,17 @@
 #define RXD_PIN GPIO_NUM_32  // GPS TX
 
 static const char *G_TAG = "GPS";
+static const char *TAG = "AP_WebServer";
+static const char *W_TAG = "wifi";
+
 double latitude = 0.0;
 double longitude = 0.0;
 
 static EventGroupHandle_t wifi_event_group;
-static const char *W_TAG = "wifi";
+
 const unsigned int MY_ID_INT = 3582194827;
 const char* MY_ID_CHAR = "3582194827";
+
 int rx_id = 0;
 int rx_danger = 0;
 bool gps_data_all_receive = false;
@@ -436,58 +443,84 @@ esp_err_t init_nvs_with_handling(void) {
 }
 
 static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data) {
-    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
-        esp_wifi_connect();
-    } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
-        esp_wifi_connect();
-    } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
-    	ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
-    	char ip_str[INET_ADDRSTRLEN];
-    	esp_ip4addr_ntoa(&event->ip_info.ip, ip_str, INET_ADDRSTRLEN);
-    	ESP_LOGI(W_TAG, "Got IP: %s", ip_str);
-    	xEventGroupSetBits(wifi_event_group, WIFI_CONNECTED_BIT);
-	}
+    if (event_base == WIFI_EVENT) {
+        switch (event_id) {
+        case WIFI_EVENT_STA_START:
+            esp_wifi_connect();
+            ESP_LOGI(W_TAG, "STA 시작됨. 연결 시도 중...");
+            break;
+
+        case WIFI_EVENT_STA_DISCONNECTED:
+            esp_wifi_connect();
+            ESP_LOGI(W_TAG, "STA 연결 끊김. 재연결 시도...");
+            break;
+
+        case WIFI_EVENT_AP_START:
+            ESP_LOGI(W_TAG, "SoftAP 시작됨.");
+            break;
+        
+        default:
+            ESP_LOGI(W_TAG, "WIFI_EVENT 발생: ID=%d", event_id);
+            break;
+        }
+    }
+
+    else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
+        ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
+        char ip_str[INET_ADDRSTRLEN];
+        esp_ip4addr_ntoa(&event->ip_info.ip, ip_str, INET_ADDRSTRLEN);
+        ESP_LOGI(W_TAG, "STA에서 IP 할당됨: %s", ip_str);
+        xEventGroupSetBits(wifi_event_group, WIFI_CONNECTED_BIT);
+    }
 }
 
-void wifi_init_sta(void) {
-    wifi_event_group = xEventGroupCreate();
-    ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
 
+
+
+void wifi_init_softap_sta(void)
+{
+    esp_netif_init();
+    esp_event_loop_create_default();
+
+    // Create default WiFi station and AP
     esp_netif_create_default_wifi_sta();
+    esp_netif_create_default_wifi_ap();
+
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+    esp_wifi_init(&cfg);
 
-    ESP_ERROR_CHECK(esp_wifi_init(&cfg));
+    // Register event handlers
+    esp_event_handler_instance_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, NULL, NULL);
+    esp_event_handler_instance_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &wifi_event_handler, NULL, NULL);
 
-    esp_event_handler_instance_t instance_any_id;
-    esp_event_handler_instance_t instance_got_ip;
-
-    ESP_ERROR_CHECK(esp_event_handler_instance_register(WIFI_EVENT,
-                                                        ESP_EVENT_ANY_ID,
-                                                        &wifi_event_handler,
-                                                        NULL,
-                                                        &instance_any_id));
-    ESP_ERROR_CHECK(esp_event_handler_instance_register(IP_EVENT,
-                                                        IP_EVENT_STA_GOT_IP,
-                                                        &wifi_event_handler,
-                                                        NULL,
-                                                        &instance_got_ip));
-
-    wifi_config_t wifi_config = {
+    wifi_config_t wifi_sta_config = {
         .sta = {
-            .ssid = WIFI_SSID,
-            .password = WIFI_PASS,
+            .ssid = CONFIG_ESP_WIFI_SSID,
+            .password = CONFIG_ESP_WIFI_PASSWORD,
+            .threshold.authmode = WIFI_AUTH_WPA2_PSK,
         },
     };
 
-    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
-    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
-    ESP_ERROR_CHECK(esp_wifi_start());
+    wifi_config_t wifi_ap_config = {
+        .ap = {
+            .ssid = "ESP32-AP",
+            .ssid_len = strlen("ESP32-AP"),
+            .password = "12345678",
+            .max_connection = 4,
+            .authmode = WIFI_AUTH_WPA_WPA2_PSK
+        },
+    };
 
-    ESP_LOGI(W_TAG, "wifi_init_sta finished.");
+    if (strlen((char *)wifi_ap_config.ap.password) == 0) {
+        wifi_ap_config.ap.authmode = WIFI_AUTH_OPEN;
+    }
 
-    xEventGroupWaitBits(wifi_event_group, WIFI_CONNECTED_BIT,
-                        false, true, portMAX_DELAY);
+    esp_wifi_set_mode(WIFI_MODE_APSTA);
+    esp_wifi_set_config(WIFI_IF_STA, &wifi_sta_config);
+    esp_wifi_set_config(WIFI_IF_AP, &wifi_ap_config);
+    esp_wifi_start();
+
+    ESP_LOGI(TAG, "WiFi AP+STA mode initialized. STA SSID:%s, AP SSID: ESP32-AP", CONFIG_ESP_WIFI_SSID);
 }
 
 void tcp_client_task(void *pvParameters) {
@@ -617,6 +650,8 @@ void lora_host_task(void *pvParameters){
 	vTaskDelete(NULL);
 }
 
+
+
 void app_main(void) {
 	spi_bus_config_t buscfg = {
         .miso_io_num = PIN_NUM_MISO,
@@ -651,12 +686,14 @@ void app_main(void) {
 	    gpio_set_pull_mode(pins[i], GPIO_FLOATING);
 	}
 	
-	wifi_init_sta();
+	wifi_init_softap_sta();
 	lora_init();
 	
 	xTaskCreate(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL);
 	xTaskCreate(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL);
     xTaskCreate(gps_task, "gps_task", 4096, NULL, 10, NULL);
+    
+    
     while (1) {
 		if(gpio_get_level(CTRL) == 1 && gpio_get_level(FIND_HOST) == 1){
 			char buf[LORA_MAX_PACKET_SIZE];
@@ -677,17 +714,6 @@ void app_main(void) {
 				}
 				if(gpio_get_level(CTRL) == 1 && gpio_get_level(DOWN) == 1){
 					break;
-				}
-			}
-		}
-		if(gpio_get_level(CTRL) == 1 && gpio_get_level(UP) == 1){
-			bool flag = true;
-			char adding_alpha = 'a';
-			
-			sys_delay_ms(500);
-			while(flag){
-				if(gpio_get_level(UP)){
-					(adding_alpha<='Z') ? : ;
 				}
 			}
 		}
