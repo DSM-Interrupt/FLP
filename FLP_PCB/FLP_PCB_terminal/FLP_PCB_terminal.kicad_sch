@@ -22125,7 +22125,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Buzzer_Beeper:Buzzer_15x7.5RM7.6"
+		(property "Footprint" "Buzzer_Beeper:Buzzer_12x9.5RM7.6"
 			(at 120.015 78.74 90)
 			(effects
 				(font
