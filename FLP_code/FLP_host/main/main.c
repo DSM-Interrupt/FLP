@@ -32,10 +32,8 @@
 #include "esp_netif.h"
 
 #define HOST_IP_ADDR "192.168.0.100"
-#define PORT 3333
+#define PORT 443
 
-#define WIFI_SSID "Your_SSID"
-#define WIFI_PASS "Your_PASSWORD"
 #define WIFI_CONNECTED_BIT BIT0
 
 #define PIN_NUM_MISO GPIO_NUM_19
@@ -78,12 +76,14 @@ static EventGroupHandle_t wifi_event_group;
 
 const unsigned int MY_ID_INT = 3582194827;
 const char* MY_ID_CHAR = "3582194827";
+unsigned char Wifi_SSID[32] = "Your_SSID";
+unsigned char Wifi_password[64] = "Your_PASSWORD";
+unsigned char Device_SSID[32] = "FLP_HOST";
+unsigned char Device_password[64] = "Defelt";
 
 int rx_id = 0;
 int rx_danger = 0;
 bool gps_data_all_receive = false;
-char SSID[33];
-char Password[64];
 
 spi_device_handle_t lora_spi;
 
@@ -187,7 +187,7 @@ bool split(char * input, TerminalDevice* info) {
 
 void load_array(unsigned int* array, size_t max_size) {
     nvs_handle_t handle;
-    esp_err_t err = nvs_open(FLASH_STORAGE, NVS_READONLY, &handle);
+    esp_err_t err = nvs_open("device_info", NVS_READONLY, &handle);
     if (err != ESP_OK) {
         ESP_LOGW("device", "NVS open failed or not initialized. Starting fresh.");
         device_count = 0;
@@ -210,9 +210,34 @@ void load_array(unsigned int* array, size_t max_size) {
     nvs_close(handle);
 }
 
+void load_basic_info(){
+	nvs_handle_t handle;
+	esp_err_t err = nvs_open("basic_info", NVS_READONLY, &handle);
+	if(err != ESP_OK){
+		ESP_LOGW("basic_info", "NVS_open failed or not initialized. Starting fresh.");
+		strcpy(Wifi_SSID, "None");
+		strcpy(Wifi_password, "None");
+		strcpy(Device_SSID, "FLP_host");
+		strcpy(Device_password, "Default");
+		return;
+	}
+	
+	size_t * SSID_s = ;
+	err = nvs_get_blob(handle, "device_struct", Device_SSID, );
+    if (err == ESP_ERR_NVS_NOT_FOUND) {
+        
+    } else if (err == ESP_OK) {
+        
+    } else {
+        
+    }
+	
+	
+}
+
 void save_array(const unsigned int* array, size_t count) {
     nvs_handle_t handle;
-    esp_err_t err = nvs_open(FLASH_STORAGE, NVS_READWRITE, &handle);
+    esp_err_t err = nvs_open("device_info", NVS_READWRITE, &handle);
     if (err != ESP_OK) {
         ESP_LOGE("device", "Failed to open NVS for writing: %s", esp_err_to_name(err));
         return;
@@ -225,7 +250,6 @@ void save_array(const unsigned int* array, size_t count) {
         nvs_commit(handle);
         ESP_LOGI("device", "Saved %d devices to NVS.", count);
     }
-
     nvs_close(handle);
 }
 
@@ -247,7 +271,6 @@ bool device_add(unsigned int device_id) {
     ESP_LOGI("device", "Device ID %u added.", device_id);
     return true;
 }
-
 
 // NMEA에서 DMM(Degree Decimal Minutes)을 DD(Decimal Degrees)로 변환
 double convert_to_decimal_degrees(const char* nmea_coord, char direction) {
@@ -345,7 +368,6 @@ uint8_t lora_read_register(uint8_t reg) {
     return out;
 }
 
-
 void lora_init() {
     gpio_set_direction(PIN_NUM_RST, GPIO_MODE_OUTPUT);
     gpio_set_level(PIN_NUM_RST, 0);
@@ -374,7 +396,6 @@ void lora_init() {
 
     lora_write_register(0x1F, 0x00); 
 }
-
 
 void lora_send_packet(const char* data) {
     size_t len = strlen(data);
@@ -476,13 +497,10 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t e
 
 
 
-
-void wifi_init_softap_sta(void)
-{
+void wifi_init_softap_sta(void){
     esp_netif_init();
     esp_event_loop_create_default();
 
-    // Create default WiFi station and AP
     esp_netif_create_default_wifi_sta();
     esp_netif_create_default_wifi_ap();
 
@@ -495,21 +513,21 @@ void wifi_init_softap_sta(void)
 
     wifi_config_t wifi_sta_config = {
         .sta = {
-            .ssid = CONFIG_ESP_WIFI_SSID,
-            .password = CONFIG_ESP_WIFI_PASSWORD,
             .threshold.authmode = WIFI_AUTH_WPA2_PSK,
         },
     };
+    strncpy((char *)wifi_sta_config.sta.ssid, (char *)Wifi_SSID, sizeof(wifi_sta_config.sta.ssid));
+	strncpy((char *)wifi_sta_config.sta.password, (char *)Wifi_password, sizeof(wifi_sta_config.sta.password));
 
     wifi_config_t wifi_ap_config = {
         .ap = {
-            .ssid = "ESP32-AP",
-            .ssid_len = strlen("ESP32-AP"),
-            .password = "12345678",
+            .ssid_len = sizeof(wifi_ap_config.ap.password),
             .max_connection = 4,
             .authmode = WIFI_AUTH_WPA_WPA2_PSK
         },
     };
+    strncpy((char *)wifi_ap_config.ap.ssid, (char *)Device_SSID, sizeof(wifi_ap_config.ap.ssid));
+	strncpy((char *)wifi_ap_config.ap.password, (char *)Device_password, sizeof(wifi_ap_config.ap.password));
 
     if (strlen((char *)wifi_ap_config.ap.password) == 0) {
         wifi_ap_config.ap.authmode = WIFI_AUTH_OPEN;
@@ -522,6 +540,47 @@ void wifi_init_softap_sta(void)
 
     ESP_LOGI(TAG, "WiFi AP+STA mode initialized. STA SSID:%s, AP SSID: ESP32-AP", CONFIG_ESP_WIFI_SSID);
 }
+
+void save_basic_info() {
+    nvs_handle_t handle;
+    esp_err_t err;
+
+    err = nvs_open("basic_info", NVS_READWRITE, &handle);
+    if (err != ESP_OK) {
+        ESP_LOGE("device", "Failed to open NVS for writing: %s", esp_err_to_name(err));
+        return;
+    }
+
+    err = nvs_set_blob(handle, "Device_SSID", Device_SSID, 32);
+    if (err != ESP_OK) {
+        ESP_LOGE("device", "Failed to write Device_SSID: %s", esp_err_to_name(err));
+    }
+
+    err = nvs_set_blob(handle, "Device_pass", Device_password, 64);
+    if (err != ESP_OK) {
+        ESP_LOGE("device", "Failed to write Device_pass: %s", esp_err_to_name(err));
+    }
+
+    err = nvs_set_blob(handle, "Wifi_SSID", Wifi_SSID, 32);
+    if (err != ESP_OK) {
+        ESP_LOGE("Wifi", "Failed to write Wifi_SSID: %s", esp_err_to_name(err));
+    }
+
+    err = nvs_set_blob(handle, "Wifi_pass", Wifi_password, 64);
+    if (err != ESP_OK) {
+        ESP_LOGE("Wifi", "Failed to write Wifi_pass: %s", esp_err_to_name(err));
+    }
+
+    err = nvs_commit(handle);
+    if (err == ESP_OK) {
+        ESP_LOGI("device", "All data saved successfully to NVS.");
+    } else {
+        ESP_LOGE("device", "Failed to commit NVS: %s", esp_err_to_name(err));
+    }
+
+    nvs_close(handle);
+}
+
 
 void tcp_client_task(void *pvParameters) {
     char rx_buffer[1024];
@@ -615,7 +674,6 @@ void tcp_client_task(void *pvParameters) {
     vTaskDelete(NULL);
 }
 
-
 void lora_host_task(void *pvParameters){
 	for(int i = 0 ;i <device_count;i++){
 		TerminalDevice* new_device = (TerminalDevice*)malloc(sizeof(TerminalDevice));
@@ -649,8 +707,6 @@ void lora_host_task(void *pvParameters){
 	}
 	vTaskDelete(NULL);
 }
-
-
 
 void app_main(void) {
 	spi_bus_config_t buscfg = {
@@ -711,9 +767,6 @@ void app_main(void) {
 		                device_add(atoi(temp));
 		                break;
 		            }
-				}
-				if(gpio_get_level(CTRL) == 1 && gpio_get_level(DOWN) == 1){
-					break;
 				}
 			}
 		}
