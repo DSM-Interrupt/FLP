@@ -210,29 +210,54 @@ void load_array(unsigned int* array, size_t max_size) {
     nvs_close(handle);
 }
 
-void load_basic_info(){
-	nvs_handle_t handle;
-	esp_err_t err = nvs_open("basic_info", NVS_READONLY, &handle);
-	if(err != ESP_OK){
-		ESP_LOGW("basic_info", "NVS_open failed or not initialized. Starting fresh.");
-		strcpy(Wifi_SSID, "None");
-		strcpy(Wifi_password, "None");
-		strcpy(Device_SSID, "FLP_host");
-		strcpy(Device_password, "Default");
-		return;
-	}
-	
-	size_t * SSID_s = ;
-	err = nvs_get_blob(handle, "device_struct", Device_SSID, );
-    if (err == ESP_ERR_NVS_NOT_FOUND) {
-        
-    } else if (err == ESP_OK) {
-        
-    } else {
-        
+void load_basic_info() {
+    nvs_handle_t handle;
+    esp_err_t err = nvs_open("basic_info", NVS_READONLY, &handle);
+    if (err != ESP_OK) {
+        ESP_LOGW("basic_info", "NVS open failed or not initialized. Starting fresh.");
+        strcpy(Wifi_SSID, "None");
+        strcpy(Wifi_password, "None");
+        strcpy(Device_SSID, "FLP_host");
+        strcpy(Device_password, "Default");
+        return;
     }
-	
-	
+
+    size_t SSID_s = 32;
+    size_t PASS_s = 64;
+
+    err = nvs_get_blob(handle, "Device_SSID", Device_SSID, &SSID_s);
+    if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW("basic_info", "Device_SSID not found. Using default.");
+        strcpy(Device_SSID, "FLP_host");
+    } else if (err != ESP_OK) {
+        ESP_LOGE("basic_info", "Error reading Device_SSID: %s", esp_err_to_name(err));
+    }
+
+    err = nvs_get_blob(handle, "Wifi_SSID", Wifi_SSID, &SSID_s);
+    if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW("basic_info", "Wifi_SSID not found. Using default.");
+        strcpy(Wifi_SSID, "None");
+    } else if (err != ESP_OK) {
+        ESP_LOGE("basic_info", "Error reading Wifi_SSID: %s", esp_err_to_name(err));
+    }
+
+    err = nvs_get_blob(handle, "Device_pass", Device_password, &PASS_s);
+    if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW("basic_info", "Device_pass not found. Using default.");
+        strcpy(Device_password, "Default");
+    } else if (err != ESP_OK) {
+        ESP_LOGE("basic_info", "Error reading Device_pass: %s", esp_err_to_name(err));
+    }
+
+    err = nvs_get_blob(handle, "Wifi_pass", Wifi_password, &PASS_s);
+    if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW("basic_info", "Wifi_pass not found. Using default.");
+        strcpy(Wifi_password, "None");
+    } else if (err != ESP_OK) {
+        ESP_LOGE("basic_info", "Error reading Wifi_pass: %s", esp_err_to_name(err));
+    }
+
+    nvs_close(handle);
 }
 
 void save_array(const unsigned int* array, size_t count) {
@@ -733,7 +758,8 @@ void app_main(void) {
         ret = nvs_flash_init();
     }
     ESP_ERROR_CHECK(ret);
-
+    
+    load_basic_info();
     load_array(device_list, MAX_DEVICE_CNT);
 	
 	gpio_num_t pins[] = {CTRL, FIND_HOST, Enter_AND_SPACE, UP,DOWN};
@@ -745,9 +771,9 @@ void app_main(void) {
 	wifi_init_softap_sta();
 	lora_init();
 	
-	xTaskCreate(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL);
-	xTaskCreate(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL);
-    xTaskCreate(gps_task, "gps_task", 4096, NULL, 10, NULL);
+	xTaskCreatePinnedToCore(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL, 1);  // Core 1
+	xTaskCreatePinnedToCore(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL, 1);    // Core 1
+	xTaskCreatePinnedToCore(gps_task, "gps_task", 4096, NULL, 10, NULL, 1);          // Core 1
     
     
     while (1) {
