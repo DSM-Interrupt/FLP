@@ -30,9 +30,10 @@
 #include "cJSON.h"
 #include "esp_http_server.h"
 #include "esp_netif.h"
+#include "esp_websocket_client.h"
 
 #define HOST_IP_ADDR "192.168.0.100"
-#define PORT 443
+#define PORT "443"
 
 #define WIFI_CONNECTED_BIT BIT0
 
@@ -42,6 +43,7 @@
 #define PIN_NUM_CS   GPIO_NUM_18
 #define PIN_NUM_RST  GPIO_NUM_16
 #define PIN_NUM_IRQ  GPIO_NUM_26
+
 #define GPS_RX GPIO_NUM_33
 #define GPS_TX GPIO_NUM_32
 
@@ -66,20 +68,21 @@
 #define RXD_PIN GPIO_NUM_32  // GPS TX
 
 static const char *G_TAG = "GPS";
-static const char *TAG = "AP_WebServer";
+static const char *TAG = "WSS_CLIENT";
 static const char *W_TAG = "wifi";
 
 double latitude = 0.0;
 double longitude = 0.0;
 
 static EventGroupHandle_t wifi_event_group;
+esp_websocket_client_handle_t client = NULL;
 
-const unsigned int MY_ID_INT = 3582194827;
-const char* MY_ID_CHAR = "3582194827";
-unsigned char Wifi_SSID[32] = "Your_SSID";
-unsigned char Wifi_password[64] = "Your_PASSWORD";
-unsigned char Device_SSID[32] = "FLP_HOST";
-unsigned char Device_password[64] = "Defelt";
+const int MY_ID_INT = 1726384219;
+const char* MY_ID_CHAR = "1726384219";
+char Wifi_SSID[32] = "Your_SSID";
+char Wifi_password[64] = "Your_PASSWORD";
+char Device_SSID[32] = "FLP_HOST";
+char Device_password[64] = "Defelt";
 
 int rx_id = 0;
 int rx_danger = 0;
@@ -88,29 +91,15 @@ bool gps_data_all_receive = false;
 spi_device_handle_t lora_spi;
 
 typedef struct terminaldevice{
-	unsigned int code;
+	int code;
 	double latit;
 	double longit;
+	uint8_t danger;
 } TerminalDevice;
 
-unsigned int device_list[MAX_DEVICE_CNT];
+int device_list[MAX_DEVICE_CNT];
 TerminalDevice* device_info[MAX_DEVICE_CNT];
 size_t device_count = 0;
-
-unsigned int atou(const char* str) {
-    unsigned int result = 0;
-
-    while (isspace((unsigned char)*str)) {
-        str++;
-    }
-
-    while (isdigit((unsigned char)*str)) {
-        result = result * 10 + (*str - '0');
-        str++;
-    }
-
-    return result;
-}
 
 char* make_json_payload(void) {
     cJSON *root = cJSON_CreateObject();
@@ -164,7 +153,7 @@ bool split(char * input, TerminalDevice* info) {
     char* token;
     token = strtok(input, ",");
     if (token != NULL) {
-        if (info->code != atou(token)) {
+        if (info->code != atoi(token)) {
             return false;
         }
     }
@@ -178,14 +167,14 @@ bool split(char * input, TerminalDevice* info) {
     }
     token = strtok(NULL, ",");
     if (token != NULL) {
-        if (MY_ID_INT != atou(token)) {
+        if (MY_ID_INT != atoi(token)) {
             return false;
         }
     }
     return true;
 }
 
-void load_array(unsigned int* array, size_t max_size) {
+void load_array(int* array, size_t max_size) {
     nvs_handle_t handle;
     esp_err_t err = nvs_open("device_info", NVS_READONLY, &handle);
     if (err != ESP_OK) {
@@ -260,7 +249,7 @@ void load_basic_info() {
     nvs_close(handle);
 }
 
-void save_array(const unsigned int* array, size_t count) {
+void save_array(const int* array, size_t count) {
     nvs_handle_t handle;
     esp_err_t err = nvs_open("device_info", NVS_READWRITE, &handle);
     if (err != ESP_OK) {
@@ -278,7 +267,7 @@ void save_array(const unsigned int* array, size_t count) {
     nvs_close(handle);
 }
 
-bool device_add(unsigned int device_id) {
+bool device_add(int device_id) {
     for (size_t i = 0; i < device_count; i++) {
         if (device_list[i] == device_id) {
             ESP_LOGW("device", "Device ID %u already exists. Skipping.", device_id);
@@ -359,14 +348,14 @@ void gps_task(void *arg) {
     while (1) {
         int len = uart_read_bytes(UART_GPS, data, BUF_SIZE - 1, pdMS_TO_TICKS(1000));
         if (len > 0) {
-            data[len] = '\0';  // 문자열 끝 처리
+            data[len] = '\0';
             char* line = strtok((char*)data, "\r\n");
             while (line != NULL) {
                 parse_nmea_sentence(line);
                 line = strtok(NULL, "\r\n");
             }
         }
-        vTaskDelay(pdMS_TO_TICKS(1000));  // 1초마다 체크
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
     free(data);
 }
@@ -400,24 +389,19 @@ void lora_init() {
     gpio_set_level(PIN_NUM_RST, 1);
     vTaskDelay(pdMS_TO_TICKS(10));
 
-
     lora_write_register(0x01, 0x80); 
     lora_write_register(0x01, 0x81); 
-
 
     uint64_t frf = ((uint64_t)LORA_FREQUENCY << 19) / 32000000;
     lora_write_register(0x06, (frf >> 16) & 0xFF);
     lora_write_register(0x07, (frf >> 8) & 0xFF);
     lora_write_register(0x08, (frf >> 0) & 0xFF);
 
-
     lora_write_register(0x1D, 0x72);
     lora_write_register(0x1E, 0xA4); 
 
-
     lora_write_register(0x20, 0x00);
     lora_write_register(0x21, 0x08);
-
 
     lora_write_register(0x1F, 0x00); 
 }
@@ -506,7 +490,6 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t e
             break;
         
         default:
-            ESP_LOGI(W_TAG, "WIFI_EVENT 발생: ID=%d", event_id);
             break;
         }
     }
@@ -562,8 +545,6 @@ void wifi_init_softap_sta(void){
     esp_wifi_set_config(WIFI_IF_STA, &wifi_sta_config);
     esp_wifi_set_config(WIFI_IF_AP, &wifi_ap_config);
     esp_wifi_start();
-
-    ESP_LOGI(TAG, "WiFi AP+STA mode initialized. STA SSID:%s, AP SSID: ESP32-AP", CONFIG_ESP_WIFI_SSID);
 }
 
 void save_basic_info() {
@@ -606,96 +587,180 @@ void save_basic_info() {
     nvs_close(handle);
 }
 
+static esp_err_t root_get_handler(httpd_req_t *req) {
+    wifi_config_t sta_config;
+    wifi_config_t ap_config;
 
-void tcp_client_task(void *pvParameters) {
-    char rx_buffer[1024];
-    char host_ip[] = HOST_IP_ADDR;
-    int addr_family = AF_INET;
-    int ip_protocol = IPPROTO_IP;
+    esp_wifi_get_config(WIFI_IF_STA, &sta_config);
+    esp_wifi_get_config(WIFI_IF_AP, &ap_config);
 
-    struct sockaddr_in dest_addr;
-    dest_addr.sin_addr.s_addr = inet_addr(host_ip);
-    dest_addr.sin_family = AF_INET;
-    dest_addr.sin_port = htons(PORT);
+    char html_buffer[4096];  // 충분한 공간 확보
 
-    int sock = socket(addr_family, SOCK_STREAM, ip_protocol);
-    if (sock < 0) {
-        ESP_LOGE("TCP", "Unable to create socket: errno %d", errno);
-        vTaskDelete(NULL);
-        return;
+    const char *html_template = "<!DOCTYPE html>"
+    "<html><body><head></head>"
+    "<fieldset><legend>Host Info</legend>"
+    "<table border=\"1px\" style=\"border-collapse: collapse; background-color: #e0e0e0\">"
+    "<tr><th>category</th><th>data</th></tr>"
+    "<tr><td>Connecting SSID</td><td>%s</td></tr>"
+    "<tr><td>Connecting Password</td><td>%s</td></tr>"
+    "<tr><td>Device SSID</td><td>%s</td></tr>"
+    "<tr><td>Device Password</td><td>%s</td></tr>"
+    "<tr><td>Current Connecting Device</td><td>%d client(s)</td></tr>"
+    "<tr><td>Status Connection Server</td><td>%s</td></tr>"
+    "<tr><td>Device Status</td><td>%s</td></tr>"
+    "</table></fieldset>"
+    "<form method=\"post\" action=\"/submit\">"
+    "<fieldset><legend>Wifi SSID/Password change</legend>"
+    "<p>SSID : <input name=\"SSID\" type=\"text\" /></p>"
+    "<p>Password : <input name=\"Wifipass\" type=\"text\" /></p>"
+    "<button type=\"submit\">submit</button></fieldset></form>"
+    "<form method=\"post\" action=\"/submit\">"
+    "<fieldset><legend>Device SSID/Password change</legend>"
+    "<p>SSID : <input name=\"Device_SSID\" type=\"text\" /></p>"
+    "<p>Password : <input name=\"Device_Wifipass\" type=\"text\" /></p>"
+    "<button type=\"submit\">submit</button></fieldset></form>"
+    "</body></html>";
+
+    wifi_sta_list_t sta_list;
+    esp_wifi_ap_get_sta_list(&sta_list);
+
+    // 서버 및 장치 상태는 임시로 "Unknown"
+    const char *server_status = "Unknown";
+    const char *device_status = "Idle";
+
+    // HTML 버퍼 구성
+    snprintf(html_buffer, sizeof(html_buffer), html_template,
+        (char *)sta_config.sta.ssid,
+        (char *)sta_config.sta.password,
+        (char *)ap_config.ap.ssid,
+        (char *)ap_config.ap.password,
+        sta_list.num,
+        server_status,
+        device_status
+    );
+
+    httpd_resp_set_type(req, "text/html");
+    httpd_resp_send(req, html_buffer, HTTPD_RESP_USE_STRLEN);
+    return ESP_OK;
+}
+
+static esp_err_t submit_post_handler(httpd_req_t *req) {
+    char buf[256];
+    int ret, remaining = req->content_len;
+
+    while (remaining > 0) {
+        if ((ret = httpd_req_recv(req, buf, MIN(remaining, sizeof(buf)))) <= 0) {
+            return ESP_FAIL;
+        }
+        remaining -= ret;
+
+        buf[ret] = '\0';
+        ESP_LOGI(TAG, "POST Body: %s", buf);
     }
 
-    int err = connect(sock, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
-    if (err != 0) {
-        ESP_LOGE("TCP", "Socket unable to connect: errno %d", errno);
-        close(sock);
-        vTaskDelete(NULL);
-        return;
+    httpd_resp_send(req, "<h2>Received</h2><a href='/'>Go back</a>", HTTPD_RESP_USE_STRLEN);
+    return ESP_OK;
+}
+
+void start_webserver(void) {
+    httpd_config_t config = HTTPD_DEFAULT_CONFIG();
+    httpd_handle_t server = NULL;
+
+    if (httpd_start(&server, &config) == ESP_OK) {
+        httpd_uri_t root = {
+            .uri = "/",
+            .method = HTTP_GET,
+            .handler = root_get_handler,
+            .user_ctx = NULL
+        };
+        httpd_register_uri_handler(server, &root);
+
+        httpd_uri_t submit = {
+            .uri = "/submit",
+            .method = HTTP_POST,
+            .handler = submit_post_handler,
+            .user_ctx = NULL
+        };
+        httpd_register_uri_handler(server, &submit);
+    }
+}
+
+static void websocket_event_handler(void *handler_args, esp_event_base_t base,
+                                    int32_t event_id, void *event_data) {
+    esp_websocket_event_data_t *data = (esp_websocket_event_data_t *)event_data;
+    switch (event_id) {
+        case WEBSOCKET_EVENT_CONNECTED:
+            ESP_LOGI(TAG, "WebSocket connected");
+            break;
+        case WEBSOCKET_EVENT_DISCONNECTED:
+            ESP_LOGI(TAG, "WebSocket disconnected");
+            break;
+        case WEBSOCKET_EVENT_DATA:
+            ESP_LOGI(TAG, "Received data: %.*s", data->data_len, (char *)data->data_ptr);
+
+            char *rx_data = strndup((char *)data->data_ptr, data->data_len);
+            if (rx_data) {
+                cJSON *root = cJSON_Parse(rx_data);
+                if (root) {
+                    cJSON *danger_array = cJSON_GetObjectItem(root, "danger");
+                    if (cJSON_IsArray(danger_array)) {
+                        int count = cJSON_GetArraySize(danger_array);
+                        for (int i = 0; i < count && i < MAX_DEVICE_CNT; i++) {
+                            cJSON *item = cJSON_GetArrayItem(danger_array, i);
+                            cJSON *id = cJSON_GetObjectItem(item, "id");
+                            cJSON *distance = cJSON_GetObjectItem(item, "distance");
+                            if (cJSON_IsNumber(id) && cJSON_IsNumber(distance)) {
+                                for(int j = 0;j < device_count;j++){
+									if(device_info[j]->code == id->valueint){
+										device_info[j]->danger=distance->valueint;
+									}
+								}
+                            }
+                        }
+                    }
+                    cJSON_Delete(root);
+                }
+                free(rx_data);
+            }
+            break;
+        case WEBSOCKET_EVENT_ERROR:
+            ESP_LOGE(TAG, "WebSocket error occurred");
+            break;
+    }
+}
+
+void wss_client_task(void *pvParameters) {
+    esp_websocket_client_config_t websocket_cfg = {
+        .uri = "wss://" HOST_IP_ADDR ":" PORT"/",
+    };
+
+    client = esp_websocket_client_init(&websocket_cfg);
+    esp_websocket_register_events(client, WEBSOCKET_EVENT_ANY, websocket_event_handler, (void *)client);
+    esp_websocket_client_start(client);
+
+    while (!esp_websocket_client_is_connected(client)) {
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 
     while (1) {
         if (gps_data_all_receive) {
-            char* server_send_string_JSON = make_json_payload();
+            char *server_send_string_JSON = make_json_payload();
             if (server_send_string_JSON != NULL) {
-                size_t len = strlen(server_send_string_JSON);
-                int sent = send(sock, server_send_string_JSON, len, 0);
-                if (sent < 0) {
-                    ESP_LOGE("TCP", "Error occurred during sending: errno %d", errno);
+                if (esp_websocket_client_send_text(client, server_send_string_JSON, strlen(server_send_string_JSON), portMAX_DELAY) > 0) {
+                    ESP_LOGI(TAG, "Sent JSON payload");
                 } else {
-                    ESP_LOGI("TCP", "Sent %d bytes", sent);
+                    ESP_LOGE(TAG, "Failed to send payload");
                 }
                 free(server_send_string_JSON);
-            } else {
-                ESP_LOGE("TCP", "Failed to allocate JSON payload");
             }
             gps_data_all_receive = false;
-        }
-
-        int r = recv(sock, rx_buffer, sizeof(rx_buffer)-1, MSG_DONTWAIT);
-        if (r > 0) {
-            rx_buffer[r] = '\0';
-           	unsigned int receive_id[MAX_DEVICE_CNT];
-           	uint8_t receive_danger[MAX_DEVICE_CNT];
-           	cJSON *root = cJSON_Parse(rx_buffer);
-		    if (root == NULL) {
-		        printf("JSON 파싱 실패\n");
-		        return;
-		    }
-		
-		    cJSON *danger_array = cJSON_GetObjectItem(root, "danger");
-		    if (!cJSON_IsArray(danger_array)) {
-		        printf("danger 항목이 배열이 아님\n");
-		        cJSON_Delete(root);
-		        return;
-		    }
-		
-		    int count = cJSON_GetArraySize(danger_array);
-		    if (count > MAX_DEVICE_CNT) count = MAX_DEVICE_CNT;
-		
-		    for (int i = 0; i < count; i++) {
-		        cJSON *item = cJSON_GetArrayItem(danger_array, i);
-		        cJSON *id = cJSON_GetObjectItem(item, "id");
-		        cJSON *distance = cJSON_GetObjectItem(item, "distance");
-		
-		        if (cJSON_IsNumber(id) && cJSON_IsNumber(distance)) {
-		            receive_id[i] = id->valueint;
-		            receive_danger[i] = distance->valueint;
-		        }
-		    }
-		
-		    cJSON_Delete(root);
-            parse_rx_buffer(rx_buffer);
-            
-            
-            
-            ESP_LOGI("TCP", "Received: %s", rx_buffer);
-            
         }
 
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
-    close(sock);
+    esp_websocket_client_stop(client);
+    esp_websocket_client_destroy(client);
     vTaskDelete(NULL);
 }
 
@@ -709,8 +774,9 @@ void lora_host_task(void *pvParameters){
 	
 	while(1){
 		for(int i = 0; i < device_count;i++){
-			char gps_get_messege[17];
-			sprintf(gps_get_messege,"%u", device_info[i]->code);
+			char gps_get_messege[20];
+			
+			sprintf(gps_get_messege,"%u,%d", device_info[i]->code,device_info[i]->danger);
 			strcat(gps_get_messege, "getgps");
 			lora_send_packet(gps_get_messege);
 			
@@ -771,7 +837,7 @@ void app_main(void) {
 	wifi_init_softap_sta();
 	lora_init();
 	
-	xTaskCreatePinnedToCore(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL, 1);  // Core 1
+	xTaskCreatePinnedToCore(wss_client_task, "wss_client", 8192, NULL, 5, NULL, 1);  // Core 1
 	xTaskCreatePinnedToCore(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL, 1);    // Core 1
 	xTaskCreatePinnedToCore(gps_task, "gps_task", 4096, NULL, 10, NULL, 1);          // Core 1
     
