@@ -32,6 +32,8 @@
 #include "esp_netif.h"
 #include "esp_websocket_client.h"
 
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
 #define HOST_IP_ADDR "192.168.0.100"
 #define PORT "443"
 
@@ -624,11 +626,9 @@ static esp_err_t root_get_handler(httpd_req_t *req) {
     wifi_sta_list_t sta_list;
     esp_wifi_ap_get_sta_list(&sta_list);
 
-    // 서버 및 장치 상태는 임시로 "Unknown"
     const char *server_status = "Unknown";
     const char *device_status = "Idle";
 
-    // HTML 버퍼 구성
     snprintf(html_buffer, sizeof(html_buffer), html_template,
         (char *)sta_config.sta.ssid,
         (char *)sta_config.sta.password,
