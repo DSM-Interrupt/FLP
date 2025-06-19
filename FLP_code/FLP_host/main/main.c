@@ -833,12 +833,18 @@ void wss_client_task(void *pvParameters) {
     };
 
     while (1) {
-		if (!esp_websocket_client_is_connected(client)) {
-		    esp_websocket_client_stop(client);
-		    esp_websocket_client_destroy(client);
-		    client = NULL;
-		}
-        
+        if (client == NULL) {
+            client = esp_websocket_client_init(&websocket_cfg);
+            esp_websocket_register_events(client, WEBSOCKET_EVENT_ANY, websocket_event_handler, (void *)client);
+            esp_websocket_client_start(client);
+
+
+            while (!esp_websocket_client_is_connected(client)) {
+                vTaskDelay(pdMS_TO_TICKS(100));
+            }
+        }
+
+
         if (gps_data_all_receive) {
             char *server_send_string_JSON = make_json_payload();
             if (server_send_string_JSON != NULL) {
@@ -846,13 +852,22 @@ void wss_client_task(void *pvParameters) {
                     ESP_LOGI(TAG, "Sent JSON payload");
                 } else {
                     ESP_LOGE(TAG, "Failed to send payload");
-               	 	esp_websocket_client_stop(client);
+
+
+                    esp_websocket_client_stop(client);
                     esp_websocket_client_destroy(client);
                     client = NULL;
                 }
                 free(server_send_string_JSON);
             }
             gps_data_all_receive = false;
+        }
+
+
+        if (!esp_websocket_client_is_connected(client)) {
+            esp_websocket_client_stop(client);
+            esp_websocket_client_destroy(client);
+            client = NULL;
         }
 
         vTaskDelay(pdMS_TO_TICKS(1000));
@@ -862,6 +877,7 @@ void wss_client_task(void *pvParameters) {
     esp_websocket_client_destroy(client);
     vTaskDelete(NULL);
 }
+
 
 void lora_host_task(void *pvParameters){
 	for(int i = 0 ;i <device_count;i++){
