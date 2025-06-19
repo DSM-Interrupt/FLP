@@ -483,9 +483,14 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t e
             break;
 
         case WIFI_EVENT_STA_DISCONNECTED:
-            esp_wifi_connect();
-            ESP_LOGI(W_TAG, "STA 연결 끊김. 재연결 시도...");
-            break;
+            if (client != NULL) {
+		        esp_websocket_client_stop(client);
+		        esp_websocket_client_destroy(client);
+		        client = NULL;
+		    }
+		    esp_wifi_connect();
+		    ESP_LOGI(W_TAG, "STA 연결 끊김. 재연결 시도...");
+		    break;
 
         case WIFI_EVENT_AP_START:
             ESP_LOGI(W_TAG, "SoftAP 시작됨.");
@@ -596,7 +601,7 @@ static esp_err_t root_get_handler(httpd_req_t *req) {
     esp_wifi_get_config(WIFI_IF_STA, &sta_config);
     esp_wifi_get_config(WIFI_IF_AP, &ap_config);
 
-    char html_buffer[4096];  // 충분한 공간 확보
+    char html_buffer[4096];
 
     const char *html_template = "<!DOCTYPE html>"
     "<html><body><head></head>"
@@ -625,9 +630,29 @@ static esp_err_t root_get_handler(httpd_req_t *req) {
 
     wifi_sta_list_t sta_list;
     esp_wifi_ap_get_sta_list(&sta_list);
+    
+    const char *server_status;
 
-    const char *server_status = "Unknown";
-    const char *device_status = "Idle";
+    if (esp_websocket_client_is_connected(client)) {
+	    server_status = "Connected";
+	} else {
+	    server_status = "Disconnected";
+	}
+    char *device_status = (char*)malloc(device_count * 12 + 1);
+
+	for (int i = 0; i < device_count; i++) {
+	    char temp[11];
+	    sprintf(temp, "%d", device_list[i]);
+	
+	    for (int j = 0; j < 10; j++) {
+	        device_status[i * 12 + j] = temp[j];
+	    }
+	
+	    device_status[i * 12 + 10] = ',';
+	    device_status[i * 12 + 11] = ' ';
+	}
+
+	device_status[device_count * 12 - 2] = '\0';
 
     snprintf(html_buffer, sizeof(html_buffer), html_template,
         (char *)sta_config.sta.ssid,
@@ -641,6 +666,7 @@ static esp_err_t root_get_handler(httpd_req_t *req) {
 
     httpd_resp_set_type(req, "text/html");
     httpd_resp_send(req, html_buffer, HTTPD_RESP_USE_STRLEN);
+    free(device_status);
     return ESP_OK;
 }
 
@@ -648,17 +674,89 @@ static esp_err_t submit_post_handler(httpd_req_t *req) {
     char buf[256];
     int ret, remaining = req->content_len;
 
+    char ssid[32] = {0};
+    char password[64] = {0};
+    char device_ssid[32] = {0};
+    char device_password[64] = {0};
+
     while (remaining > 0) {
-        if ((ret = httpd_req_recv(req, buf, MIN(remaining, sizeof(buf)))) <= 0) {
+        if ((ret = httpd_req_recv(req, buf, MIN(remaining, sizeof(buf) - 1))) <= 0) {
             return ESP_FAIL;
         }
         remaining -= ret;
-
         buf[ret] = '\0';
+
         ESP_LOGI(TAG, "POST Body: %s", buf);
+
+        char *ssid_ptr = strstr(buf, "SSID=");
+        if (ssid_ptr) {
+            sscanf(ssid_ptr + 5, "%31[^&]", ssid);
+        }
+
+        char *pass_ptr = strstr(buf, "Wifipass=");
+        if (pass_ptr) {
+            sscanf(pass_ptr + 9, "%63[^&]", password);
+        }
+
+        char *dev_ssid_ptr = strstr(buf, "Device_SSID=");
+        if (dev_ssid_ptr) {
+            sscanf(dev_ssid_ptr + 12, "%31[^&]", device_ssid);
+        }
+
+        char *dev_pass_ptr = strstr(buf, "Device_Wifipass=");
+        if (dev_pass_ptr) {
+            sscanf(dev_pass_ptr + 17, "%63[^&]", device_password);
+        }
     }
 
-    httpd_resp_send(req, "<h2>Received</h2><a href='/'>Go back</a>", HTTPD_RESP_USE_STRLEN);
+    if (strlen(ssid) > 0 && strlen(password) > 0) {
+        strncpy(Wifi_SSID, ssid, sizeof(Wifi_SSID));
+        strncpy(Wifi_password, password, sizeof(Wifi_password));
+    }
+
+    if (strlen(device_ssid) > 0 && strlen(device_password) > 0) {
+        strncpy(Device_SSID, device_ssid, sizeof(Device_SSID));
+        strncpy(Device_password, device_password, sizeof(Device_password));
+    }
+
+	esp_wifi_disconnect();
+
+	wifi_config_t wifi_sta_config = {
+	    .sta = {
+	        .threshold.authmode = WIFI_AUTH_WPA2_PSK,
+	    },
+	};
+	strncpy((char *)wifi_sta_config.sta.ssid, Wifi_SSID, sizeof(wifi_sta_config.sta.ssid));
+	strncpy((char *)wifi_sta_config.sta.password, Wifi_password, sizeof(wifi_sta_config.sta.password));
+	
+	esp_wifi_set_config(WIFI_IF_STA, &wifi_sta_config);
+	esp_wifi_connect();
+	
+	wifi_config_t wifi_ap_config = {
+	    .ap = {
+	        .ssid_len = sizeof(wifi_ap_config.ap.password),
+	        .max_connection = 4,
+	        .authmode = WIFI_AUTH_WPA_WPA2_PSK
+	    },
+	};
+	strncpy((char *)wifi_ap_config.ap.ssid, Device_SSID, sizeof(wifi_ap_config.ap.ssid));
+	strncpy((char *)wifi_ap_config.ap.password, Device_password, sizeof(wifi_ap_config.ap.password));
+	
+	if (strlen((char *)wifi_ap_config.ap.password) == 0) {
+	    wifi_ap_config.ap.authmode = WIFI_AUTH_OPEN;
+	}
+	
+	esp_wifi_set_config(WIFI_IF_AP, &wifi_ap_config);
+	
+	ESP_LOGI(TAG, "Wi-Fi settings updated and reconnected.");
+	
+    save_basic_info();
+
+    httpd_resp_send(req, "<h2>SSID and Password Updated!</h2><a href='/'>Go back</a>", HTTPD_RESP_USE_STRLEN);
+
+    ESP_LOGI(TAG, "Updated SSID: %s, Password: %s", Wifi_SSID, Wifi_password);
+    ESP_LOGI(TAG, "Updated Device SSID: %s, Password: %s", Device_SSID, Device_password);
+
     return ESP_OK;
 }
 
@@ -734,15 +832,13 @@ void wss_client_task(void *pvParameters) {
         .uri = "wss://" HOST_IP_ADDR ":" PORT"/",
     };
 
-    client = esp_websocket_client_init(&websocket_cfg);
-    esp_websocket_register_events(client, WEBSOCKET_EVENT_ANY, websocket_event_handler, (void *)client);
-    esp_websocket_client_start(client);
-
-    while (!esp_websocket_client_is_connected(client)) {
-        vTaskDelay(pdMS_TO_TICKS(100));
-    }
-
     while (1) {
+		if (!esp_websocket_client_is_connected(client)) {
+		    esp_websocket_client_stop(client);
+		    esp_websocket_client_destroy(client);
+		    client = NULL;
+		}
+        
         if (gps_data_all_receive) {
             char *server_send_string_JSON = make_json_payload();
             if (server_send_string_JSON != NULL) {
@@ -750,6 +846,9 @@ void wss_client_task(void *pvParameters) {
                     ESP_LOGI(TAG, "Sent JSON payload");
                 } else {
                     ESP_LOGE(TAG, "Failed to send payload");
+               	 	esp_websocket_client_stop(client);
+                    esp_websocket_client_destroy(client);
+                    client = NULL;
                 }
                 free(server_send_string_JSON);
             }
@@ -836,10 +935,11 @@ void app_main(void) {
 	
 	wifi_init_softap_sta();
 	lora_init();
+	start_webserver();
 	
-	xTaskCreatePinnedToCore(wss_client_task, "wss_client", 8192, NULL, 5, NULL, 1);  // Core 1
-	xTaskCreatePinnedToCore(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL, 1);    // Core 1
-	xTaskCreatePinnedToCore(gps_task, "gps_task", 4096, NULL, 10, NULL, 1);          // Core 1
+	xTaskCreatePinnedToCore(wss_client_task, "wss_client", 8192, NULL, 5, NULL, 1); 
+	xTaskCreatePinnedToCore(lora_host_task, "LoRa_host", 4096, NULL, 5, NULL, 1);    
+	xTaskCreatePinnedToCore(gps_task, "gps_task", 4096, NULL, 10, NULL, 1);          
     
     
     while (1) {
