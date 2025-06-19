@@ -45,7 +45,9 @@ SPI_HandleTypeDef hspi1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+uint8_t gps_rx_buffer[1];
+char gps_sentence[128];
+uint8_t gps_index = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,7 +96,7 @@ int main(void)
   MX_SPI1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_UART_Receive_IT(&huart2, gps_rx_buffer, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -168,8 +170,8 @@ static void MX_SPI1_Init(void)
   hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi1.Init.NSS = SPI_NSS_HARD_OUTPUT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -234,24 +236,23 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, DIO0_Pin|ID_Pin|SX1278_RESET_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, SX1278_NSS_Pin|buzzer_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(buzzer_GPIO_Port, buzzer_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, ID_Pin|SX1278_RESET_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : DIO0_Pin ID_Pin SX1278_RESET_Pin */
-  GPIO_InitStruct.Pin = DIO0_Pin|ID_Pin|SX1278_RESET_Pin;
+  /*Configure GPIO pins : SX1278_NSS_Pin buzzer_Pin */
+  GPIO_InitStruct.Pin = SX1278_NSS_Pin|buzzer_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : buzzer_Pin */
-  GPIO_InitStruct.Pin = buzzer_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  /*Configure GPIO pin : DIO0_Pin */
+  GPIO_InitStruct.Pin = DIO0_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(buzzer_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(DIO0_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : find_host_Pin */
   GPIO_InitStruct.Pin = find_host_Pin;
@@ -259,13 +260,40 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(find_host_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : ID_Pin SX1278_RESET_Pin */
+  GPIO_InitStruct.Pin = ID_Pin|SX1278_RESET_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
   /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2) {
+        if (gps_rx_buffer[0] == '\n') {
+            gps_sentence[gps_index] = '\0';
+            gps_index = 0;
+            parse_gps_sentence(gps_sentence);
+        } else {
+            gps_sentence[gps_index++] = gps_rx_buffer[0];
+            if (gps_index >= 127) gps_index = 0;
+        }
+        HAL_UART_Receive_IT(&huart2, gps_rx_buffer, 1);
+    }
+}
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (GPIO_Pin == DIO0_Pin) {
+        lora_irq_handler();
+    }
+}
 /* USER CODE END 4 */
 
 /**
