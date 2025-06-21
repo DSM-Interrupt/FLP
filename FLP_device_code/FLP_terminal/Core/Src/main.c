@@ -21,17 +21,24 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+#include "stdint.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef struct GpsData{
+	double latitude;
+	double longitude;
+}GpsData;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define TERMINAL_ID_INT 2041235739
+#define TERMINAL_ID_CHAR "2041235739"
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,6 +55,9 @@ UART_HandleTypeDef huart2;
 uint8_t gps_rx_buffer[1];
 char gps_sentence[128];
 uint8_t gps_index = 0;
+GpsData SaveGpsData;
+int host_id;
+static int danger = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -56,6 +66,98 @@ static void MX_GPIO_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
+void parse_gps_sentence(char* gps_input){
+	return;
+}
+
+void lora_write_register(){
+
+}
+
+void lora_read_register(){
+
+}
+
+void lora_send_packet(const char* data) {
+    size_t len = strlen(data);
+
+
+    lora_write_register(0x01, 0x81);
+
+
+    lora_write_register(0x0E, 0x00);
+    lora_write_register(0x0D, 0x00);
+
+
+    for (int i = 0; i < len; i++) {
+        lora_write_register(0x00, data[i]);
+    }
+
+
+    lora_write_register(0x22, len);
+
+
+    lora_write_register(0x01, 0x83);
+
+
+    while ((lora_read_register(0x12) & 0x08) == 0) {
+        HAL_Delay(10);
+    }
+
+
+    lora_write_register(0x12, 0xFF);
+}
+
+int lora_receive_packet(char *buf) {
+    int len = 0;
+
+    uint8_t irq_flags = lora_read_register(0x12);
+
+    if (irq_flags & 0x40) {
+        len = lora_read_register(0x13);
+        if (len > LORA_MAX_PACKET_SIZE) {
+            len = LORA_MAX_PACKET_SIZE;
+        }
+        uint8_t fifo_addr = lora_read_register(0x10);
+
+        lora_write_register(0x0D, fifo_addr);
+
+        for (int i = 0; i < len; i++) {
+            buf[i] = lora_read_register(0x00);
+        }
+
+        lora_write_register(0x12, 0xFF);
+    }
+
+    return len;
+}
+
+void lora_receive_handler(void) {
+    char buf[256] = {0};
+    int packet_len = lora_receive_packet(buf);
+
+    if (packet_len > 0) {
+        buf[packet_len] = '\0';
+        printf("LoRa Received: %s\n", buf);
+        if (strstr(buf, "getgps") != NULL) {
+        	char * token;
+        	token = strtok(buf,',');
+        	if(strstr(token,TERMINAL_ID_CHAR)){
+        		token = strtok(buf,NULL);
+        		host_id = atoi(token);
+
+        		token = strtok(buf,NULL);
+        		danger = atoi(token);
+
+        		char response[64];
+				snprintf(response, sizeof(response), "%u,%.6f,%.6f %u", TERMINAL_ID, SaveGpsData.latitude, SaveGpsData.longitude, host_id);
+
+				lora_send_packet(response);
+				printf("LoRa Sent: %s\n", response);
+        	}
+        }
+    }
+}
 
 /* USER CODE END PFP */
 
@@ -291,7 +393,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if (GPIO_Pin == DIO0_Pin) {
-        lora_irq_handler();
+    	lora_receive_handler();
     }
 }
 /* USER CODE END 4 */

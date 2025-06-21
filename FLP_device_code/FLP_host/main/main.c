@@ -889,9 +889,9 @@ void lora_host_task(void *pvParameters){
 	
 	while(1){
 		for(int i = 0; i < device_count;i++){
-			char gps_get_messege[20];
+			char gps_get_messege[33];
 			
-			sprintf(gps_get_messege,"%u,%d", device_info[i]->code,device_info[i]->danger);
+			sprintf(gps_get_messege,"%u,%u,%u,", device_info[i]->code, MY_ID_INT, device_info[i]->danger);
 			strcat(gps_get_messege, "getgps");
 			lora_send_packet(gps_get_messege);
 			
@@ -899,7 +899,7 @@ void lora_host_task(void *pvParameters){
 			int packet_len;
 			while(1){
 				packet_len = lora_receive_packet(buf);
-				if(packet_len < 0){
+				if(packet_len > 0){
 					if(strstr(buf, MY_ID_CHAR)){
 						split(buf, device_info[i]);
 						break;
