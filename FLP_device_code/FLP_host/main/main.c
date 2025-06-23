@@ -284,7 +284,6 @@ bool device_add(int device_id) {
     return true;
 }
 
-// NMEA에서 DMM(Degree Decimal Minutes)을 DD(Decimal Degrees)로 변환
 double convert_to_decimal_degrees(const char* nmea_coord, char direction) {
     double raw = atof(nmea_coord);
     int degrees = (int)(raw / 100);
@@ -960,11 +959,32 @@ void app_main(void) {
                 packet_len = lora_receive_packet(buf);
 
                 if (packet_len > 0 && strstr(buf, "FINDHOST") != NULL) {
-                    char temp[10] = {0};
-                    strncpy(temp, buf, sizeof(temp) - 1);
-                    device_add(atoi(temp));
-                    break;
-                }
+					int add_id;
+					char *token;
+
+					strtok(buf, ",");
+
+					token = strtok(NULL, ",");
+					if (token == NULL) {
+						ESP_LOGW("HOST", "Invalid FINDHOST packet: missing ID");
+						break;
+					}
+
+					add_id = atoi(token);
+
+					if (!device_add(add_id)) {
+						char fail_msg[32];
+						snprintf(fail_msg, sizeof(fail_msg), "%d,host_set_fail",
+								 my_id_int);
+						lora_send_packet(fail_msg);
+						ESP_LOGW("HOST", "Device add failed. Sent: %s",
+								 fail_msg);
+					} else {
+						ESP_LOGI("HOST", "Device %d added successfully",
+								 add_id);
+					}
+					break;
+				}
             }
         }
     }

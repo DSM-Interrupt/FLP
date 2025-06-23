@@ -3774,11 +3774,11 @@ LOAD C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 .debug_str      0x00000000    0x85d9d
  .debug_str     0x00000000    0x85d9d ./Core/Src/main.o
                               0x82445 (size before relaxing)
- .debug_str     0x00085d9d    0x7e9c4 ./Core/Src/stm32f1xx_hal_msp.o
- .debug_str     0x00085d9d    0x7e4c9 ./Core/Src/stm32f1xx_it.o
- .debug_str     0x00085d9d     0x997b ./Core/Src/syscalls.o
- .debug_str     0x00085d9d     0x7719 ./Core/Src/sysmem.o
- .debug_str     0x00085d9d    0x7de8a ./Core/Src/system_stm32f1xx.o
+ .debug_str     0x00085d9d    0x7e9cb ./Core/Src/stm32f1xx_hal_msp.o
+ .debug_str     0x00085d9d    0x7e4d0 ./Core/Src/stm32f1xx_it.o
+ .debug_str     0x00085d9d     0x9982 ./Core/Src/syscalls.o
+ .debug_str     0x00085d9d     0x7720 ./Core/Src/sysmem.o
+ .debug_str     0x00085d9d    0x7de91 ./Core/Src/system_stm32f1xx.o
  .debug_str     0x00085d9d       0x7a ./Core/Startup/startup_stm32f103c8tx.o
  .debug_str     0x00085d9d    0x7e5bd ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
  .debug_str     0x00085d9d    0x7e509 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o

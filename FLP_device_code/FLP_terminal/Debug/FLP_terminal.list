@@ -1423,17 +1423,17 @@ int main(void)
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
  8000f24:	f000 fb5e 	bl	80015e4 <HAL_Init>
-
   /* USER CODE BEGIN Init */
-  lora_init();
- 8000f28:	f7ff fe7e 	bl	8000c28 <lora_init>
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
- 8000f2c:	f000 f812 	bl	8000f54 <SystemClock_Config>
-  /* USER CODE BEGIN SysInit */
+ 8000f28:	f000 f814 	bl	8000f54 <SystemClock_Config>
 
+  /* USER CODE BEGIN SysInit */
+  lora_init();
+ 8000f2c:	f7ff fe7c 	bl	8000c28 <lora_init>
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -1947,9 +1947,21 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  80011fe:	e7fd      	b.n	80011fc <Error_Handler+0x8>
 
 08001200 <HAL_MspInit>:
+/* USER CODE END 0 */
+/**
+  * Initializes the Global MSP.
+  */
+void HAL_MspInit(void)
+{
  8001200:	b480      	push	{r7}
  8001202:	b085      	sub	sp, #20
  8001204:	af00      	add	r7, sp, #0
+
+  /* USER CODE BEGIN MspInit 0 */
+
+  /* USER CODE END MspInit 0 */
+
+  __HAL_RCC_AFIO_CLK_ENABLE();
  8001206:	4b15      	ldr	r3, [pc, #84]	@ (800125c <HAL_MspInit+0x5c>)
  8001208:	699b      	ldr	r3, [r3, #24]
  800120a:	4a14      	ldr	r2, [pc, #80]	@ (800125c <HAL_MspInit+0x5c>)
@@ -1960,6 +1972,7 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001216:	f003 0301 	and.w	r3, r3, #1
  800121a:	60bb      	str	r3, [r7, #8]
  800121c:	68bb      	ldr	r3, [r7, #8]
+  __HAL_RCC_PWR_CLK_ENABLE();
  800121e:	4b0f      	ldr	r3, [pc, #60]	@ (800125c <HAL_MspInit+0x5c>)
  8001220:	69db      	ldr	r3, [r3, #28]
  8001222:	4a0e      	ldr	r2, [pc, #56]	@ (800125c <HAL_MspInit+0x5c>)
@@ -1970,6 +1983,12 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  800122e:	f003 5380 	and.w	r3, r3, #268435456	@ 0x10000000
  8001232:	607b      	str	r3, [r7, #4]
  8001234:	687b      	ldr	r3, [r7, #4]
+
+  /* System interrupt init*/
+
+  /** DISABLE: JTAG-DP Disabled and SW-DP Disabled
+  */
+  __HAL_AFIO_REMAP_SWJ_DISABLE();
  8001236:	4b0a      	ldr	r3, [pc, #40]	@ (8001260 <HAL_MspInit+0x60>)
  8001238:	685b      	ldr	r3, [r3, #4]
  800123a:	60fb      	str	r3, [r7, #12]
@@ -1982,6 +2001,11 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  800124c:	4a04      	ldr	r2, [pc, #16]	@ (8001260 <HAL_MspInit+0x60>)
  800124e:	68fb      	ldr	r3, [r7, #12]
  8001250:	6053      	str	r3, [r2, #4]
+
+  /* USER CODE BEGIN MspInit 1 */
+
+  /* USER CODE END MspInit 1 */
+}
  8001252:	bf00      	nop
  8001254:	3714      	adds	r7, #20
  8001256:	46bd      	mov	sp, r7
@@ -1991,21 +2015,35 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001260:	40010000 	.word	0x40010000
 
 08001264 <HAL_SPI_MspInit>:
+  * This function configures the hardware resources used in this example
+  * @param hspi: SPI handle pointer
+  * @retval None
+  */
+void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
+{
  8001264:	b580      	push	{r7, lr}
  8001266:	b088      	sub	sp, #32
  8001268:	af00      	add	r7, sp, #0
  800126a:	6078      	str	r0, [r7, #4]
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
  800126c:	f107 0310 	add.w	r3, r7, #16
  8001270:	2200      	movs	r2, #0
  8001272:	601a      	str	r2, [r3, #0]
  8001274:	605a      	str	r2, [r3, #4]
  8001276:	609a      	str	r2, [r3, #8]
  8001278:	60da      	str	r2, [r3, #12]
+  if(hspi->Instance==SPI1)
  800127a:	687b      	ldr	r3, [r7, #4]
  800127c:	681b      	ldr	r3, [r3, #0]
  800127e:	4a1b      	ldr	r2, [pc, #108]	@ (80012ec <HAL_SPI_MspInit+0x88>)
  8001280:	4293      	cmp	r3, r2
  8001282:	d12f      	bne.n	80012e4 <HAL_SPI_MspInit+0x80>
+  {
+    /* USER CODE BEGIN SPI1_MspInit 0 */
+
+    /* USER CODE END SPI1_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_SPI1_CLK_ENABLE();
  8001284:	4b1a      	ldr	r3, [pc, #104]	@ (80012f0 <HAL_SPI_MspInit+0x8c>)
  8001286:	699b      	ldr	r3, [r3, #24]
  8001288:	4a19      	ldr	r2, [pc, #100]	@ (80012f0 <HAL_SPI_MspInit+0x8c>)
@@ -2016,6 +2054,8 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001294:	f403 5380 	and.w	r3, r3, #4096	@ 0x1000
  8001298:	60fb      	str	r3, [r7, #12]
  800129a:	68fb      	ldr	r3, [r7, #12]
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
  800129c:	4b14      	ldr	r3, [pc, #80]	@ (80012f0 <HAL_SPI_MspInit+0x8c>)
  800129e:	699b      	ldr	r3, [r3, #24]
  80012a0:	4a13      	ldr	r2, [pc, #76]	@ (80012f0 <HAL_SPI_MspInit+0x8c>)
@@ -2026,26 +2066,46 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  80012ac:	f003 0304 	and.w	r3, r3, #4
  80012b0:	60bb      	str	r3, [r7, #8]
  80012b2:	68bb      	ldr	r3, [r7, #8]
+    /**SPI1 GPIO Configuration
+    PA5     ------> SPI1_SCK
+    PA6     ------> SPI1_MISO
+    PA7     ------> SPI1_MOSI
+    */
+    GPIO_InitStruct.Pin = SX1278_SCK_Pin|SX1278_MOSI_Pin;
  80012b4:	23a0      	movs	r3, #160	@ 0xa0
  80012b6:	613b      	str	r3, [r7, #16]
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
  80012b8:	2302      	movs	r3, #2
  80012ba:	617b      	str	r3, [r7, #20]
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
  80012bc:	2303      	movs	r3, #3
  80012be:	61fb      	str	r3, [r7, #28]
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
  80012c0:	f107 0310 	add.w	r3, r7, #16
  80012c4:	4619      	mov	r1, r3
  80012c6:	480b      	ldr	r0, [pc, #44]	@ (80012f4 <HAL_SPI_MspInit+0x90>)
  80012c8:	f000 fbd2 	bl	8001a70 <HAL_GPIO_Init>
+
+    GPIO_InitStruct.Pin = SX1278_MISO_Pin;
  80012cc:	2340      	movs	r3, #64	@ 0x40
  80012ce:	613b      	str	r3, [r7, #16]
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
  80012d0:	2300      	movs	r3, #0
  80012d2:	617b      	str	r3, [r7, #20]
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
  80012d4:	2300      	movs	r3, #0
  80012d6:	61bb      	str	r3, [r7, #24]
+    HAL_GPIO_Init(SX1278_MISO_GPIO_Port, &GPIO_InitStruct);
  80012d8:	f107 0310 	add.w	r3, r7, #16
  80012dc:	4619      	mov	r1, r3
  80012de:	4805      	ldr	r0, [pc, #20]	@ (80012f4 <HAL_SPI_MspInit+0x90>)
  80012e0:	f000 fbc6 	bl	8001a70 <HAL_GPIO_Init>
+
+    /* USER CODE END SPI1_MspInit 1 */
+
+  }
+
+}
  80012e4:	bf00      	nop
  80012e6:	3720      	adds	r7, #32
  80012e8:	46bd      	mov	sp, r7
@@ -2055,21 +2115,35 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  80012f4:	40010800 	.word	0x40010800
 
 080012f8 <HAL_UART_MspInit>:
+  * This function configures the hardware resources used in this example
+  * @param huart: UART handle pointer
+  * @retval None
+  */
+void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+{
  80012f8:	b580      	push	{r7, lr}
  80012fa:	b088      	sub	sp, #32
  80012fc:	af00      	add	r7, sp, #0
  80012fe:	6078      	str	r0, [r7, #4]
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
  8001300:	f107 0310 	add.w	r3, r7, #16
  8001304:	2200      	movs	r2, #0
  8001306:	601a      	str	r2, [r3, #0]
  8001308:	605a      	str	r2, [r3, #4]
  800130a:	609a      	str	r2, [r3, #8]
  800130c:	60da      	str	r2, [r3, #12]
+  if(huart->Instance==USART2)
  800130e:	687b      	ldr	r3, [r7, #4]
  8001310:	681b      	ldr	r3, [r3, #0]
  8001312:	4a1f      	ldr	r2, [pc, #124]	@ (8001390 <HAL_UART_MspInit+0x98>)
  8001314:	4293      	cmp	r3, r2
  8001316:	d137      	bne.n	8001388 <HAL_UART_MspInit+0x90>
+  {
+    /* USER CODE BEGIN USART2_MspInit 0 */
+
+    /* USER CODE END USART2_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_USART2_CLK_ENABLE();
  8001318:	4b1e      	ldr	r3, [pc, #120]	@ (8001394 <HAL_UART_MspInit+0x9c>)
  800131a:	69db      	ldr	r3, [r3, #28]
  800131c:	4a1d      	ldr	r2, [pc, #116]	@ (8001394 <HAL_UART_MspInit+0x9c>)
@@ -2080,6 +2154,8 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001328:	f403 3300 	and.w	r3, r3, #131072	@ 0x20000
  800132c:	60fb      	str	r3, [r7, #12]
  800132e:	68fb      	ldr	r3, [r7, #12]
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
  8001330:	4b18      	ldr	r3, [pc, #96]	@ (8001394 <HAL_UART_MspInit+0x9c>)
  8001332:	699b      	ldr	r3, [r3, #24]
  8001334:	4a17      	ldr	r2, [pc, #92]	@ (8001394 <HAL_UART_MspInit+0x9c>)
@@ -2090,32 +2166,55 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001340:	f003 0304 	and.w	r3, r3, #4
  8001344:	60bb      	str	r3, [r7, #8]
  8001346:	68bb      	ldr	r3, [r7, #8]
+    /**USART2 GPIO Configuration
+    PA2     ------> USART2_TX
+    PA3     ------> USART2_RX
+    */
+    GPIO_InitStruct.Pin = GPS_Rx_Pin;
  8001348:	2304      	movs	r3, #4
  800134a:	613b      	str	r3, [r7, #16]
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
  800134c:	2302      	movs	r3, #2
  800134e:	617b      	str	r3, [r7, #20]
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
  8001350:	2303      	movs	r3, #3
  8001352:	61fb      	str	r3, [r7, #28]
+    HAL_GPIO_Init(GPS_Rx_GPIO_Port, &GPIO_InitStruct);
  8001354:	f107 0310 	add.w	r3, r7, #16
  8001358:	4619      	mov	r1, r3
  800135a:	480f      	ldr	r0, [pc, #60]	@ (8001398 <HAL_UART_MspInit+0xa0>)
  800135c:	f000 fb88 	bl	8001a70 <HAL_GPIO_Init>
+
+    GPIO_InitStruct.Pin = GPS_Tx_Pin;
  8001360:	2308      	movs	r3, #8
  8001362:	613b      	str	r3, [r7, #16]
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
  8001364:	2300      	movs	r3, #0
  8001366:	617b      	str	r3, [r7, #20]
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
  8001368:	2300      	movs	r3, #0
  800136a:	61bb      	str	r3, [r7, #24]
+    HAL_GPIO_Init(GPS_Tx_GPIO_Port, &GPIO_InitStruct);
  800136c:	f107 0310 	add.w	r3, r7, #16
  8001370:	4619      	mov	r1, r3
  8001372:	4809      	ldr	r0, [pc, #36]	@ (8001398 <HAL_UART_MspInit+0xa0>)
  8001374:	f000 fb7c 	bl	8001a70 <HAL_GPIO_Init>
+
+    /* USART2 interrupt Init */
+    HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
  8001378:	2200      	movs	r2, #0
  800137a:	2100      	movs	r1, #0
  800137c:	2026      	movs	r0, #38	@ 0x26
  800137e:	f000 fa8e 	bl	800189e <HAL_NVIC_SetPriority>
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
  8001382:	2026      	movs	r0, #38	@ 0x26
  8001384:	f000 faa7 	bl	80018d6 <HAL_NVIC_EnableIRQ>
+
+    /* USER CODE END USART2_MspInit 1 */
+
+  }
+
+}
  8001388:	bf00      	nop
  800138a:	3720      	adds	r7, #32
  800138c:	46bd      	mov	sp, r7
@@ -2125,122 +2224,268 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001398:	40010800 	.word	0x40010800
 
 0800139c <NMI_Handler>:
+/******************************************************************************/
+/**
+  * @brief This function handles Non maskable interrupt.
+  */
+void NMI_Handler(void)
+{
  800139c:	b480      	push	{r7}
  800139e:	af00      	add	r7, sp, #0
+  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+
+  /* USER CODE END NonMaskableInt_IRQn 0 */
+  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+   while (1)
  80013a0:	bf00      	nop
  80013a2:	e7fd      	b.n	80013a0 <NMI_Handler+0x4>
 
 080013a4 <HardFault_Handler>:
+
+/**
+  * @brief This function handles Hard fault interrupt.
+  */
+void HardFault_Handler(void)
+{
  80013a4:	b480      	push	{r7}
  80013a6:	af00      	add	r7, sp, #0
+  /* USER CODE BEGIN HardFault_IRQn 0 */
+
+  /* USER CODE END HardFault_IRQn 0 */
+  while (1)
  80013a8:	bf00      	nop
  80013aa:	e7fd      	b.n	80013a8 <HardFault_Handler+0x4>
 
 080013ac <MemManage_Handler>:
+
+/**
+  * @brief This function handles Memory management fault.
+  */
+void MemManage_Handler(void)
+{
  80013ac:	b480      	push	{r7}
  80013ae:	af00      	add	r7, sp, #0
+  /* USER CODE BEGIN MemoryManagement_IRQn 0 */
+
+  /* USER CODE END MemoryManagement_IRQn 0 */
+  while (1)
  80013b0:	bf00      	nop
  80013b2:	e7fd      	b.n	80013b0 <MemManage_Handler+0x4>
 
 080013b4 <BusFault_Handler>:
+
+/**
+  * @brief This function handles Prefetch fault, memory access fault.
+  */
+void BusFault_Handler(void)
+{
  80013b4:	b480      	push	{r7}
  80013b6:	af00      	add	r7, sp, #0
+  /* USER CODE BEGIN BusFault_IRQn 0 */
+
+  /* USER CODE END BusFault_IRQn 0 */
+  while (1)
  80013b8:	bf00      	nop
  80013ba:	e7fd      	b.n	80013b8 <BusFault_Handler+0x4>
 
 080013bc <UsageFault_Handler>:
+
+/**
+  * @brief This function handles Undefined instruction or illegal state.
+  */
+void UsageFault_Handler(void)
+{
  80013bc:	b480      	push	{r7}
  80013be:	af00      	add	r7, sp, #0
+  /* USER CODE BEGIN UsageFault_IRQn 0 */
+
+  /* USER CODE END UsageFault_IRQn 0 */
+  while (1)
  80013c0:	bf00      	nop
  80013c2:	e7fd      	b.n	80013c0 <UsageFault_Handler+0x4>
 
 080013c4 <SVC_Handler>:
+
+/**
+  * @brief This function handles System service call via SWI instruction.
+  */
+void SVC_Handler(void)
+{
  80013c4:	b480      	push	{r7}
  80013c6:	af00      	add	r7, sp, #0
+
+  /* USER CODE END SVCall_IRQn 0 */
+  /* USER CODE BEGIN SVCall_IRQn 1 */
+
+  /* USER CODE END SVCall_IRQn 1 */
+}
  80013c8:	bf00      	nop
  80013ca:	46bd      	mov	sp, r7
  80013cc:	bc80      	pop	{r7}
  80013ce:	4770      	bx	lr
 
 080013d0 <DebugMon_Handler>:
+
+/**
+  * @brief This function handles Debug monitor.
+  */
+void DebugMon_Handler(void)
+{
  80013d0:	b480      	push	{r7}
  80013d2:	af00      	add	r7, sp, #0
+
+  /* USER CODE END DebugMonitor_IRQn 0 */
+  /* USER CODE BEGIN DebugMonitor_IRQn 1 */
+
+  /* USER CODE END DebugMonitor_IRQn 1 */
+}
  80013d4:	bf00      	nop
  80013d6:	46bd      	mov	sp, r7
  80013d8:	bc80      	pop	{r7}
  80013da:	4770      	bx	lr
 
 080013dc <PendSV_Handler>:
+
+/**
+  * @brief This function handles Pendable request for system service.
+  */
+void PendSV_Handler(void)
+{
  80013dc:	b480      	push	{r7}
  80013de:	af00      	add	r7, sp, #0
+
+  /* USER CODE END PendSV_IRQn 0 */
+  /* USER CODE BEGIN PendSV_IRQn 1 */
+
+  /* USER CODE END PendSV_IRQn 1 */
+}
  80013e0:	bf00      	nop
  80013e2:	46bd      	mov	sp, r7
  80013e4:	bc80      	pop	{r7}
  80013e6:	4770      	bx	lr
 
 080013e8 <SysTick_Handler>:
+
+/**
+  * @brief This function handles System tick timer.
+  */
+void SysTick_Handler(void)
+{
  80013e8:	b580      	push	{r7, lr}
  80013ea:	af00      	add	r7, sp, #0
+  /* USER CODE BEGIN SysTick_IRQn 0 */
+
+  /* USER CODE END SysTick_IRQn 0 */
+  HAL_IncTick();
  80013ec:	f000 f940 	bl	8001670 <HAL_IncTick>
+  /* USER CODE BEGIN SysTick_IRQn 1 */
+
+  /* USER CODE END SysTick_IRQn 1 */
+}
  80013f0:	bf00      	nop
  80013f2:	bd80      	pop	{r7, pc}
 
 080013f4 <USART2_IRQHandler>:
+
+/**
+  * @brief This function handles USART2 global interrupt.
+  */
+void USART2_IRQHandler(void)
+{
  80013f4:	b580      	push	{r7, lr}
  80013f6:	af00      	add	r7, sp, #0
+  /* USER CODE BEGIN USART2_IRQn 0 */
+
+  /* USER CODE END USART2_IRQn 0 */
+  HAL_UART_IRQHandler(&huart2);
  80013f8:	4802      	ldr	r0, [pc, #8]	@ (8001404 <USART2_IRQHandler+0x10>)
  80013fa:	f001 fbdb 	bl	8002bb4 <HAL_UART_IRQHandler>
+  /* USER CODE BEGIN USART2_IRQn 1 */
+
+  /* USER CODE END USART2_IRQn 1 */
+}
  80013fe:	bf00      	nop
  8001400:	bd80      	pop	{r7, pc}
  8001402:	bf00      	nop
  8001404:	20000248 	.word	0x20000248
 
 08001408 <_getpid>:
+void initialise_monitor_handles()
+{
+}
+
+int _getpid(void)
+{
  8001408:	b480      	push	{r7}
  800140a:	af00      	add	r7, sp, #0
+  return 1;
  800140c:	2301      	movs	r3, #1
+}
  800140e:	4618      	mov	r0, r3
  8001410:	46bd      	mov	sp, r7
  8001412:	bc80      	pop	{r7}
  8001414:	4770      	bx	lr
 
 08001416 <_kill>:
+
+int _kill(int pid, int sig)
+{
  8001416:	b580      	push	{r7, lr}
  8001418:	b082      	sub	sp, #8
  800141a:	af00      	add	r7, sp, #0
  800141c:	6078      	str	r0, [r7, #4]
  800141e:	6039      	str	r1, [r7, #0]
+  (void)pid;
+  (void)sig;
+  errno = EINVAL;
  8001420:	f003 fd2a 	bl	8004e78 <__errno>
  8001424:	4603      	mov	r3, r0
  8001426:	2216      	movs	r2, #22
  8001428:	601a      	str	r2, [r3, #0]
+  return -1;
  800142a:	f04f 33ff 	mov.w	r3, #4294967295
+}
  800142e:	4618      	mov	r0, r3
  8001430:	3708      	adds	r7, #8
  8001432:	46bd      	mov	sp, r7
  8001434:	bd80      	pop	{r7, pc}
 
 08001436 <_exit>:
+
+void _exit (int status)
+{
  8001436:	b580      	push	{r7, lr}
  8001438:	b082      	sub	sp, #8
  800143a:	af00      	add	r7, sp, #0
  800143c:	6078      	str	r0, [r7, #4]
+  _kill(status, -1);
  800143e:	f04f 31ff 	mov.w	r1, #4294967295
  8001442:	6878      	ldr	r0, [r7, #4]
  8001444:	f7ff ffe7 	bl	8001416 <_kill>
+  while (1) {}    /* Make sure we hang here */
  8001448:	bf00      	nop
  800144a:	e7fd      	b.n	8001448 <_exit+0x12>
 
 0800144c <_read>:
+}
+
+__attribute__((weak)) int _read(int file, char *ptr, int len)
+{
  800144c:	b580      	push	{r7, lr}
  800144e:	b086      	sub	sp, #24
  8001450:	af00      	add	r7, sp, #0
  8001452:	60f8      	str	r0, [r7, #12]
  8001454:	60b9      	str	r1, [r7, #8]
  8001456:	607a      	str	r2, [r7, #4]
+  (void)file;
+  int DataIdx;
+
+  for (DataIdx = 0; DataIdx < len; DataIdx++)
  8001458:	2300      	movs	r3, #0
  800145a:	617b      	str	r3, [r7, #20]
  800145c:	e00a      	b.n	8001474 <_read+0x28>
+  {
+    *ptr++ = __io_getchar();
  800145e:	f3af 8000 	nop.w
  8001462:	4601      	mov	r1, r0
  8001464:	68bb      	ldr	r3, [r7, #8]
@@ -2248,6 +2493,7 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001468:	60ba      	str	r2, [r7, #8]
  800146a:	b2ca      	uxtb	r2, r1
  800146c:	701a      	strb	r2, [r3, #0]
+  for (DataIdx = 0; DataIdx < len; DataIdx++)
  800146e:	697b      	ldr	r3, [r7, #20]
  8001470:	3301      	adds	r3, #1
  8001472:	617b      	str	r3, [r7, #20]
@@ -2255,28 +2501,42 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001476:	687b      	ldr	r3, [r7, #4]
  8001478:	429a      	cmp	r2, r3
  800147a:	dbf0      	blt.n	800145e <_read+0x12>
+  }
+
+  return len;
  800147c:	687b      	ldr	r3, [r7, #4]
+}
  800147e:	4618      	mov	r0, r3
  8001480:	3718      	adds	r7, #24
  8001482:	46bd      	mov	sp, r7
  8001484:	bd80      	pop	{r7, pc}
 
 08001486 <_write>:
+
+__attribute__((weak)) int _write(int file, char *ptr, int len)
+{
  8001486:	b580      	push	{r7, lr}
  8001488:	b086      	sub	sp, #24
  800148a:	af00      	add	r7, sp, #0
  800148c:	60f8      	str	r0, [r7, #12]
  800148e:	60b9      	str	r1, [r7, #8]
  8001490:	607a      	str	r2, [r7, #4]
+  (void)file;
+  int DataIdx;
+
+  for (DataIdx = 0; DataIdx < len; DataIdx++)
  8001492:	2300      	movs	r3, #0
  8001494:	617b      	str	r3, [r7, #20]
  8001496:	e009      	b.n	80014ac <_write+0x26>
+  {
+    __io_putchar(*ptr++);
  8001498:	68bb      	ldr	r3, [r7, #8]
  800149a:	1c5a      	adds	r2, r3, #1
  800149c:	60ba      	str	r2, [r7, #8]
  800149e:	781b      	ldrb	r3, [r3, #0]
  80014a0:	4618      	mov	r0, r3
  80014a2:	f3af 8000 	nop.w
+  for (DataIdx = 0; DataIdx < len; DataIdx++)
  80014a6:	697b      	ldr	r3, [r7, #20]
  80014a8:	3301      	adds	r3, #1
  80014aa:	617b      	str	r3, [r7, #20]
@@ -2284,18 +2544,27 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  80014ae:	687b      	ldr	r3, [r7, #4]
  80014b0:	429a      	cmp	r2, r3
  80014b2:	dbf1      	blt.n	8001498 <_write+0x12>
+  }
+  return len;
  80014b4:	687b      	ldr	r3, [r7, #4]
+}
  80014b6:	4618      	mov	r0, r3
  80014b8:	3718      	adds	r7, #24
  80014ba:	46bd      	mov	sp, r7
  80014bc:	bd80      	pop	{r7, pc}
 
 080014be <_close>:
+
+int _close(int file)
+{
  80014be:	b480      	push	{r7}
  80014c0:	b083      	sub	sp, #12
  80014c2:	af00      	add	r7, sp, #0
  80014c4:	6078      	str	r0, [r7, #4]
+  (void)file;
+  return -1;
  80014c6:	f04f 33ff 	mov.w	r3, #4294967295
+}
  80014ca:	4618      	mov	r0, r3
  80014cc:	370c      	adds	r7, #12
  80014ce:	46bd      	mov	sp, r7
@@ -2303,15 +2572,23 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  80014d2:	4770      	bx	lr
 
 080014d4 <_fstat>:
+
+
+int _fstat(int file, struct stat *st)
+{
  80014d4:	b480      	push	{r7}
  80014d6:	b083      	sub	sp, #12
  80014d8:	af00      	add	r7, sp, #0
  80014da:	6078      	str	r0, [r7, #4]
  80014dc:	6039      	str	r1, [r7, #0]
+  (void)file;
+  st->st_mode = S_IFCHR;
  80014de:	683b      	ldr	r3, [r7, #0]
  80014e0:	f44f 5200 	mov.w	r2, #8192	@ 0x2000
  80014e4:	605a      	str	r2, [r3, #4]
+  return 0;
  80014e6:	2300      	movs	r3, #0
+}
  80014e8:	4618      	mov	r0, r3
  80014ea:	370c      	adds	r7, #12
  80014ec:	46bd      	mov	sp, r7
@@ -2319,11 +2596,17 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  80014f0:	4770      	bx	lr
 
 080014f2 <_isatty>:
+
+int _isatty(int file)
+{
  80014f2:	b480      	push	{r7}
  80014f4:	b083      	sub	sp, #12
  80014f6:	af00      	add	r7, sp, #0
  80014f8:	6078      	str	r0, [r7, #4]
+  (void)file;
+  return 1;
  80014fa:	2301      	movs	r3, #1
+}
  80014fc:	4618      	mov	r0, r3
  80014fe:	370c      	adds	r7, #12
  8001500:	46bd      	mov	sp, r7
@@ -2331,13 +2614,21 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001504:	4770      	bx	lr
 
 08001506 <_lseek>:
+
+int _lseek(int file, int ptr, int dir)
+{
  8001506:	b480      	push	{r7}
  8001508:	b085      	sub	sp, #20
  800150a:	af00      	add	r7, sp, #0
  800150c:	60f8      	str	r0, [r7, #12]
  800150e:	60b9      	str	r1, [r7, #8]
  8001510:	607a      	str	r2, [r7, #4]
+  (void)file;
+  (void)ptr;
+  (void)dir;
+  return 0;
  8001512:	2300      	movs	r3, #0
+}
  8001514:	4618      	mov	r0, r3
  8001516:	3714      	adds	r7, #20
  8001518:	46bd      	mov	sp, r7
@@ -2346,23 +2637,44 @@ __STATIC_FORCEINLINE void __disable_irq(void)
 	...
 
 08001520 <_sbrk>:
+ *
+ * @param incr Memory size
+ * @return Pointer to allocated memory
+ */
+void *_sbrk(ptrdiff_t incr)
+{
  8001520:	b580      	push	{r7, lr}
  8001522:	b086      	sub	sp, #24
  8001524:	af00      	add	r7, sp, #0
  8001526:	6078      	str	r0, [r7, #4]
+  extern uint8_t _end; /* Symbol defined in the linker script */
+  extern uint8_t _estack; /* Symbol defined in the linker script */
+  extern uint32_t _Min_Stack_Size; /* Symbol defined in the linker script */
+  const uint32_t stack_limit = (uint32_t)&_estack - (uint32_t)&_Min_Stack_Size;
  8001528:	4a14      	ldr	r2, [pc, #80]	@ (800157c <_sbrk+0x5c>)
  800152a:	4b15      	ldr	r3, [pc, #84]	@ (8001580 <_sbrk+0x60>)
  800152c:	1ad3      	subs	r3, r2, r3
  800152e:	617b      	str	r3, [r7, #20]
+  const uint8_t *max_heap = (uint8_t *)stack_limit;
  8001530:	697b      	ldr	r3, [r7, #20]
  8001532:	613b      	str	r3, [r7, #16]
+  uint8_t *prev_heap_end;
+
+  /* Initialize heap end at first call */
+  if (NULL == __sbrk_heap_end)
  8001534:	4b13      	ldr	r3, [pc, #76]	@ (8001584 <_sbrk+0x64>)
  8001536:	681b      	ldr	r3, [r3, #0]
  8001538:	2b00      	cmp	r3, #0
  800153a:	d102      	bne.n	8001542 <_sbrk+0x22>
+  {
+    __sbrk_heap_end = &_end;
  800153c:	4b11      	ldr	r3, [pc, #68]	@ (8001584 <_sbrk+0x64>)
  800153e:	4a12      	ldr	r2, [pc, #72]	@ (8001588 <_sbrk+0x68>)
  8001540:	601a      	str	r2, [r3, #0]
+  }
+
+  /* Protect heap from growing into the reserved MSP stack */
+  if (__sbrk_heap_end + incr > max_heap)
  8001542:	4b10      	ldr	r3, [pc, #64]	@ (8001584 <_sbrk+0x64>)
  8001544:	681a      	ldr	r2, [r3, #0]
  8001546:	687b      	ldr	r3, [r7, #4]
@@ -2370,22 +2682,32 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  800154a:	693a      	ldr	r2, [r7, #16]
  800154c:	429a      	cmp	r2, r3
  800154e:	d207      	bcs.n	8001560 <_sbrk+0x40>
+  {
+    errno = ENOMEM;
  8001550:	f003 fc92 	bl	8004e78 <__errno>
  8001554:	4603      	mov	r3, r0
  8001556:	220c      	movs	r2, #12
  8001558:	601a      	str	r2, [r3, #0]
+    return (void *)-1;
  800155a:	f04f 33ff 	mov.w	r3, #4294967295
  800155e:	e009      	b.n	8001574 <_sbrk+0x54>
+  }
+
+  prev_heap_end = __sbrk_heap_end;
  8001560:	4b08      	ldr	r3, [pc, #32]	@ (8001584 <_sbrk+0x64>)
  8001562:	681b      	ldr	r3, [r3, #0]
  8001564:	60fb      	str	r3, [r7, #12]
+  __sbrk_heap_end += incr;
  8001566:	4b07      	ldr	r3, [pc, #28]	@ (8001584 <_sbrk+0x64>)
  8001568:	681a      	ldr	r2, [r3, #0]
  800156a:	687b      	ldr	r3, [r7, #4]
  800156c:	4413      	add	r3, r2
  800156e:	4a05      	ldr	r2, [pc, #20]	@ (8001584 <_sbrk+0x64>)
  8001570:	6013      	str	r3, [r2, #0]
+
+  return (void *)prev_heap_end;
  8001572:	68fb      	ldr	r3, [r7, #12]
+}
  8001574:	4618      	mov	r0, r3
  8001576:	3718      	adds	r7, #24
  8001578:	46bd      	mov	sp, r7
@@ -2396,8 +2718,20 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8001588:	20000478 	.word	0x20000478
 
 0800158c <SystemInit>:
+  * @note   This function should be used only after reset.
+  * @param  None
+  * @retval None
+  */
+void SystemInit (void)
+{
  800158c:	b480      	push	{r7}
  800158e:	af00      	add	r7, sp, #0
+
+  /* Configure the Vector Table location -------------------------------------*/
+#if defined(USER_VECT_TAB_ADDRESS)
+  SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. */
+#endif /* USER_VECT_TAB_ADDRESS */
+}
  8001590:	bf00      	nop
  8001592:	46bd      	mov	sp, r7
  8001594:	bc80      	pop	{r7}
