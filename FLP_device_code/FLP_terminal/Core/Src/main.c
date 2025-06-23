@@ -302,14 +302,14 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  lora_init();
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  lora_init();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
