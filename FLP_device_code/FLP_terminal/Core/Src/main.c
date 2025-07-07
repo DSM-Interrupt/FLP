@@ -162,7 +162,6 @@ void parse_gps_sentence(char* gps_input) {
     }
 }
 
-
 void lora_send_packet(const char* data) {
     size_t len = strlen(data);
     if (len > 255) len = 255;
@@ -278,6 +277,7 @@ void lora_receive_handler(void) {
     }
 }
 
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -325,6 +325,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  if(HAL_GPIO_ReadPin(GPIOE, find_host_Pin)){
+		  lora_send_packet();
+
+	  }
 
     /* USER CODE BEGIN 3 */
   }
@@ -528,6 +532,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	  printf("fucking error");
   }
   /* USER CODE END Error_Handler_Debug */
 }

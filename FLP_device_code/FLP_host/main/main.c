@@ -32,7 +32,7 @@
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-#define HOST_IP_ADDR "192.168.0.100"
+#define HOST_IP_ADDR "https://flp24.com"
 #define PORT "443"
 #define WIFI_CONNECTED_BIT BIT0
 

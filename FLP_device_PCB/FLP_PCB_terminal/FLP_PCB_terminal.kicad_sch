@@ -14470,7 +14470,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "744028000056"
 			(at 252.73 16.51 0)
 			(effects
 				(font
@@ -21153,7 +21153,7 @@
 				)
 			)
 		)
-		(property "Value" "27pF"
+		(property "Value" "2.2pF"
 			(at 237.49 11.43 90)
 			(effects
 				(font
