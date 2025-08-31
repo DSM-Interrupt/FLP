@@ -32,9 +32,11 @@
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-#define HOST_IP_ADDR "192.168.0.100"
+#define HOST_IP_ADDR "https://flp24.com"
 #define PORT "443"
 #define WIFI_CONNECTED_BIT BIT0
+#define DNS_PORT 53
+#define DNS_MAX_LEN 256
 
 #define PIN_NUM_MISO GPIO_NUM_19
 #define PIN_NUM_MOSI GPIO_NUM_23
@@ -86,6 +88,7 @@ static int rx_danger = 0;
 static bool gps_data_all_receive = false;
 
 static spi_device_handle_t lora_spi;
+static httpd_handle_t server = NULL;
 
 typedef struct TerminalDevice {
     int Code;
@@ -284,7 +287,6 @@ bool device_add(int device_id) {
     return true;
 }
 
-// NMEA에서 DMM(Degree Decimal Minutes)을 DD(Decimal Degrees)로 변환
 double convert_to_decimal_degrees(const char* nmea_coord, char direction) {
     double raw = atof(nmea_coord);
     int degrees = (int)(raw / 100);
@@ -479,11 +481,6 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t e
             break;
 
         case WIFI_EVENT_STA_DISCONNECTED:
-            if (websocket_client != NULL) {
-		        esp_websocket_client_stop(websocket_client);
-		        esp_websocket_client_destroy(websocket_client);
-		        websocket_client = NULL;
-		    }
 		    esp_wifi_connect();
 		    ESP_LOGI(tag_wifi, "STA 연결 끊김. 재연결 시도...");
 		    break;
@@ -538,7 +535,7 @@ void wifi_init_softap_sta(void) {
         },
     };
     strncpy((char *)wifi_ap_config.ap.ssid, (char *)device_ssid, sizeof(wifi_ap_config.ap.ssid));
-    strncpy((char *)wifi_ap_config.ap.password, (char *)device_password, sizeof(wifi_ap_config.ap.password));
+    strncpy((char *)wifi_ap_config.ap.password, (char *)device_password, sizeof(wifi_ap_config.ap.password)); // @suppress("Field cannot be resolved")
 
     if (strlen((char *)wifi_ap_config.ap.password) == 0) {
         wifi_ap_config.ap.authmode = WIFI_AUTH_OPEN;
@@ -591,82 +588,75 @@ void save_basic_info() {
 }
 
 
-static esp_err_t root_get_handler(httpd_req_t *req) {
-    wifi_config_t sta_config;
-    wifi_config_t ap_config;
+static void dns_server_task(void *pvParameters) {
+    uint8_t buffer[DNS_MAX_LEN];
+    struct sockaddr_in client_addr;
+    socklen_t client_addr_len = sizeof(client_addr);
+    struct sockaddr_in server_addr;
 
-    esp_wifi_get_config(WIFI_IF_STA, &sta_config);
-    esp_wifi_get_config(WIFI_IF_AP, &ap_config);
+    int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+    if (sock < 0) {
+        ESP_LOGE("DNS", "Socket 생성 실패");
+        vTaskDelete(NULL);
+    }
 
-    char html_buffer[4096];
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+    server_addr.sin_port = htons(DNS_PORT);
 
-    const char *html_template = "<!DOCTYPE html>"
-    "<html><body><head></head>"
-    "<fieldset><legend>Host Info</legend>"
-    "<table border=\"1px\" style=\"border-collapse: collapse; background-color: #e0e0e0\">"
-    "<tr><th>category</th><th>data</th></tr>"
-    "<tr><td>Connecting SSID</td><td>%s</td></tr>"
-    "<tr><td>Connecting Password</td><td>%s</td></tr>"
-    "<tr><td>Device SSID</td><td>%s</td></tr>"
-    "<tr><td>Device Password</td><td>%s</td></tr>"
-    "<tr><td>Current Connecting Device</td><td>%d client(s)</td></tr>"
-    "<tr><td>Status Connection Server</td><td>%s</td></tr>"
-    "<tr><td>Device Status</td><td>%s</td></tr>"
-    "</table></fieldset>"
-    "<form method=\"post\" action=\"/submit\">"
-    "<fieldset><legend>Wifi SSID/Password change</legend>"
-    "<p>SSID : <input name=\"SSID\" type=\"text\" /></p>"
-    "<p>Password : <input name=\"Wifipass\" type=\"text\" /></p>"
-    "<button type=\"submit\">submit</button></fieldset></form>"
-    "<form method=\"post\" action=\"/submit\">"
-    "<fieldset><legend>Device SSID/Password change</legend>"
-    "<p>SSID : <input name=\"Device_SSID\" type=\"text\" /></p>"
-    "<p>Password : <input name=\"Device_Wifipass\" type=\"text\" /></p>"
-    "<button type=\"submit\">submit</button></fieldset></form>"
-    "</body></html>";
+    if (bind(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        ESP_LOGE("DNS", "Bind 실패");
+        close(sock);
+        vTaskDelete(NULL);
+    }
 
-    wifi_sta_list_t sta_list;
-    esp_wifi_ap_get_sta_list(&sta_list);
-    
-    const char *server_status;
+    ESP_LOGI("DNS", "DNS 서버가 시작되었습니다.");
 
-    if (esp_websocket_client_is_connected(websocket_client)) {
-	    server_status = "Connected";
-	} else {
-	    server_status = "Disconnected";
-	}
-    char *device_status = (char*)malloc(device_count * 12 + 1);
+    while (1) {
+        int len = recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr *)&client_addr, &client_addr_len);
+        if (len > 0) {
+            // DNS 응답 헤더 설정
+            buffer[2] |= 0x80;
+            buffer[2] |= 0x04;
+            buffer[3] |= 0x80;
 
-	for (int i = 0; i < device_count; i++) {
-	    char temp[11];
-	    sprintf(temp, "%d", device_list[i]);
-	
-	    for (int j = 0; j < 10; j++) {
-	        device_status[i * 12 + j] = temp[j];
-	    }
-	
-	    device_status[i * 12 + 10] = ',';
-	    device_status[i * 12 + 11] = ' ';
-	}
+            // esp_netif API를 사용하여 AP의 IP 정보 가져오기
+            esp_netif_t *ap_netif = esp_netif_get_handle_from_ifkey("WIFI_AP_DEF");
+            esp_netif_ip_info_t ip_info;
+            esp_netif_get_ip_info(ap_netif, &ip_info);
 
-	device_status[device_count * 12 - 2] = '\0';
+            // DNS 응답 레코드 생성
+            uint8_t *dns_response = buffer + len;
+            *dns_response++ = 0xC0;
+            *dns_response++ = 0x0C;
+            *dns_response++ = 0x00;
+            *dns_response++ = 0x01; // 타입 A
+            *dns_response++ = 0x00;
+            *dns_response++ = 0x01; // 클래스 IN
+            *dns_response++ = 0x00;
+            *dns_response++ = 0x00;
+            *dns_response++ = 0x00;
+            *dns_response++ = 0x78; // TTL
+            *dns_response++ = 0x00;
+            *dns_response++ = 0x04; // 데이터 길이
 
-    snprintf(html_buffer, sizeof(html_buffer), html_template,
-        (char *)sta_config.sta.ssid,
-        (char *)sta_config.sta.password,
-        (char *)ap_config.ap.ssid,
-        (char *)ap_config.ap.password,
-        sta_list.num,
-        server_status,
-        device_status
-    );
+            // IP 주소 추가
+            uint32_t ip_addr = ip_info.ip.addr;
+            *dns_response++ = (uint8_t)(ip_addr >> 0);
+            *dns_response++ = (uint8_t)(ip_addr >> 8);
+            *dns_response++ = (uint8_t)(ip_addr >> 16);
+            *dns_response++ = (uint8_t)(ip_addr >> 24);
 
-    httpd_resp_set_type(req, "text/html");
-    httpd_resp_send(req, html_buffer, HTTPD_RESP_USE_STRLEN);
-    free(device_status);
-    return ESP_OK;
+            len += 16;
+            sendto(sock, buffer, len, 0, (struct sockaddr *)&client_addr, client_addr_len);
+        }
+    }
+    close(sock);
+    vTaskDelete(NULL);
 }
 
+
+// POST 요청을 처리하는 핸들러 (기존과 동일)
 static esp_err_t submit_post_handler(httpd_req_t *req) {
     char buf[256];
     int ret, remaining = req->content_len;
@@ -683,78 +673,184 @@ static esp_err_t submit_post_handler(httpd_req_t *req) {
         remaining -= ret;
         buf[ret] = '\0';
 
-        ESP_LOGI(tag_softap, "POST Body: %s", buf);
-
         char *ssid_ptr = strstr(buf, "SSID=");
-        if (ssid_ptr) {
-            sscanf(ssid_ptr + 5, "%31[^&]", sta_ssid_input);
-        }
+        if (ssid_ptr) sscanf(ssid_ptr + 5, "%31[^&]", sta_ssid_input);
 
         char *pass_ptr = strstr(buf, "Wifipass=");
-        if (pass_ptr) {
-            sscanf(pass_ptr + 9, "%63[^&]", sta_pass_input);
-        }
+        if (pass_ptr) sscanf(pass_ptr + 9, "%63[^&]", sta_pass_input);
 
         char *ap_ssid_ptr = strstr(buf, "Device_SSID=");
-        if (ap_ssid_ptr) {
-            sscanf(ap_ssid_ptr + 12, "%31[^&]", ap_ssid_input);
-        }
+        if (ap_ssid_ptr) sscanf(ap_ssid_ptr + 12, "%31[^&]", ap_ssid_input);
 
         char *ap_pass_ptr = strstr(buf, "Device_Wifipass=");
-        if (ap_pass_ptr) {
-            sscanf(ap_pass_ptr + 17, "%63[^&]", ap_pass_input);
-        }
+        if (ap_pass_ptr) sscanf(ap_pass_ptr + 17, "%63[^&]", ap_pass_input);
     }
 
-    if (strlen(sta_ssid_input) > 0 && strlen(sta_pass_input) > 0) {
+    if (strlen(sta_ssid_input) > 0) { // 비밀번호는 비어있을 수 있음
         strncpy(wifi_ssid, sta_ssid_input, sizeof(wifi_ssid));
         strncpy(wifi_password, sta_pass_input, sizeof(wifi_password));
     }
 
-    if (strlen(ap_ssid_input) > 0 && strlen(ap_pass_input) > 0) {
+    if (strlen(ap_ssid_input) > 0) { // 비밀번호는 비어있을 수 있음
         strncpy(device_ssid, ap_ssid_input, sizeof(device_ssid));
         strncpy(device_password, ap_pass_input, sizeof(device_password));
     }
 
+    // 변경된 정보를 NVS에 저장
+    save_basic_info();
+
+    // Wi-Fi 재설정 및 재연결 로직
+    ESP_LOGI(tag_wifi, "Wi-Fi settings updated. Restarting Wi-Fi...");
     esp_wifi_disconnect();
 
-    wifi_config_t wifi_sta_config = {
-        .sta = {
-            .threshold.authmode = WIFI_AUTH_WPA2_PSK,
-        },
-    };
+    wifi_config_t wifi_sta_config = { .sta = { .threshold.authmode = WIFI_AUTH_WPA2_PSK }};
     strncpy((char *)wifi_sta_config.sta.ssid, wifi_ssid, sizeof(wifi_sta_config.sta.ssid));
     strncpy((char *)wifi_sta_config.sta.password, wifi_password, sizeof(wifi_sta_config.sta.password));
-
     esp_wifi_set_config(WIFI_IF_STA, &wifi_sta_config);
-    esp_wifi_connect();
 
-    wifi_config_t wifi_ap_config = {
-        .ap = {
-            .ssid_len = sizeof(wifi_ap_config.ap.password),
-            .max_connection = 4,
-            .authmode = WIFI_AUTH_WPA_WPA2_PSK
-        },
-    };
+    wifi_config_t wifi_ap_config = { .ap = { .max_connection = 4, .authmode = WIFI_AUTH_WPA_WPA2_PSK }};
     strncpy((char *)wifi_ap_config.ap.ssid, device_ssid, sizeof(wifi_ap_config.ap.ssid));
     strncpy((char *)wifi_ap_config.ap.password, device_password, sizeof(wifi_ap_config.ap.password));
-
     if (strlen((char *)wifi_ap_config.ap.password) == 0) {
         wifi_ap_config.ap.authmode = WIFI_AUTH_OPEN;
     }
-
     esp_wifi_set_config(WIFI_IF_AP, &wifi_ap_config);
 
-    ESP_LOGI(tag_wifi, "Wi-Fi settings updated and reconnected.");
+    esp_wifi_connect();
 
-    save_basic_info();
-
-    httpd_resp_send(req, "<h2>SSID and Password Updated!</h2><a href='/'>Go back</a>", HTTPD_RESP_USE_STRLEN);
-
-    ESP_LOGI(tag_wifi, "Updated SSID: %s, Password: %s", wifi_ssid, wifi_password);
-    ESP_LOGI(tag_wifi, "Updated Device SSID: %s, Password: %s", device_ssid, device_password);
+    // 사용자에게 성공 메시지 표시
+    const char* resp_str = "<h2>Settings Updated!</h2><p>The device will now connect to the new network. You may need to reconnect to this device's Wi-Fi if you changed its settings.</p>";
+    httpd_resp_send(req, resp_str, HTTPD_RESP_USE_STRLEN);
 
     return ESP_OK;
+}
+
+// 캡티브 포털의 메인 페이지를 보여주는 핸들러
+static esp_err_t captive_portal_get_handler(httpd_req_t *req) {
+    // 여기에 기존의 HTML 페이지 생성 로직을 넣습니다.
+    // (root_get_handler의 내용을 그대로 가져옵니다)
+    wifi_config_t sta_config;
+    wifi_config_t ap_config;
+
+    esp_wifi_get_config(WIFI_IF_STA, &sta_config);
+    esp_wifi_get_config(WIFI_IF_AP, &ap_config);
+
+    // html_template는 이전에 개선한 버전의 문자열을 사용
+    const char *html_template =
+            "<!DOCTYPE html>"
+            "<html>"
+            "<head>"
+            "    <title>Host Information</title>"
+            "    <meta http-equiv=\"refresh\" content=\"5\">"
+            "    <style>"
+            "        body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }"
+            "        fieldset { border: 1px solid #ccc; border-radius: 8px; margin-bottom: 20px; padding: 20px; background-color: #fff; }"
+            "        legend { font-weight: bold; font-size: 1.2em; color: #333; }"
+            "        table { border-collapse: collapse; background-color: #e0e0e0; width: 100%; }"
+            "        th, td { border: 1px solid #999; padding: 8px; text-align: left; }"
+            "        th { background-color: #d0d0d0; }"
+            "        input[type=\"text\"] { width: calc(100% - 20px); padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }"
+            "        button { padding: 10px 15px; border: none; background-color: #007bff; color: white; border-radius: 4px; cursor: pointer; }"
+            "        button:hover { background-color: #0056b3; }"
+            "    </style>"
+            "</head>"
+            "<body>"
+            "    <fieldset>"
+            "        <legend>Host Info</legend>"
+            "        <table>"
+            "            <tr><th>Category</th><th>Data</th></tr>"
+            "            <tr><td>Connecting SSID</td><td>%s</td></tr>"
+            "            <tr><td>Connecting Password</td><td>%s</td></tr>"
+            "            <tr><td>Device SSID</td><td>%s</td></tr>"
+            "            <tr><td>Device Password</td><td>%s</td></tr>"
+            "            <tr><td>Current Connecting Device</td><td>%d client(s)</td></tr>"
+            "            <tr><td>Status Connection Server</td><td>%s</td></tr>"
+            "            <tr><td>Device Status</td><td>%s</td></tr>"
+            "        </table>"
+            "    </fieldset>"
+            "    <form method=\"post\" action=\"/submit\">"
+            "        <fieldset>"
+            "            <legend>Wifi SSID/Password Change</legend>"
+            "            <p>SSID: <input name=\"SSID\" type=\"text\" /></p>"
+            "            <p>Password: <input name=\"Wifipass\" type=\"text\" /></p>"
+            "            <button type=\"submit\">Submit</button>"
+            "        </fieldset>"
+            "    </form>"
+            "    <form method=\"post\" action=\"/submit\">"
+            "        <fieldset>"
+            "            <legend>Device SSID/Password Change</legend>"
+            "            <p>SSID: <input name=\"Device_SSID\" type=\"text\" /></p>"
+            "            <p>Password: <input name=\"Device_Wifipass\" type=\"text\" /></p>"
+            "            <button type=\"submit\">Submit</button>"
+            "        </fieldset>"
+            "    </form>"
+            "</body>"
+            "</html>";
+
+    char html_buffer[4096];
+
+    wifi_sta_list_t sta_list;
+    esp_wifi_ap_get_sta_list(&sta_list);
+
+    const char *server_status = esp_websocket_client_is_connected(websocket_client) ? "Connected" : "Disconnected";
+
+    char device_status_str[MAX_DEVICE_CNT * 12] = "No devices registered";
+    if (device_count > 0) {
+    	char temp_str[256] = {0};
+		for (int i = 0; i < device_count; i++) {
+			char id_str[12];
+			sprintf(id_str, "%d, ", device_list[i]);
+			strcat(temp_str, id_str);
+		}
+		// 마지막 쉼표와 공백 제거
+		temp_str[strlen(temp_str) - 2] = '\0';
+		strcpy(device_status_str, temp_str);
+    }
+
+    snprintf(html_buffer, sizeof(html_buffer), html_template,
+        (char *)sta_config.sta.ssid, (char *)sta_config.sta.password,
+        (char *)ap_config.ap.ssid, (char *)ap_config.ap.password,
+        sta_list.num, server_status, device_status_str
+    );
+
+    httpd_resp_set_type(req, "text/html");
+    httpd_resp_send(req, html_buffer, HTTPD_RESP_USE_STRLEN);
+
+    return ESP_OK;
+}
+
+// 웹 서버 시작 함수 (캡티브 포털용으로 수정)
+void start_webserver(void) {
+    if (server != NULL) {
+        return; // 이미 실행 중이면 아무것도 하지 않음
+    }
+
+    httpd_config_t config = HTTPD_DEFAULT_CONFIG();
+    // URI 매칭이 없을 때 모든 요청을 처리할 핸들러 등록
+    config.uri_match_fn = httpd_uri_match_wildcard;
+
+    ESP_LOGI(tag_softap, "Starting webserver for captive portal");
+    if (httpd_start(&server, &config) == ESP_OK) {
+        // POST 요청을 처리할 URI
+        httpd_uri_t submit_uri = {
+            .uri       = "/submit",
+            .method    = HTTP_POST,
+            .handler   = submit_post_handler,
+            .user_ctx  = NULL
+        };
+        httpd_register_uri_handler(server, &submit_uri);
+
+        // 그 외 모든 GET 요청을 처리할 URI (와일드카드 사용)
+        httpd_uri_t captive_portal_uri = {
+            .uri       = "/*", // 모든 경로를 의미
+            .method    = HTTP_GET,
+            .handler   = captive_portal_get_handler,
+            .user_ctx  = NULL
+        };
+        httpd_register_uri_handler(server, &captive_portal_uri);
+    } else {
+        ESP_LOGE(tag_softap, "Failed to start webserver");
+    }
 }
 
 
@@ -830,79 +926,105 @@ static void websocket_event_handler(void *handler_args, esp_event_base_t base,
 void wss_client_task(void *pv_parameters) {
     esp_websocket_client_config_t websocket_cfg = {
         .uri = "wss://" HOST_IP_ADDR ":" PORT "/",
+        .network_timeout_ms = 10000,
     };
-
+    esp_websocket_client_handle_t client = esp_websocket_client_init(&websocket_cfg);
+    esp_websocket_register_events(client, WEBSOCKET_EVENT_ANY, websocket_event_handler, (void *)client);
     while (1) {
-        if (websocket_client == NULL) {
-            websocket_client = esp_websocket_client_init(&websocket_cfg);
-            esp_websocket_register_events(websocket_client, WEBSOCKET_EVENT_ANY, websocket_event_handler, (void *)websocket_client);
-            esp_websocket_client_start(websocket_client);
 
-            while (!esp_websocket_client_is_connected(websocket_client)) {
-                vTaskDelay(pdMS_TO_TICKS(100));
-            }
-        }
+        if (esp_websocket_client_is_connected(client)) {
 
-        if (gps_data_all_receive) {
-            char *json_payload = make_json_payload();
-            if (json_payload != NULL) {
-                if (esp_websocket_client_send_text(websocket_client, json_payload, strlen(json_payload), portMAX_DELAY) > 0) {
-                    ESP_LOGI(tag_wss, "Sent JSON payload");
-                } else {
-                    ESP_LOGE(tag_wss, "Failed to send payload");
-                    esp_websocket_client_stop(websocket_client);
-                    esp_websocket_client_destroy(websocket_client);
-                    websocket_client = NULL;
+            if (gps_data_all_receive) {
+                char *json_payload = make_json_payload();
+                if (json_payload != NULL) {
+                    ESP_LOGI(tag_wss, "Attempting to send JSON payload...");
+                    int ret = esp_websocket_client_send_text(client, json_payload, strlen(json_payload), portMAX_DELAY);
+                    if (ret > 0) {
+                        ESP_LOGI(tag_wss, "Sent JSON payload successfully");
+                    } else {
+                        ESP_LOGE(tag_wss, "Failed to send payload, error code: %d", ret);
+                    }
+                    free(json_payload);
                 }
-                free(json_payload);
+                gps_data_all_receive = false;
             }
-            gps_data_all_receive = false;
         }
 
-        if (!esp_websocket_client_is_connected(websocket_client)) {
-            esp_websocket_client_stop(websocket_client);
-            esp_websocket_client_destroy(websocket_client);
-            websocket_client = NULL;
+        else {
+            EventBits_t bits = xEventGroupGetBits(wifi_event_group);
+            if (bits & WIFI_CONNECTED_BIT) {
+                ESP_LOGI(tag_wss, "WebSocket disconnected. Attempting to reconnect...");
+                esp_websocket_client_start(client); // 재연결 시도
+            } else {
+                ESP_LOGW(tag_wss, "Wi-Fi not connected. Waiting for Wi-Fi connection...");
+            }
+            vTaskDelay(pdMS_TO_TICKS(5000));
         }
 
+        // 루프 주기
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
-    esp_websocket_client_stop(websocket_client);
-    esp_websocket_client_destroy(websocket_client);
+    // 실제로는 도달하지 않지만, 만약을 위한 정리 코드
+    esp_websocket_client_stop(client);
+    esp_websocket_client_destroy(client);
     vTaskDelete(NULL);
 }
 
 void lora_host_task(void *pv_parameters) {
+    const TickType_t timeout_ticks = pdMS_TO_TICKS(5000);
+
     for (int i = 0; i < device_count; i++) {
         TerminalDevice *new_device = malloc(sizeof(TerminalDevice));
         if (new_device) {
             new_device->Code = device_list[i];
+            new_device->Danger = 0; // 위험도 초기화
             device_info[i] = new_device;
         }
     }
 
     while (1) {
         for (int i = 0; i < device_count; i++) {
+            if (device_info[i] == NULL) continue;
+
             char gps_request_msg[33];
-            snprintf(gps_request_msg, sizeof(gps_request_msg), "%u,%u,%u,", device_info[i]->Code, my_id_int, device_info[i]->Danger);
-            strcat(gps_request_msg, "getgps");
+            snprintf(gps_request_msg, sizeof(gps_request_msg), "%u,%u,%u,getgps", device_info[i]->Code, my_id_int, device_info[i]->Danger);
             lora_send_packet(gps_request_msg);
+            ESP_LOGI("LORA_HOST", "Sent to %d: %s", device_info[i]->Code, gps_request_msg);
+
+            TickType_t start_time = xTaskGetTickCount();
+            bool received = false;
 
             char buf[LORA_MAX_PACKET_SIZE];
             int packet_len = 0;
-            while (1) {
+
+            while ((xTaskGetTickCount() - start_time) < timeout_ticks) {
                 packet_len = lora_receive_packet(buf);
-                if (packet_len > 0 && strstr(buf, my_id_char)) {
-                    split(buf, device_info[i]);
-                    break;
+                if (packet_len > 0) {
+                    if (strstr(buf, my_id_char) != NULL) {
+                        if (split(buf, device_info[i])) {
+                            ESP_LOGI("LORA_HOST", "Received from %d: %s", device_info[i]->Code, buf);
+                            received = true;
+                            break;
+                        }
+                    }
                 }
+                vTaskDelay(pdMS_TO_TICKS(10));
+            }
+
+            if (!received) {
+                ESP_LOGW("LORA_HOST", "Timeout waiting for response from device %d", device_info[i]->Code);
             }
         }
 
         gps_data_all_receive = true;
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
-
+    for (int i = 0; i < device_count; i++) {
+        if (device_info[i] != NULL) {
+            free(device_info[i]);
+        }
+    }
     vTaskDelete(NULL);
 }
 
@@ -948,25 +1070,62 @@ void app_main(void) {
 
     xTaskCreatePinnedToCore(wss_client_task, "wss_client", 8192, NULL, 5, NULL, 1); 
     xTaskCreatePinnedToCore(lora_host_task, "lora_host", 4096, NULL, 5, NULL, 1);    
-    xTaskCreatePinnedToCore(gps_task, "gps_task", 4096, NULL, 10, NULL, 1);          
+    xTaskCreatePinnedToCore(gps_task, "gps_task", 4096, NULL, 10, NULL, 1);
+    xTaskCreatePinnedToCore(dns_server_task, "dns_server", 4096, NULL, 5, NULL);
 
-    while (1) {
-        if (gpio_get_level(CTRL) == 1 && gpio_get_level(FIND_HOST) == 1) {
-            char buf[LORA_MAX_PACKET_SIZE];
-            int packet_len;
+	while (1) {
+		// CTRL과 FIND_HOST 버튼이 동시에 눌렸을 때만 등록 모드 진입
+		if (gpio_get_level(CTRL) == 1 && gpio_get_level(FIND_HOST) == 1) {
+			ESP_LOGI("HOST_MODE", "Entering device registration mode for 10 seconds...");
 
-            while (1) {
-                memset(buf, 0, sizeof(buf));
-                packet_len = lora_receive_packet(buf);
+			// 타임아웃 설정 (10000ms = 10초)
+			const TickType_t registration_timeout_ticks = pdMS_TO_TICKS(10000);
+			TickType_t start_time = xTaskGetTickCount();
 
-                if (packet_len > 0 && strstr(buf, "FINDHOST") != NULL) {
-                    char temp[10] = {0};
-                    strncpy(temp, buf, sizeof(temp) - 1);
-                    device_add(atoi(temp));
-                    break;
-                }
-            }
-        }
-    }
+			char buf[LORA_MAX_PACKET_SIZE];
+			int packet_len;
+
+			// 10초 동안만 "FINDHOST" 패킷을 기다림
+			while ((xTaskGetTickCount() - start_time) < registration_timeout_ticks) {
+				memset(buf, 0, sizeof(buf));
+				packet_len = lora_receive_packet(buf);
+
+				if (packet_len > 0 && strstr(buf, "FINDHOST") != NULL) {
+					int add_id;
+					char *token;
+
+					// "FINDHOST"가 포함된 패킷 파싱
+					strtok(buf, ",");
+					token = strtok(NULL, ",");
+
+					if (token != NULL) {
+						add_id = atoi(token);
+						ESP_LOGI("HOST_MODE", "Received registration request from ID: %d", add_id);
+
+						if (device_add(add_id)) {
+							 ESP_LOGI("HOST_MODE", "Device %d added successfully", add_id);
+							 // 등록 성공 시 lora_host_task 재시작 또는 동적 업데이트 필요
+						} else {
+							// 실패 메시지 전송 (필요 시)
+							char fail_msg[32];
+							snprintf(fail_msg, sizeof(fail_msg), "%d,host_set_fail", my_id_int);
+							lora_send_packet(fail_msg);
+							ESP_LOGW("HOST_MODE", "Device add failed for ID: %d", add_id);
+						}
+					} else {
+						ESP_LOGW("HOST_MODE", "Invalid FINDHOST packet: missing ID");
+					}
+
+					// 하나의 장치를 처리한 후 등록 모드를 빠져나옴
+					break;
+				}
+				vTaskDelay(pdMS_TO_TICKS(10)); // CPU 부담 감소
+			}
+			ESP_LOGI("HOST_MODE", "Exiting device registration mode.");
+		}
+
+		// 메인 루프는 다른 작업을 방해하지 않도록 주기적으로 딜레이를 가짐
+		vTaskDelay(pdMS_TO_TICKS(100));
+	}
 }
 
