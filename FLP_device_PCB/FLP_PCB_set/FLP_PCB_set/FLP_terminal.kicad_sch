@@ -1,0 +1,224 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "d400af6c-f61d-4f8b-872f-1b152a1320ea")
+	(paper "A4")
+	(lib_symbols)
+	(wire
+		(pts
+			(xy 74.93 27.94) (xy 82.55 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59906643-f195-4454-adce-9f5a647464ef")
+	)
+	(wire
+		(pts
+			(xy 74.93 30.48) (xy 82.55 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a446fb6-9268-4665-a99f-1f484c4fc4d5")
+	)
+	(sheet
+		(at 124.46 33.02)
+		(size 24.13 19.05)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "0ae67f6e-4f17-4cbc-bbf5-63c02f98d1d0")
+		(property "Sheetname" "STM32"
+			(at 124.46 32.3084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "STM32.kicad_sch"
+			(at 124.46 52.6546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "FLP_PCB_set"
+				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 54.61 24.13)
+		(size 20.32 16.51)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "2508fd1a-b460-4e54-ae43-854b285e1d14")
+		(property "Sheetname" "USB_CC"
+			(at 54.61 23.4184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "USB_CC.kicad_sch"
+			(at 54.61 41.2246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "CC_1" output
+			(at 74.93 27.94 0)
+			(uuid "46d03252-ef63-4280-90af-f4a6f00dce7c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "CC_2" output
+			(at 74.93 30.48 0)
+			(uuid "5aa516ba-054e-4d08-b03a-ed82e0a903c6")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "FLP_PCB_set"
+				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 82.55 24.13)
+		(size 21.59 16.51)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a453b314-1f32-488d-baa1-e2b591ed45a3")
+		(property "Sheetname" "UART_USB"
+			(at 82.55 23.4184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "USB.kicad_sch"
+			(at 82.55 41.2246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3.3V_USB" input
+			(at 104.14 26.67 0)
+			(uuid "30339ed6-8d70-4542-b510-7d05c2594406")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "CC_1" input
+			(at 82.55 27.94 180)
+			(uuid "3f72b571-52cd-44f4-9155-1653175cc6fa")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "CC_2" input
+			(at 82.55 30.48 180)
+			(uuid "06425a61-782c-4e1f-815a-ee107e49da6a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "D+" input
+			(at 104.14 34.29 0)
+			(uuid "5b375cda-6c86-4f11-9ad4-1495520197ca")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "D-" input
+			(at 104.14 36.83 0)
+			(uuid "14c799bf-4eac-4f00-8abf-4a286a085045")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "FLP_PCB_set"
+				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97"
+					(page "4")
+				)
+			)
+		)
+	)
+)
