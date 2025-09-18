@@ -631,6 +631,30 @@
     [
       "0ae67f6e-4f17-4cbc-bbf5-63c02f98d1d0",
       "STM32"
+    ],
+    [
+      "ada91f11-1394-4bbf-b7f9-c4d19c7b4248",
+      "Voltage_convert"
+    ],
+    [
+      "b5817f9e-7fce-4188-85e5-575d86700cf4",
+      "Bat"
+    ],
+    [
+      "d0f0a116-a95e-4434-aa99-e51c1538bd1a",
+      "GPS"
+    ],
+    [
+      "3eba69d0-8bea-4ef4-86fc-54dd02157b88",
+      "LoRa"
+    ],
+    [
+      "9fc78345-966a-44a3-b601-cea51d8ab616",
+      "USB_to_UART"
+    ],
+    [
+      "93f579ec-9a41-4198-b2c4-9a4e8cc596ea",
+      "BOOT_Mode"
     ]
   ],
   "text_variables": {}
