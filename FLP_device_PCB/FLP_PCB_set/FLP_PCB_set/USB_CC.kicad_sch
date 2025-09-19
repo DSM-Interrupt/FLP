@@ -339,7 +339,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "286214a6-c42f-4c8f-8eea-0957cbbf6432")
-		(property "Reference" "R17"
+		(property "Reference" "R20"
 			(at 24.13 29.2099 0)
 			(effects
 				(font
@@ -348,7 +348,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5K"
+		(property "Value" "5.1K"
 			(at 24.13 31.7499 0)
 			(effects
 				(font
@@ -393,7 +393,7 @@
 		(instances
 			(project ""
 				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97/2508fd1a-b460-4e54-ae43-854b285e1d14"
-					(reference "R17")
+					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -409,7 +409,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ab8d3926-9c6f-4bc6-8505-012b298d2d43")
-		(property "Reference" "#PWR032"
+		(property "Reference" "#PWR031"
 			(at 21.59 44.45 0)
 			(effects
 				(font
@@ -459,7 +459,7 @@
 		(instances
 			(project ""
 				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97/2508fd1a-b460-4e54-ae43-854b285e1d14"
-					(reference "#PWR032")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -474,8 +474,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "f5125f66-d12f-4438-9a29-a36f1d0119ed")
-		(property "Reference" "R18"
+		(uuid "d7a4949b-5918-4ff8-a8e4-f1aac17444ca")
+		(property "Reference" "R21"
 			(at 33.02 29.2099 0)
 			(effects
 				(font
@@ -484,7 +484,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5K"
+		(property "Value" "5.1K"
 			(at 33.02 31.7499 0)
 			(effects
 				(font
@@ -521,15 +521,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "b7fc1e00-ff66-48ac-b5cb-ef08f1b48cfb")
+			(uuid "5a9213af-4d9b-4ef6-840e-47ce84cd25cc")
 		)
 		(pin "2"
-			(uuid "605f3aec-996e-4597-88da-5dcd0ca119cc")
+			(uuid "3406051e-7b2b-4508-8029-2fe84d65e8a3")
 		)
 		(instances
 			(project "FLP_PCB_set"
 				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97/2508fd1a-b460-4e54-ae43-854b285e1d14"
-					(reference "R18")
+					(reference "R21")
 					(unit 1)
 				)
 			)

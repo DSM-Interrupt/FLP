@@ -9638,7 +9638,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 106.68) (xy 87.63 107.95)
+			(xy 90.17 106.68) (xy 87.63 107.95)
 		)
 		(stroke
 			(width 0)
@@ -11458,6 +11458,16 @@
 	)
 	(wire
 		(pts
+			(xy 90.17 97.79) (xy 88.9 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a91b19c9-6d93-445f-8ba4-ba3c22d6c4eb")
+	)
+	(wire
+		(pts
 			(xy 121.92 73.66) (xy 140.97 73.66)
 		)
 		(stroke
@@ -11868,6 +11878,16 @@
 	)
 	(wire
 		(pts
+			(xy 88.9 97.79) (xy 88.9 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c81a466b-83b9-4845-ac25-83863e885ef8")
+	)
+	(wire
+		(pts
 			(xy 19.05 91.44) (xy 25.4 97.79)
 		)
 		(stroke
@@ -12068,7 +12088,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 95.25) (xy 88.9 99.06)
+			(xy 90.17 97.79) (xy 90.17 99.06)
 		)
 		(stroke
 			(width 0)
@@ -14835,7 +14855,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 88.9 102.87 0)
+		(at 90.17 102.87 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14844,7 +14864,7 @@
 		(fields_autoplaced yes)
 		(uuid "20d15aa4-efa2-4548-b2ce-ae1a105bcd88")
 		(property "Reference" "R5"
-			(at 91.44 101.5999 0)
+			(at 92.71 101.5999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14853,7 +14873,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 91.44 104.1399 0)
+			(at 92.71 104.1399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14862,7 +14882,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 87.122 102.87 90)
+			(at 88.392 102.87 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14871,7 +14891,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 88.9 102.87 0)
+			(at 90.17 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14880,7 +14900,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 88.9 102.87 0)
+			(at 90.17 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
