@@ -1246,7 +1246,7 @@
 				)
 			)
 		)
-		(property "Value" "USB_ON"
+		(property "Value" "150080GS75000"
 			(at 84.7725 63.5 0)
 			(effects
 				(font

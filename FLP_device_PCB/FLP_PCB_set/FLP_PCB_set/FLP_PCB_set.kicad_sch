@@ -48,6 +48,48 @@
 		)
 	)
 	(sheet
+		(at 85.09 132.08)
+		(size 25.4 19.05)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6bba06f4-66da-4570-88eb-43d1082ec0eb")
+		(property "Sheetname" "FLP_terminal"
+			(at 85.09 131.3684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "FLP_terminal.kicad_sch"
+			(at 85.09 151.7146 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "FLP_PCB_set"
+				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52"
+					(page "13")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 124.46 133.35)
 		(size 24.13 20.32)
 		(exclude_from_sim no)
@@ -63,7 +105,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "cb21122d-83f9-4f10-9012-eb16f816aa97")
-		(property "Sheetname" "FLP_terminal"
+		(property "Sheetname" "FLP_terminal_temp"
 			(at 124.46 132.6384 0)
 			(effects
 				(font
@@ -72,7 +114,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "FLP_terminal.kicad_sch"
+		(property "Sheetfile" "FLP_terminal_temp.kicad_sch"
 			(at 124.46 154.2546 0)
 			(effects
 				(font

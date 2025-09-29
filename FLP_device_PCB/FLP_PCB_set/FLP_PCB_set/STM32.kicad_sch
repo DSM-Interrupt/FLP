@@ -3553,17 +3553,6 @@
 		)
 		(uuid "9a2dccb9-e357-4ae9-b4b1-c09a6a4ba4f9")
 	)
-	(hierarchical_label "3.3V_OUT"
-		(shape output)
-		(at 157.48 127 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "9ae3ba05-f286-4cf6-9490-8e8377f0afb1")
-	)
 	(hierarchical_label "NSS(CS)"
 		(shape input)
 		(at 63.5 83.82 180)
@@ -3618,6 +3607,17 @@
 			(justify right)
 		)
 		(uuid "b1bfd1be-a080-4386-ae92-444750c7d7cb")
+	)
+	(hierarchical_label "3.3V_in"
+		(shape output)
+		(at 157.48 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b6cc2229-54e6-4e78-808e-a4b0e946b819")
 	)
 	(hierarchical_label "TX"
 		(shape input)
@@ -3707,16 +3707,16 @@
 		)
 		(uuid "e07f1c76-c42f-4362-8c01-f96df7612bdd")
 	)
-	(hierarchical_label "3.3V_OUT"
+	(hierarchical_label "3.3V_in"
 		(shape output)
-		(at 157.48 116.84 180)
+		(at 157.48 127 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "e175428a-caea-44cc-9ecf-1aa730b43719")
+		(uuid "ebcfaa59-568c-4854-820c-691240627fda")
 	)
 	(hierarchical_label "BOOT0"
 		(shape output)
@@ -4268,7 +4268,7 @@
 			(uuid "10b54504-fbdd-490d-9ea9-8b37c5d9388e")
 		)
 		(instances
-			(project ""
+			(project "FLP_PCB_set"
 				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97/0ae67f6e-4f17-4cbc-bbf5-63c02f98d1d0"
 					(reference "#PWR040")
 					(unit 1)
@@ -5388,7 +5388,7 @@
 				)
 			)
 		)
-		(property "Value" "Buzzer"
+		(property "Value" "FQ 010"
 			(at 157.226 63.246 0)
 			(effects
 				(font

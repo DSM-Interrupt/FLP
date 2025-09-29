@@ -484,7 +484,7 @@
 			(uuid "38815b06-4ff1-4ae5-b086-46a17496cf31")
 		)
 		(instances
-			(project ""
+			(project "FLP_PCB_set"
 				(path "/3f8c5218-62bd-4afc-a38b-629e4a961e52/cb21122d-83f9-4f10-9012-eb16f816aa97/93f579ec-9a41-4198-b2c4-9a4e8cc596ea"
 					(reference "#PWR054")
 					(unit 1)
