@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.27,
-          "width": 2.54
+          "drill": 0.0,
+          "height": 0.8,
+          "width": 0.9
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -52,7 +52,156 @@
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "clearance|157510000|95000000|86525edc-3dd3-4944-9262-9653abe6601f|94df325a-8b1f-4a54-984c-855fa021f42a",
+          ""
+        ],
+        [
+          "clearance|73110000|96720000|40d35c99-8ff6-4aed-b289-fe6b1ea37248|b660343e-07a3-427a-bff2-28ccbd9da2d5",
+          ""
+        ],
+        [
+          "clearance|74479265|94820000|8b3a33f4-fee6-47c4-8feb-e97a8184398f|bcbe7b2c-5628-4dd9-ba01-6359f3c7f919",
+          ""
+        ],
+        [
+          "copper_edge_clearance|108000000|64240000|4caacc80-93ef-4d37-9856-b993b8378f08|f3bb832f-a1bf-4475-b848-524ac9849b33",
+          ""
+        ],
+        [
+          "copper_edge_clearance|108000264|55477017|62387a20-90b1-460a-82b5-e78b0645653c|9a64efe0-d04f-4de3-bfcd-5e85475b9727",
+          ""
+        ],
+        [
+          "copper_edge_clearance|190110000|64130000|4e651596-b6c9-4240-aefb-a4a53fabe3d2|304e224a-8d67-496b-bbfa-e9157b8f7dc7",
+          ""
+        ],
+        [
+          "copper_edge_clearance|190115074|55289389|8286eca1-4f4d-4c74-ade1-dec6bd137a65|ec4fd9e5-6571-4ec8-b87c-be46bf5e63ca",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|105450000|59780000|6dc891f3-e8ea-43e3-aad9-bc2558454636|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|187520000|59530000|4888d56c-9b01-4d01-a60e-20a969c18f16|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|46040000|59700000|9476a7f9-df6f-41ff-8e0b-41dc88ae7a79|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "shorting_items|157375000|96715000|191fc8bc-bd3c-4e38-888f-909cbeb313a3|b9bd8564-b667-4fd7-9eda-137a187817ec",
+          ""
+        ],
+        [
+          "shorting_items|157460000|95500000|22ac8a26-4735-4400-825c-df2427cb6e1e|94df325a-8b1f-4a54-984c-855fa021f42a",
+          ""
+        ],
+        [
+          "shorting_items|157460000|95500000|78beeec1-d4ee-46f5-a9e4-fc68b70f8313|94df325a-8b1f-4a54-984c-855fa021f42a",
+          ""
+        ],
+        [
+          "shorting_items|157510000|95450000|94df325a-8b1f-4a54-984c-855fa021f42a|c5b69ac1-b11f-4537-a0fb-13106b5d5e7c",
+          ""
+        ],
+        [
+          "shorting_items|158610000|95261000|a1946dfc-e678-4ad2-bc07-0bd1915f12f8|cd51e167-521e-4b09-9030-6c30b001208b",
+          ""
+        ],
+        [
+          "shorting_items|158610000|95450000|2ed653e6-7282-4a81-9d08-c9231b5db8ba|cd51e167-521e-4b09-9030-6c30b001208b",
+          ""
+        ],
+        [
+          "shorting_items|73110000|96320000|40d35c99-8ff6-4aed-b289-fe6b1ea37248|41cd6883-a0ca-4057-bbbb-9c686ce0ac0f",
+          ""
+        ],
+        [
+          "shorting_items|73110000|96320000|40d35c99-8ff6-4aed-b289-fe6b1ea37248|84b225a1-5a68-4832-ae60-329c81c3e6fd",
+          ""
+        ],
+        [
+          "shorting_items|74510000|95220000|4c25dddf-f242-4105-bff3-b40dcb2cebe4|8b3a33f4-fee6-47c4-8feb-e97a8184398f",
+          ""
+        ],
+        [
+          "shorting_items|74510000|95220000|8b3a33f4-fee6-47c4-8feb-e97a8184398f|c442c970-b5d1-481b-a640-6bc33b4edcfd",
+          ""
+        ],
+        [
+          "shorting_items|74510000|96320000|169fcb9d-f149-453a-8f65-5a5f283f8f8c|b02d885e-6961-46cf-8f7b-f0db838dba90",
+          ""
+        ],
+        [
+          "silk_edge_clearance|108000053|64250308|4caacc80-93ef-4d37-9856-b993b8378f08|846f608e-5121-497c-9f7f-777baa4da453",
+          ""
+        ],
+        [
+          "silk_edge_clearance|108018648|55307776|62387a20-90b1-460a-82b5-e78b0645653c|14513586-b558-4f8b-8564-5a4ddc0dc096",
+          ""
+        ],
+        [
+          "silk_edge_clearance|190110000|64000000|a9eee714-966b-4abb-b66c-c5cbf87e4d17|9e920869-050f-4379-ac70-82c7f3093246",
+          ""
+        ],
+        [
+          "silk_edge_clearance|190159451|55079424|8286eca1-4f4d-4c74-ade1-dec6bd137a65|86568aab-b127-4b77-b4d6-db18b6089837",
+          ""
+        ],
+        [
+          "solder_mask_bridge|157375000|96715000|b9bd8564-b667-4fd7-9eda-137a187817ec|191fc8bc-bd3c-4e38-888f-909cbeb313a3",
+          ""
+        ],
+        [
+          "solder_mask_bridge|157460000|95500000|22ac8a26-4735-4400-825c-df2427cb6e1e|94df325a-8b1f-4a54-984c-855fa021f42a",
+          ""
+        ],
+        [
+          "solder_mask_bridge|157460000|95500000|78beeec1-d4ee-46f5-a9e4-fc68b70f8313|94df325a-8b1f-4a54-984c-855fa021f42a",
+          ""
+        ],
+        [
+          "solder_mask_bridge|157510000|95450000|c5b69ac1-b11f-4537-a0fb-13106b5d5e7c|94df325a-8b1f-4a54-984c-855fa021f42a",
+          ""
+        ],
+        [
+          "solder_mask_bridge|158610000|95261000|a1946dfc-e678-4ad2-bc07-0bd1915f12f8|cd51e167-521e-4b09-9030-6c30b001208b",
+          ""
+        ],
+        [
+          "solder_mask_bridge|158610000|95450000|2ed653e6-7282-4a81-9d08-c9231b5db8ba|cd51e167-521e-4b09-9030-6c30b001208b",
+          ""
+        ],
+        [
+          "solder_mask_bridge|73110000|96320000|41cd6883-a0ca-4057-bbbb-9c686ce0ac0f|40d35c99-8ff6-4aed-b289-fe6b1ea37248",
+          ""
+        ],
+        [
+          "solder_mask_bridge|73110000|96320000|84b225a1-5a68-4832-ae60-329c81c3e6fd|40d35c99-8ff6-4aed-b289-fe6b1ea37248",
+          ""
+        ],
+        [
+          "solder_mask_bridge|74510000|95220000|4c25dddf-f242-4105-bff3-b40dcb2cebe4|8b3a33f4-fee6-47c4-8feb-e97a8184398f",
+          ""
+        ],
+        [
+          "solder_mask_bridge|74510000|95220000|c442c970-b5d1-481b-a640-6bc33b4edcfd|8b3a33f4-fee6-47c4-8feb-e97a8184398f",
+          ""
+        ],
+        [
+          "solder_mask_bridge|74510000|96320000|b02d885e-6961-46cf-8f7b-f0db838dba90|169fcb9d-f149-453a-8f65-5a5f283f8f8c",
+          ""
+        ],
+        [
+          "unconnected_items|122610500|31788135|98a4f02c-5e63-4881-b381-f1fbfa07ba43|0c6900c0-84dd-4ca7-b3a9-489631813943",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -558,14 +707,176 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Availability",
+          "name": "Availability",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CREATOR",
+          "name": "CREATOR",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Check_prices",
+          "name": "Check_prices",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "DESCRIPTION",
+          "name": "DESCRIPTION",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Description_1",
+          "name": "Description_1",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Height",
+          "name": "Height",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MANUFACTURER",
+          "name": "MANUFACTURER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MAXIMUM_PACKAGE_HEIGHT",
+          "name": "MAXIMUM_PACKAGE_HEIGHT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MF",
+          "name": "MF",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MP",
+          "name": "MP",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Manufacturer_Name",
+          "name": "Manufacturer_Name",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Manufacturer_Part_Number",
+          "name": "Manufacturer_Part_Number",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Mouser Part Number",
+          "name": "Mouser Part Number",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Mouser Price/Stock",
+          "name": "Mouser Price/Stock",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PACKAGE",
+          "name": "PACKAGE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PARTREV",
+          "name": "PARTREV",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "PRICE",
+          "name": "PRICE",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Package",
+          "name": "Package",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Price",
+          "name": "Price",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SNAPEDA_PN",
+          "name": "SNAPEDA_PN",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "STANDARD",
+          "name": "STANDARD",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "SnapEDA_Link",
+          "name": "SnapEDA_Link",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "VERIFIER",
+          "name": "VERIFIER",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "AVAILABILITY",
+          "name": "AVAILABILITY",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "설명",
+          "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "Default Editing",
+      "name": "",
       "sort_asc": true,
-      "sort_field": "참조"
+      "sort_field": "Reference"
     },
     "connection_grid_size": 50.0,
     "drawing": {
@@ -596,7 +907,7 @@
     },
     "net_format_name": "",
     "page_layout_descr_file": "",
-    "plot_directory": "",
+    "plot_directory": "../../../../../../Users/user/OneDrive/바탕 화면/",
     "space_save_all_events": true,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
@@ -618,7 +929,7 @@
     ],
     [
       "cb21122d-83f9-4f10-9012-eb16f816aa97",
-      "FLP_terminal"
+      "FLP_terminal_temp"
     ],
     [
       "a453b314-1f32-488d-baa1-e2b591ed45a3",
@@ -655,6 +966,10 @@
     [
       "93f579ec-9a41-4198-b2c4-9a4e8cc596ea",
       "BOOT_Mode"
+    ],
+    [
+      "6bba06f4-66da-4570-88eb-43d1082ec0eb",
+      "FLP_terminal"
     ]
   ],
   "text_variables": {}
