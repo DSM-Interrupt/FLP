@@ -4,7 +4,7 @@ dependencies:
 description: WebSocket protocol client for ESP-IDF
 repository: git://github.com/espressif/esp-protocols.git
 repository_info:
-  commit_sha: 85a8dac42dfe5dca7c4ab5753786bf5d768eb487
+  commit_sha: 29f1dec4083cdb9a051fcbb1ca5908e9d4141fa0
   path: components/esp_websocket_client
 url: https://github.com/espressif/esp-protocols/tree/master/components/esp_websocket_client
-version: 1.4.0
+version: 1.5.0
